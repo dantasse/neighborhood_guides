@@ -1,0 +1,7 @@
+# Everything in this file will not be checked in to git.
+
+/data
+# Big files usually shouldn't be checked in.
+
+*.pyc
+# These are python compiled files, shouldn't check in.
