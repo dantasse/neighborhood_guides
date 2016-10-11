@@ -1,0 +1,23 @@
+{
+  "name": "neighborhood_guides",
+  "version": "0.0.1",
+  "description": "Neighborhood Guides website",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^1.13.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dantasse/neighborhood_guides.git"
+  },
+  "author": "dantasse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dantasse/neighborhood_guides/issues"
+  },
+  "homepage": "https://github.com/dantasse/neighborhood_guides#readme"
+}
