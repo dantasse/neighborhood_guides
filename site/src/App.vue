@@ -3,11 +3,8 @@
 
 <template>
   <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <p>
-      Here is your neighborhoods:
-      <nghd-list></nghd-list>
-    </p>
+    <nghd-list></nghd-list>
+    <aesthetics></aesthetics>
     <p>
       To get a better understanding of how this boilerplate works, check out
       <a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.
@@ -18,10 +15,12 @@
 <script>
 // Here are the "subcomponents" we're using:
 import NghdList from './components/NghdList'
+import Aesthetics from './components/Aesthetics'
 
 export default {
   components: {
-    NghdList
+    NghdList,
+    Aesthetics
   }
 }
 
@@ -34,21 +33,18 @@ html {
 
 body {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   height: 100%;
 }
 
 #app {
-  color: #2c3e50;
-  margin-top: -100px;
   max-width: 600px;
   font-family: Source Sans Pro, Helvetica, sans-serif;
   text-align: center;
 }
 
 #app a {
-  color: #42b983;
   text-decoration: none;
 }
 

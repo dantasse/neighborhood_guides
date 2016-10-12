@@ -1,34 +1,38 @@
 <template>
   <div class="nghd-list">
-    <!--Must have one top level element, in this case the div.-->
+      Here are the neighborhoods:
+    <!-- A component must have one top level element, in this case the div.-->
     <ul>
-      <!--<li v-for='nghd in nghds'>-->
-        <!--{{nghd['autotags_90plus']}}-->
-      <!--</li>-->
-      <li v-for='name in nghdNames'>
+      <li v-for='name in nghdNames' v-on:click='selectName(name)'>
           {{name}}
       </li>
     </ul>
     <br/>
-    A list of neighborhoods!
+    Here is the store:
+    {{store.state.current_neighborhood}}
   </div>
 </template>
 
 
 <script>
+import store from '../store'
+console.log(store)
 // Here we can use ES6 (ES2015) features, like 'let'.
 let nghds = require('../assets/pgh_nghd_autotags.json')
 let nghdNames = Object.keys(nghds)
-console.log(nghdNames)
+
+let selectName = function (name) {
+  console.log(name)
+}
 
 export default {
   data () {
     return {
-      // nghds: nghds,
-      nghdNames: nghdNames
+      nghdNames: nghdNames,
+      selectName: selectName,
+      store: store
     }
   }
-
 }
 </script>
 

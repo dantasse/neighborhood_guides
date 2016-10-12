@@ -1,30 +1,25 @@
-# my-project
+# Neighborhood Guides site
 
-> A Vue.js project
+This uses Vue and Webpack. Particularly, it was generated through `vue-cli`. [More info about this particular setup.](http://vuejs-templates.github.io/webpack/index.html)
+
+Here is some auto-generated help:
 
 ## Build Setup
+    
+    # install dependencies
+    npm install
+    
+    # serve with hot reload at localhost:8080
+    npm run dev
 
-``` bash
-# install dependencies
-npm install
+    # build for production with minification
+    npm run build
 
-# serve with hot reload at localhost:8080
-npm run dev
+For detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-# build for production with minification
-npm run build
+## Notes from Dan
+`index.html` here should probably not be touched by us; webpack (I think) will put the whole site we build into there.
 
-# run unit tests
-npm run unit
+You can probably ignore `build`, `config`, `package.json`, `static`, and `test` too. All our code goes in `src`, I think.
 
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-`index.html` here should probably not be touched by us; webpack (I think) will stuff the whole site we build into there.
-You can probably ignore `build/`, `config`, `package.json`, `static`, and `test` too. All our code goes in `src`.
+`index.html`, despite the name, is not that important. Nor is `src/main.js`.
