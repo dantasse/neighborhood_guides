@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    current_neighborhood: 'shadyside'// undefined
+    current_neighborhood: undefined
   },
   mutations: {
   }

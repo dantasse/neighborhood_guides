@@ -15,7 +15,7 @@
 
 
 <script>
-import store from '../store'
+import store from '../store/store.js'
 console.log(store)
 // Here we can use ES6 (ES2015) features, like 'let'.
 let nghds = require('../assets/pgh_nghd_autotags.json')
