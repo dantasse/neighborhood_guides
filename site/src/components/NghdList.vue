@@ -8,27 +8,26 @@
       </li>
     </ul>
     <br/>
-    Here is the store:
-    {{store.state.current_neighborhood}}
+
+    Here is the current neighborhood:
+    {{store.state.currentNeighborhood}}
   </div>
 </template>
 
 
 <script>
 import store from '../store/store.js'
-console.log(store)
-// Here we can use ES6 (ES2015) features, like 'let'.
-let nghds = require('../assets/pgh_nghd_autotags.json')
-let nghdNames = Object.keys(nghds)
 
+// Here we can use ES6 (ES2015) features, like 'let'.
 let selectName = function (name) {
-  console.log(name)
+  // This is how you call a method on the store:
+  store.dispatch('selectNeighborhood', name)
 }
 
 export default {
   data () {
     return {
-      nghdNames: nghdNames,
+      nghdNames: store.state.neighborhoodNames,
       selectName: selectName,
       store: store
     }
@@ -38,7 +37,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-li {
+li:hover {
   color: #42b983;
 }
 </style>

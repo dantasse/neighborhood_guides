@@ -1,25 +1,34 @@
 <template>
   <div class="aesthetics">
     <ul>
+      {{top10tags}}
       <li v-for='tag in top10tags'>
         {{tag}}
       </li>
     </ul>
     <br/>
+    <h1>{{store.state.currentNeighborhood}}</h1>
   </div>
 </template>
 
 
 <script>
-// Here we can use ES6 (ES2015) features, like 'let'.
-// console.log(this.$store)
-// let top10tags = [$store.foo]
-let top10tags = [1, 2, 3]
-// TODO pick up here: figure out why $store isn't getting piped around. or how it is at all :-/
+import store from '../store/store.js'
+import { mapGetters } from 'vuex'
+
 export default {
+  computed: mapGetters([
+    'top10tags'
+  ]),
+  // mapGetters is syntactic sugar; could also say:
+  // computed: {
+  //   top10tags () {
+  //     return store.getters.top10tags
+  //   }
+  // },
   data () {
     return {
-      top10tags: top10tags
+      store: store
     }
   }
 }

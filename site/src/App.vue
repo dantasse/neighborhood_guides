@@ -41,7 +41,7 @@ body {
 #app {
   max-width: 600px;
   font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
+  text-align: left;
 }
 
 #app a {
