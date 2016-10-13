@@ -1,16 +1,12 @@
 <template>
   <div class="nghd-list">
-      Here are the neighborhoods:
     <!-- A component must have one top level element, in this case the div.-->
+    Click a neighborhood to see its photos.
     <ul>
       <li v-for='name in nghdNames' v-on:click='selectName(name)'>
           {{name}}
       </li>
     </ul>
-    <br/>
-
-    Here is the current neighborhood:
-    {{store.state.currentNeighborhood}}
   </div>
 </template>
 
@@ -27,7 +23,7 @@ let selectName = function (name) {
 export default {
   data () {
     return {
-      nghdNames: store.state.neighborhoodNames,
+      nghdNames: store.state.neighborhoodNames.sort(),
       selectName: selectName,
       store: store
     }

@@ -1,13 +1,12 @@
 <template>
   <div class="aesthetics">
+    <h1>{{store.state.currentNeighborhood}}</h1>
     <ul>
-      {{top10tags}}
       <li v-for='tag in top10tags'>
         {{tag}}
       </li>
     </ul>
     <br/>
-    <h1>{{store.state.currentNeighborhood}}</h1>
   </div>
 </template>
 

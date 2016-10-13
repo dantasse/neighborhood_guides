@@ -19,6 +19,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    // To call this, call e.g. store.dispatch('selectNeighborhood', 'Shadyside')
     selectNeighborhood ({ commit }, newNghd) {
       commit('selectNeighborhood', newNghd)
       // This seems dumb here, this action just redirects to the mutation, but
