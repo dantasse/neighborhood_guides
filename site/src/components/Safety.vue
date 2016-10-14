@@ -1,5 +1,5 @@
 <template>
-  <div class="aesthetics">
+  <div class="safety">
     <h3>Crime in {{store.state.currentNeighborhood}}</h3>
     <ul>
       <li>Part 1 crimes (most serious) per 1000 people: {{crimeStats['Part1Per1000']}}</li>

@@ -10,8 +10,9 @@
       <div class="col-md-6">
         <aesthetics></aesthetics>
         <safety></safety>
-            <!--To get a better understanding of how this boilerplate works, check out-->
-            <!--<a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.-->
+        <convenience></convenience>
+        <!--To get a better understanding of how this boilerplate works, check out-->
+        <!--<a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.-->
       </div>
     </div>
   </div>
@@ -22,12 +23,14 @@
 import NghdList from './components/NghdList'
 import Aesthetics from './components/Aesthetics'
 import Safety from './components/Safety'
+import Convenience from './components/Convenience'
 
 export default {
   components: {
     NghdList,
     Aesthetics,
-    Safety
+    Safety,
+    Convenience
   }
 }
 

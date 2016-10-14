@@ -6,13 +6,15 @@ Vue.use(Vuex)
 let neighborhoodsAutotags = require('../assets/pgh_nghd_autotags.json')
 // TODO not sure how to load this asychronously.
 let crimeStats = require('../assets/pgh_2015_crime_review.csv')
+let nghdsWalkscores = require('../assets/pgh_nghd_walkscores.csv')
 
 export default new Vuex.Store({
   state: {
     currentNeighborhood: 'Shadyside',
     neighborhoodNames: Object.keys(neighborhoodsAutotags),
     neighborhoodsAutotags: neighborhoodsAutotags,
-    neighborhoodsCrimeStats: crimeStats
+    neighborhoodsCrimeStats: crimeStats,
+    neighborhoodsWalkscores: nghdsWalkscores
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
@@ -52,7 +54,15 @@ export default new Vuex.Store({
           return nghdStats
         }
       }
+    },
+    walkscores: function (state) {
+      for (let nghd of state.neighborhoodsWalkscores) {
+        if (nghd['Name'] === state.currentNeighborhood) {
+          return nghd
+        }
+      }
     }
+
   }
 })
 
