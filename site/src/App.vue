@@ -9,10 +9,9 @@
       </div>
       <div class="col-md-6">
         <aesthetics></aesthetics>
-          <p>
+        <safety></safety>
             <!--To get a better understanding of how this boilerplate works, check out-->
             <!--<a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.-->
-          </p>
       </div>
     </div>
   </div>
@@ -22,11 +21,13 @@
 // Here are the "subcomponents" we're using:
 import NghdList from './components/NghdList'
 import Aesthetics from './components/Aesthetics'
+import Safety from './components/Safety'
 
 export default {
   components: {
     NghdList,
-    Aesthetics
+    Aesthetics,
+    Safety
   }
 }
 
