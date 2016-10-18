@@ -12,13 +12,10 @@ Not all data in this file might be checked in to git. (It's not usually a good p
 `usa_cities.geojson` is from Mapzen, [link](https://mapzen.com/data/borders/)
 
 ## Safety
-A few possible sources:
 
-- `pgh_crime.csv` is from the Western Pennsylvania Open Data Portal [Tableau file we extracted CSV from](https://public.tableau.com/profile/alleghenycountydhsdare#!/vizhome/OverallTrendsinViolence_Public_8-12-16/OverallTrend), [overall crime data page](http://www.wprdc.org/crime/)
-- [Police blotter archive](https://data.wprdc.org/dataset/uniform-crime-reporting-data)
-- `pgh_2015_review.csv` is from [this report](http://apps.pittsburghpa.gov/pghbop/ANNUAL_REPORT_DRAFT_2015_May_31.pdf)
+`pgh_2015_review.csv` is from [this report](http://apps.pittsburghpa.gov/pghbop/ANNUAL_REPORT_DRAFT_2015_May_31.pdf)
 
-(for now I think `pgh_2015_review.csv` is the most straightforward to use.)
+(for now I think `pgh_2015_review.csv` is the most straightforward to use. Other sources are in `other_crime`.
 
 "Type 1": Homicide, rape, aggravated assault, robbery, theft, burglary, motor vehicle theft, arson. "Type 2": Simple assault, vandalism, drug violations, fraud, disorderly conduct, drunk driving, forgery, weapons violations, prostitution, public intoxication, other.
 
