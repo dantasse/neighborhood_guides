@@ -25,3 +25,7 @@ A few possible sources:
 ## Convenience
 
 `pgh_nghd_walkscores` - I think I manually scraped this at one point?
+
+## Localness
+
+`tweet_pgh_with_text.csv` is just a dump of the `tweet_pgh` table, which is to say, all the coordinate-geotagged tweets in Pittsburgh since, I think, early 2014.
