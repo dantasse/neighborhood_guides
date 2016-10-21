@@ -30,7 +30,16 @@ def regex_or(*items):
     return '(?:' + '|'.join(items) + ')'
 
 Contractions = re.compile(u"(?i)(\w+)(n['’′]t|['’′]ve|['’′]ll|['’′]d|['’′]re|['’′]s|['’′]m)$", re.UNICODE)
-Whitespace = re.compile(u"[\s\u0020\u00a0\u1680\u180e\u202f\u205f\u3000\u2000-\u200a]+", re.UNICODE)
+# Whitespace = re.compile(u"[\s\u0020\u00a0\u1680\u180e\u202f\u205f\u3000\u2000-\u200a]+", re.UNICODE)
+Whitespace = re.compile(u"[\u0020\u1680\u180e\u202f\u205f\u3000\u2000-\u200a]+", re.UNICODE)
+# u0020 = space
+# u00a0 = no-break space
+# u1680 = ogham space mark
+# u180e = mongolian vowel separator
+# u202f = narrow no-break space
+# u205f = medium mathematical space
+# u3000 = ideographic space
+# u2000-200a: en quad, em quad, en space, em space, three-per-em space, four-per-em space, six-per-em space, figure space, punctuation space, thin space, hair space
 
 punctChars = r"['\"“”‘’.?!…,:;]"
 #punctSeq   = punctChars+"+"	#'anthem'. => ' anthem '.
@@ -267,6 +276,10 @@ def addAllnonempty(master, smaller):
 
 # "foo   bar " => "foo bar"
 def squeezeWhitespace(input):
+    input = re.sub('\xc2\xa0', ' ', input, re.UNICODE)
+    # Sub out all non-breaking spaces first b/c otherwise the Whitespace regex
+    # will go through removing all a0 bytes, including those in emojis (for
+    # example, 🏠, which is f0 9f 8f a0 in UTF-8).
     return Whitespace.sub(" ", input).strip()
 
 # Final pass tokenization based on special patterns
@@ -279,7 +292,6 @@ def splitToken(token):
 # Assume 'text' has no HTML escaping.
 def tokenize(text):
     return simpleTokenize(squeezeWhitespace(text))
-
 
 # Twitter text comes HTML-escaped, so unescape it.
 # We also first unescape &amp;'s, in case the text has been buggily double-escaped.

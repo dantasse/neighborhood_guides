@@ -3,7 +3,7 @@
 # Take in a dump of all the tweets in a city. Split it into neighborhoods and
 # spit out a JSON file that has all the text, tweet by tweet, for each nghd.
 
-import argparse, csv, collections, ast, json, os, multiprocessing
+import argparse, csv, collections, ast, json, os, multiprocessing, io
 from util import pointmap, tweetutil
 
 parser = argparse.ArgumentParser()
@@ -36,6 +36,7 @@ def process_lines(start, end):
 
     nghds_tweettexts_thischunk = collections.defaultdict(list)
     counter = 0
+    skipped_rows = []
     for row in reader:
         counter += 1
         if counter % 10000 == 0:
@@ -45,7 +46,20 @@ def process_lines(start, end):
             continue
 
         nghd = pgh_pointmap[lat, lon]
-        nghds_tweettexts_thischunk[nghd].append(tweetutil.format(text))
+        formatted_text = tweetutil.format(text)
+
+        try:
+            json.dumps(formatted_text)
+        except UnicodeDecodeError:
+            print "UnicodeDecodeError: %s" % text
+            skipped_rows.append(row)
+            continue
+
+        nghds_tweettexts_thischunk[nghd].append(formatted_text)
+
+    print "Skipped this many: %s" % len(skipped_rows)
+    for row in skipped_rows:
+        print ','.join(row)
 
     return nghds_tweettexts_thischunk
 
@@ -71,6 +85,5 @@ if __name__ == '__main__':
     worker_pool.close()
     worker_pool.join()
 
-
-    print "Dumping to json now"
-    json.dump(nghds_tweettexts, open(args.output_file, 'w'), ensure_ascii=False)
+    print "Dumping to json file"
+    json.dump(nghds_tweettexts, open(args.output_file, 'w'))

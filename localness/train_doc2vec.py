@@ -48,4 +48,3 @@ if __name__ == '__main__':
         tagname = model.docvecs.index_to_doctag(i)
         vec = model.docvecs[i]
         docvecs_outfile.writerow([tagname] + list(vec))
-
