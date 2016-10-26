@@ -17,3 +17,4 @@ CITY_LOCATIONS = {
     'sanantonio': {'locations': '-98.7, 29.21667, -98.3, 29.61667'},
     'dallas': {'locations': '-96.996667, 32.575833, -96.596667, 32.975833'},
 }
+CITY_NAMES = CITY_LOCATIONS.keys()
