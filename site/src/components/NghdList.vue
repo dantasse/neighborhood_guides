@@ -22,8 +22,10 @@ let selectName = function (name) {
 
 export default {
   data () {
+    var neighborhoodNames = store.state.neighborhoodNames.sort()
+    neighborhoodNames.splice(neighborhoodNames.indexOf('None'), 1)
     return {
-      nghdNames: store.state.neighborhoodNames.sort(),
+      nghdNames: neighborhoodNames,
       selectName: selectName,
       store: store
     }

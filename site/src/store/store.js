@@ -56,6 +56,7 @@ export default new Vuex.Store({
           return nghdStats
         }
       }
+      return {}
     },
     walkscores: function (state) {
       for (let nghd of state.neighborhoodsWalkscores) {
@@ -63,6 +64,7 @@ export default new Vuex.Store({
           return nghd
         }
       }
+      return {}
     },
     top10TweetTfidf: function (state) {
       return state.neighborhoodsTop10TweetTfidf[state.currentNeighborhood]

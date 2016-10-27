@@ -1,9 +1,9 @@
 <template>
   <div class="aesthetics">
-    <h1>{{store.state.currentNeighborhood}}</h1>
+    <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
     <ul>
       <li v-for='tag in top10tags'>
-        {{tag}}
+        {{tag[0]}}
       </li>
     </ul>
     <br/>
