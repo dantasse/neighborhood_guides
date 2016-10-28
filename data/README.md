@@ -30,4 +30,9 @@ One directory per city. Then hopefully we'll have the same data in each director
 
 ## Liveliness
 
-Yelp data from the [Yelp academic dataset](https://www.yelp.com/dataset_challenge/dataset).
+Foursquare venue data in `4sq_venues.json`. Yelp data (which is way more limited - has Pgh but not any of our other cities, and has 4k businesses instead of the 46k I found in Foursquare - so we're probably not using it) from the [Yelp academic dataset](https://www.yelp.com/dataset_challenge/dataset).
+
+## Aesthetics
+`yfcc100m.csv` is all the yfcc100m photos in Pittsburgh. `nghd_autotags.json` is the top 10 autotags for each neighborhood.
+
+The directory `yfcc100m_autotagged` is to store YFCC100M dumps from other cities, just so I don't have to compute them again.
