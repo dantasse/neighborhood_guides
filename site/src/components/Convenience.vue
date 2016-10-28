@@ -1,12 +1,15 @@
 <template>
   <div class="convenience">
     <h3>Location convenience in {{store.state.currentNeighborhood}}</h3>
-    <ul>
+    <ul v-if="'Walk Score' in walkscores">
       <li>Walk Score: {{walkscores['Walk Score']}}</li>
       <li>Transit Score: {{walkscores['Transit Score']}}</li>
       <li>Bike Score: {{walkscores['Bike Score']}}</li>
     </ul>
-    <br/>
+    <div v-else>
+      No data for {{store.state.currentNeighborhood}}
+    </div>
+     <br/>
   </div>
 </template>
 

@@ -1,10 +1,8 @@
 <template>
-  <div class="aesthetics">
-    <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
+  <div class="localness">
+    <h3>What do people talk about in {{store.state.currentNeighborhood}}</h3>
     <ul>
-      <li v-for='tag in top10tags'>
-        {{tag[0]}}
-      </li>
+      <li v-for="tweet in top10TweetTfidf">{{tweet[0]}}</li>
     </ul>
     <br/>
   </div>
@@ -17,14 +15,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'top10tags'
+    'top10TweetTfidf'
   ]),
-  // mapGetters is syntactic sugar; could also say:
-  // computed: {
-  //   top10tags () {
-  //     return store.getters.top10tags
-  //   }
-  // },
   data () {
     return {
       store: store
@@ -37,4 +29,5 @@ export default {
 <style scoped>
 
 </style>
+
 

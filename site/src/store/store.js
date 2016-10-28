@@ -7,6 +7,7 @@ let neighborhoodsAutotags = require('../assets/pgh_nghd_autotags.json')
 // TODO not sure how to load this asychronously.
 let crimeStats = require('../assets/pgh_2015_crime_review.csv')
 let nghdsWalkscores = require('../assets/pgh_nghd_walkscores.csv')
+let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 
 export default new Vuex.Store({
   state: {
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     neighborhoodNames: Object.keys(neighborhoodsAutotags),
     neighborhoodsAutotags: neighborhoodsAutotags,
     neighborhoodsCrimeStats: crimeStats,
-    neighborhoodsWalkscores: nghdsWalkscores
+    neighborhoodsWalkscores: nghdsWalkscores,
+    neighborhoodsTop10TweetTfidf: top10TweetTfidf
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
@@ -54,6 +56,7 @@ export default new Vuex.Store({
           return nghdStats
         }
       }
+      return {}
     },
     walkscores: function (state) {
       for (let nghd of state.neighborhoodsWalkscores) {
@@ -61,6 +64,10 @@ export default new Vuex.Store({
           return nghd
         }
       }
+      return {}
+    },
+    top10TweetTfidf: function (state) {
+      return state.neighborhoodsTop10TweetTfidf[state.currentNeighborhood]
     }
 
   }

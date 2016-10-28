@@ -27,3 +27,7 @@ One directory per city. Then hopefully we'll have the same data in each director
 ## Localness
 
 `tweets.csv` is just a dump of the tweet tables, which is to say, all the coordinate-geotagged tweets in each city since sometime in 2014/15 depending on city. [More details](talesnideas.blogspot.com/2016/02/welcome-to-domo.html)
+
+## Liveliness
+
+Yelp data from the [Yelp academic dataset](https://www.yelp.com/dataset_challenge/dataset).

@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--city', default='pgh', choices=util.cities.CITY_NAMES)
 parser.add_argument('--skip_single_words', action='store_false') # default true
 parser.add_argument('--output_file', default='data/pgh/tweet_tfidf.json')
+parser.add_argument('--top10_output_file', default='data/pgh/tweet_tfidf_top10.json')
 args = parser.parse_args()
 
 if __name__ == '__main__':
@@ -47,7 +48,10 @@ if __name__ == '__main__':
     # print nghd_counts['Shadyside'].most_common(50)
     # print tweets['Shadyside']
     output = {}
+    top10_output = {}
     for nghd, counter in nghd_counts.iteritems():
         output[nghd] = counter.items()
+        top10_output[nghd] = counter.most_common(10)
 
     json.dump(output, open(args.output_file, 'w'))
+    json.dump(top10_output, open(args.top10_output_file, 'w'))
