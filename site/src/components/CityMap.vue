@@ -9,6 +9,7 @@
 <script>
 import store from '../store/store.js'
 import L from 'leaflet'
+import neighborhoodsGeojson from 'assets/pgh/neighborhoods.geojson'
 
 export default {
   data () {
@@ -17,7 +18,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$nextTick(function () {
+    this.$nextTick(function () { // happen when the DOM is ready.
       var map = L.map('leafletMap', {
         minZoom: 3,
         maxZoom: 18,
@@ -30,6 +31,7 @@ export default {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18
       }).addTo(map)
+      L.geoJSON(neighborhoodsGeojson).addTo(map)
     })
   }
 }

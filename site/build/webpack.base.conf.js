@@ -55,6 +55,10 @@ module.exports = {
         loader: 'json'
       },
       {
+        test: /\.geojson$/,
+        loader: 'json'
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url',
         query: {
