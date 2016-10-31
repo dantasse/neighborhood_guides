@@ -4,11 +4,17 @@
 <template>
   <div id="app" class="container">
     <div class="row">
+      <div class="col-md-12">
+        <city-map>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-6">
         <nghd-list></nghd-list>
       </div>
       <div class="col-md-6">
         <h1>{{store.state.currentNeighborhood}}</h1>
+        <h3>Compared to <select><option value="TODO">TODO</option></select></h3>
         <!-- These all match the "export default" components below.-->
         <aesthetics></aesthetics>
         <safety></safety>
@@ -24,6 +30,7 @@
 
 <script>
 // Here are the "subcomponents" we're using:
+import CityMap from './components/CityMap'
 import NghdList from './components/NghdList'
 import Aesthetics from './components/Aesthetics'
 import Safety from './components/Safety'
@@ -34,6 +41,7 @@ import store from './store/store.js'
 
 export default {
   components: {
+    CityMap,
     NghdList,
     Aesthetics,
     Safety,

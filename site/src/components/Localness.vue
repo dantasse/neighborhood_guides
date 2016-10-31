@@ -1,8 +1,12 @@
 <template>
   <div class="localness">
     <h3>What do people talk about in {{store.state.currentNeighborhood}}</h3>
+    Click for context.
     <ul>
-      <li v-for="tweet in top10TweetTfidf">{{tweet[0]}}</li>
+      <li v-for="tweet in top10TweetTfidf">
+        
+        <a href="_">{{tweet[0]}}</a>
+      </li>
     </ul>
     <br/>
   </div>

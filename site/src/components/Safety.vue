@@ -1,12 +1,27 @@
 <template>
   <div class="safety">
     <h3>Crime in {{store.state.currentNeighborhood}}</h3>
-    <ul>
-      <li>Part 1 crimes (most serious) per 1000 people: {{crimeStats['Part1Per1000']}}</li>
-      <li>Part 2 crimes (less serious) per 1000 people: {{crimeStats['Part2Per1000']}}</li>
-      <li>Total crimes per 1000 people: {{crimeStats['TotalPer1000']}}</li>
-    </ul>
-    <br/>
+    <table>
+      <tr>
+        <th>Crime type</th>
+        <th>Per 1000 people in <br>{{store.state.currentNeighborhood}}</th>
+        <th>Per 1000 people in <br>all of Pittsburgh</th>
+      </tr>
+      <tr>
+        <td>Part 1 crimes (most serious)</td>
+        <td>{{crimeStats['Part1Per1000']}}</td>
+        <td>TODO</td>
+      </tr>
+      <tr>
+        <td>Part 2 crimes (less serious)</td>
+        <td>{{crimeStats['Part2Per1000']}}</td>
+        <td>TODO</td>
+      </tr>
+      <tr>
+        <td>Total crimes</td>
+        <td>{{crimeStats['TotalPer1000']}}</td>
+        <td>TODO</td>
+      </tr>
   </div>
 </template>
 

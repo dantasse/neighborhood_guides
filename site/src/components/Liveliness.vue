@@ -1,14 +1,44 @@
 <template>
   <div class="liveliness">
     <h3>How lively is {{store.state.currentNeighborhood}}</h3>
-    <ul>
-      <li>Venues per Square Mile: {{ perSqMi['all'] }}</li>
-      <li>Food venues per Square Mile: {{ perSqMi['food'] }}</li>
-      <li>Arts and entertainment venues per Square Mile: {{ perSqMi['arts'] }}</li>
-      <li>Nightlife venues per Square Mile: {{ perSqMi['nightlife'] }}</li>
-      <li>Outdoors and recreation venues per Square Mile: {{ perSqMi['outdoors'] }}</li>
-      <li>Shop venues per Square Mile: {{ perSqMi['shop'] }}</li>
-    </ul>
+    Venues per square mile:
+    <table>
+      <tr>
+        <th>Business type</th>
+        <th>{{store.state.currentNeighborhood}}</th>
+        <th>All of Pittsburgh</th>
+      </tr>
+      <tr>
+        <td>All venues</td>
+        <td>{{ perSqMi['all'] }}</td>
+        <td>TODO</td>
+      </tr>
+       <tr>
+        <td>Food</td>
+        <td>{{ perSqMi['food'] }}</td>
+        <td>TODO</td>
+      </tr>
+       <tr>
+        <td>Arts and entertainment</td>
+        <td>{{ perSqMi['arts'] }}</td>
+        <td>TODO</td>
+      </tr>
+       <tr>
+        <td>Nightlife</td>
+        <td>{{ perSqMi['nightlife'] }}</td>
+        <td>TODO</td>
+      </tr>
+       <tr>
+        <td>Outdoors and recreation</td>
+        <td>{{ perSqMi['outdoors'] }}</td>
+        <td>TODO</td>
+      </tr>
+       <tr>
+        <td>Shops</td>
+        <td>{{ perSqMi['shop'] }}</td>
+        <td>TODO</td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -42,6 +72,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+table {
+  width:100%;
+}
 </style>
 
