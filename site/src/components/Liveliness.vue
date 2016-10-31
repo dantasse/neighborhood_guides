@@ -51,7 +51,6 @@ export default {
     perSqMi () {
       let venuesPerSqMi = {}
       let nghdVenues = store.getters.foursquareVenues
-      console.log(nghdVenues)
       let area = parseFloat(nghdVenues['Area in Sq Mi'])
       venuesPerSqMi['all'] = (parseFloat(nghdVenues['All Venues']) / area).toFixed(2)
       venuesPerSqMi['food'] = (parseFloat(nghdVenues['Food']) / area).toFixed(2)
