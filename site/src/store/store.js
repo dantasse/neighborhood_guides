@@ -8,6 +8,7 @@ let neighborhoodsAutotags = require('../assets/pgh_nghd_autotags.json')
 let crimeStats = require('../assets/pgh_2015_crime_review.csv')
 let nghdsWalkscores = require('../assets/pgh_nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
+let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 
 export default new Vuex.Store({
   state: {
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     neighborhoodsAutotags: neighborhoodsAutotags,
     neighborhoodsCrimeStats: crimeStats,
     neighborhoodsWalkscores: nghdsWalkscores,
-    neighborhoodsTop10TweetTfidf: top10TweetTfidf
+    neighborhoodsTop10TweetTfidf: top10TweetTfidf,
+    neighborhoodsFoursquareVenues: foursquareVenues
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
@@ -68,6 +70,14 @@ export default new Vuex.Store({
     },
     top10TweetTfidf: function (state) {
       return state.neighborhoodsTop10TweetTfidf[state.currentNeighborhood]
+    },
+    foursquareVenues: function (state) {
+      for (let nghd of state.neighborhoodsFoursquareVenues) {
+        if (nghd['Neighborhood'] === state.currentNeighborhood) {
+          return nghd
+        }
+      }
+      return {}
     }
 
   }
