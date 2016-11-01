@@ -9,7 +9,7 @@
 <script>
 import store from '../store/store.js'
 import L from 'leaflet'
-import neighborhoodsGeojson from 'assets/pgh/neighborhoods.geojson'
+import neighborhoodsGeojson from 'assets/pgh/nghd_bounds.geojson'
 
 // Define this here so we can reference it in setUpMap and resetHighlight.
 var geojsonLayer
@@ -24,7 +24,7 @@ function addHandlers (feature, layer) {
 }
 
 function selectNghd (e) {
-  let nghd = e.target.feature.properties.hood
+  let nghd = e.target.feature.properties.name
   store.dispatch('selectNeighborhood', nghd)
 }
 
@@ -75,7 +75,7 @@ function setUpMap () {
     }
     infoBox.update = function (props) {
       if (props) {
-        this._div.innerHTML = '<h4>' + props['hood'] + '</h4>'
+        this._div.innerHTML = '<h4>' + props['name'] + '</h4>'
       } else {
         this._div.innerHTML = '<h4>Select a neighborhood</h4>'
       }
