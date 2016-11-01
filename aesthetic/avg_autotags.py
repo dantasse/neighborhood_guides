@@ -6,10 +6,13 @@ import argparse, csv, collections, ast, json
 from util import pointmap
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--yfcc_autotags_file', default='data/yfcc100m_pgh_autotagged.csv')
-parser.add_argument('--pointmap_file', default='data/pgh_pointmap.csv')
-parser.add_argument('--output_file', default='pgh_nghd_autotags.csv')
+parser.add_argument('--yfcc_autotags_file', default='data/pgh/yfcc100m.csv')
+parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv')
+parser.add_argument('--output_file', default='data/pgh/nghd_autotags.json')
 args = parser.parse_args()
+
+# Tags that are meaningless so let's not include them at all.
+STOPTAGS = ['photo border']
 
 if __name__ == '__main__':
     pgh_pointmap = pointmap.Pointmap(args.pointmap_file)
@@ -29,6 +32,8 @@ if __name__ == '__main__':
         nghd = pgh_pointmap[lat, lon]
 
         autotags_90plus = ast.literal_eval(row[4])
+        autotags_90plus = filter(lambda x: x not in STOPTAGS, autotags_90plus)
+
         autotags = row[5].split(',')
         autotags_ctr = collections.Counter()
         for tag in autotags:
@@ -36,7 +41,8 @@ if __name__ == '__main__':
                 continue
             else:
                 tagname, value = tag.split(':')
-                nghds_autotags[nghd][tagname] += round(float(value), 3)
+                if tagname not in STOPTAGS:
+                    nghds_autotags[nghd][tagname] += round(float(value), 3)
         nghds_autotags[nghd]['NUM_PHOTOS'] += 1
         nghds_autotags90plus[nghd].update(autotags_90plus + ['NUM_PHOTOS'])
         overall_autotags_90plus.update(autotags_90plus + ['NUM_PHOTOS'])
@@ -54,15 +60,20 @@ if __name__ == '__main__':
         autotags = nghds_autotags[nghd]
         num_photos = autotags90plus['NUM_PHOTOS']
         output[nghd] = {'num_photos': num_photos, 'autotags_90plus': {},
-                'autotags_all': {}, 'autotags_90plus_minusbaseline':{}}
-            # 'autotags_90plus': [], 'autotags_all': []}
+                'autotags_all': {}, 'autotags_90plus_minusbaseline':{},
+                'num_outdoor': 0, 'num_indoor': 0}
         for autotag, count in autotags90plus.most_common():
             if autotag == 'NUM_PHOTOS':
                 continue
-            pct_photos = round(count * 1.0 / num_photos, 5)
-            output[nghd]['autotags_90plus'][autotag] = pct_photos
-            # output[nghd]['autotags_90plus'].append((autotag, round(count*1.0/num_photos, 5)))
-            output[nghd]['autotags_90plus_minusbaseline'][autotag] = round(pct_photos - overall_autotags_90plus[autotag], 5)
+            elif autotag == 'outdoor':
+                output[nghd]['num_outdoor'] += count
+            elif autotag == 'indoor':
+                output[nghd]['num_indoor'] += count
+            else:
+                pct_photos = round(count * 1.0 / num_photos, 5)
+                output[nghd]['autotags_90plus'][autotag] = pct_photos
+                # output[nghd]['autotags_90plus'].append((autotag, round(count*1.0/num_photos, 5)))
+                output[nghd]['autotags_90plus_minusbaseline'][autotag] = round(pct_photos - overall_autotags_90plus[autotag], 5)
 
         for autotag, count in autotags.most_common():
             if autotag == 'NUM_PHOTOS':

@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <nghd-list></nghd-list>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         <h1>{{store.state.currentNeighborhood}}</h1>
         <h3>Compared to <select><option value="TODO">TODO</option></select></h3>
         <!-- These all match the "export default" components below.-->

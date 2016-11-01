@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-let neighborhoodsAutotags = require('../assets/pgh_nghd_autotags.json')
+let neighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 // TODO not sure how to load this asychronously.
 let crimeStats = require('../assets/pgh_2015_crime_review.csv')
 let nghdsWalkscores = require('../assets/pgh_nghd_walkscores.csv')
@@ -37,6 +37,8 @@ export default new Vuex.Store({
   getters: {
     top10tags: function (state) {
       let alltags = state.neighborhoodsAutotags[state.currentNeighborhood]['autotags_90plus_minusbaseline']
+      // Get the top 10 for each neighborhood.
+      // TODO: push this into the data pipeline instead.
       let sortable = []
       Object.keys(alltags).forEach(function (key) {
         sortable.push([key, alltags[key]])
@@ -45,6 +47,10 @@ export default new Vuex.Store({
         return y[1] - x[1]
       })
       return sortable.slice(0, 10)
+    },
+    indoor_outdoor: function (state) {
+      let alltags = state.neighborhoodsAutotags[state.currentNeighborhood]
+      return [alltags['num_indoor'], alltags['num_outdoor']]
     },
     crimeStats: function (state) {
       for (let nghd of state.neighborhoodsCrimeStats) {

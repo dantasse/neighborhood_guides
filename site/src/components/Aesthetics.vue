@@ -1,6 +1,7 @@
 <template>
   <div class="aesthetics">
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
+    Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
     <ul>
       <li v-for='tag in top10tags'>
         {{tag[0]}}
@@ -17,7 +18,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'top10tags'
+    'top10tags',
+    'indoor_outdoor'
   ]),
   // mapGetters is syntactic sugar; could also say:
   // computed: {
