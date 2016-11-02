@@ -55,7 +55,7 @@ def process_lines(start, end):
             skipped_rows.append(row)
             continue
 
-        nghds_tweettexts_thischunk[nghd].append(formatted_text)
+        nghds_tweettexts_thischunk[nghd].append({'words':formatted_text, 'fulltext': text})
 
     print "Skipped this many: %s" % len(skipped_rows)
     for row in skipped_rows:

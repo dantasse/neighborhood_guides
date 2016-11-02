@@ -22,12 +22,14 @@ export default new Vuex.Store({
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
+    // Mutations are synchronous.
     selectNeighborhood: function (state, newNghd) {
       state.currentNeighborhood = newNghd
     }
   },
   actions: {
     // To call this, call e.g. store.dispatch('selectNeighborhood', 'Shadyside')
+    // Actions can be async.
     selectNeighborhood ({ commit }, newNghd) {
       commit('selectNeighborhood', newNghd)
       // This seems dumb here, this action just redirects to the mutation, but
