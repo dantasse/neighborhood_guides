@@ -102,6 +102,14 @@ export default new Vuex.Store({
         }
       }
       return {}
+    },
+    cityFoursquareVenues: function (state) {
+      for (let nghd of state.neighborhoodsFoursquareVenues) {
+        if (nghd['Neighborhood'] === state.currentCity) {
+          return nghd
+        }
+      }
+      return {}
     }
 
   }

@@ -11,32 +11,32 @@
       <tr>
         <td>All venues</td>
         <td>{{ perSqMi['all'] }}</td>
-        <td>TODO</td>
+        <td>{{ cityPerSqMi['all'] }}</td>
       </tr>
        <tr>
         <td>Food</td>
         <td>{{ perSqMi['food'] }}</td>
-        <td>TODO</td>
+        <td>{{ cityPerSqMi['food'] }}</td>
       </tr>
        <tr>
         <td>Arts and entertainment</td>
         <td>{{ perSqMi['arts'] }}</td>
-        <td>TODO</td>
+        <td>{{ cityPerSqMi['arts'] }}</td>
       </tr>
        <tr>
         <td>Nightlife</td>
         <td>{{ perSqMi['nightlife'] }}</td>
-        <td>TODO</td>
+        <td>{{ cityPerSqMi['nightlife'] }}</td>
       </tr>
        <tr>
         <td>Outdoors and recreation</td>
         <td>{{ perSqMi['outdoors'] }}</td>
-        <td>TODO</td>
+        <td>{{ cityPerSqMi['outdoors'] }}</td>
       </tr>
        <tr>
         <td>Shops</td>
         <td>{{ perSqMi['shop'] }}</td>
-        <td>TODO</td>
+        <td>{{ cityPerSqMi['shop'] }}</td>
       </tr>
     </table>
   </div>
@@ -59,6 +59,18 @@ export default {
       venuesPerSqMi['outdoors'] = (parseFloat(nghdVenues['Outdoors & Recreation']) / area).toFixed(2)
       venuesPerSqMi['shop'] = (parseFloat(nghdVenues['Shop & Service']) / area).toFixed(2)
       return venuesPerSqMi
+    },
+    cityPerSqMi () {
+      let cityVenuesPerSqMi = {}
+      let cityVenues = store.getters.cityFoursquareVenues
+      console.log(cityVenues['All Venues'])
+      cityVenuesPerSqMi['all'] = parseFloat(cityVenues['All Venues']).toFixed(2)
+      cityVenuesPerSqMi['food'] = parseFloat(cityVenues['Food']).toFixed(2)
+      cityVenuesPerSqMi['arts'] = parseFloat(cityVenues['Arts and Entertainment']).toFixed(2)
+      cityVenuesPerSqMi['nightlife'] = parseFloat(cityVenues['Nightlife Spot']).toFixed(2)
+      cityVenuesPerSqMi['outdoors'] = parseFloat(cityVenues['Outdoors & Recreation']).toFixed(2)
+      cityVenuesPerSqMi['shop'] = parseFloat(cityVenues['Shop & Service']).toFixed(2)
+      return cityVenuesPerSqMi
     }
   },
   data () {

@@ -32,6 +32,8 @@ One directory per city. Then hopefully we'll have the same data in each director
 
 Foursquare venue data in `4sq_venues.json`. Yelp data (which is way more limited - has Pgh but not any of our other cities, and has 4k businesses instead of the 46k I found in Foursquare - so we're probably not using it) from the [Yelp academic dataset](https://www.yelp.com/dataset_challenge/dataset).
 
+`nghd_4sq.csv` has these venues counted per square mile per neighborhood. There's also one line at the end that represents the city as a whole - which is a little different. It's an average of each neighborhood. So like "Food venues" there is not the total number of food venues in the city divided by the area of the city, because this would underestimate because some neighborhoods are really sparse. Instead, it's the average number of food venues per neighborhood.
+
 ## Aesthetics
 `yfcc100m.csv` is all the yfcc100m photos in Pittsburgh. `nghd_autotags.json` is the top 10 autotags for each neighborhood.
 
