@@ -1,7 +1,8 @@
 Neighborhoods,Population 2010,Part I crimes,Part II crimes,Crimes Per 1000
+Pittsburgh,305704,12320,18580,101.08
 Allegheny Center,933,98,219,339.76
-Allegheny West,462,52,41,201.30
-Allentown,2500,182,340,208.80
+Allegheny West,462,52,41,201.3
+Allentown,2500,182,340,208.8
 Arlington,1869,93,109,108.08
 Arlington Heights,244,14,40,221.31
 Banksville,4144,102,113,51.88
@@ -12,12 +13,12 @@ Bloomfield,8442,333,384,84.93
 Bluff,6600,155,258,62.58
 Bon Air,808,21,37,71.78
 Brighton Heights,7247,245,401,89.14
-Brookline,13214,306,475,59.10
+Brookline,13214,306,475,59.1
 California-Kirkbride,761,59,106,216.82
 Carrick,10113,421,612,102.15
 Central Business District,3629,790,936,475.61
 Central Lawrenceville,4482,150,174,72.29
-Central North Side,2923,217,271,166.95
+Central Northside,2923,217,271,166.95
 Central Oakland,6086,220,307,86.59
 Chartiers City,477,17,30,98.53
 Chateau,11,68,127,17727.27
@@ -45,10 +46,10 @@ Homewood West,818,59,115,212.71
 Knoxville,3747,266,412,180.94
 Larimer,1728,142,188,190.97
 Lincoln-Lemington-Belmar,4883,263,290,113.25
-Lincoln,Place,3227,38,69,33.16
+Lincoln Place,3227,38,69,33.16
 Lower Lawrenceville,2341,82,141,95.26
 Manchester,2130,100,179,130.99
-Marshall Shadeland,6043,241,402,106.40
+Marshall Shadeland,6043,241,402,106.4
 Middle Hill,1707,94,173,156.41
 Morningside,3346,58,80,41.24
 Mount Oliver Borough,509,27,29,110.02
@@ -74,7 +75,7 @@ South Shore,19,31,56,4578.95
 South Side Flats,6597,736,1766,379.26
 South Side Slopes,4423,229,244,106.94
 Spring Garden,884,52,67,134.62
-Spring Hill,2648,71,153,84.59
+Spring Hill-City View,2648,71,153,84.59
 Squirrel Hill North,11363,133,143,24.29
 Squirrel Hill South,15110,286,291,38.19
 Stanton Heights,4601,60,106,36.08

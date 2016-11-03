@@ -10,17 +10,17 @@
       <tr>
         <td>Part 1 crimes (most serious)</td>
         <td>{{crimeStats['Part1Per1000']}}</td>
-        <td>TODO</td>
+        <td>{{cityCrimeStats['Part1Per1000']}}</td>
       </tr>
       <tr>
         <td>Part 2 crimes (less serious)</td>
         <td>{{crimeStats['Part2Per1000']}}</td>
-        <td>TODO</td>
+        <td>{{cityCrimeStats['Part2Per1000']}}</td>
       </tr>
       <tr>
         <td>Total crimes</td>
         <td>{{crimeStats['TotalPer1000']}}</td>
-        <td>TODO</td>
+        <td>{{cityCrimeStats['TotalPer1000']}}</td>
       </tr>
   </div>
 </template>
@@ -32,7 +32,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'crimeStats'
+    'crimeStats',
+    'cityCrimeStats'
   ]),
   data () {
     return {

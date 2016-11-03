@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 let neighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 // TODO not sure how to load this asychronously.
-let crimeStats = require('../assets/pgh_2015_crime_review.csv')
+let crimeStats = require('../assets/pgh/crimes.csv')
 let nghdsWalkscores = require('../assets/pgh_nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
@@ -13,6 +13,7 @@ let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 export default new Vuex.Store({
   state: {
     currentNeighborhood: 'Shadyside',
+    currentCity: 'Pittsburgh',
     neighborhoodNames: Object.keys(neighborhoodsAutotags),
     neighborhoodsAutotags: neighborhoodsAutotags,
     neighborhoodsCrimeStats: crimeStats,
@@ -55,8 +56,23 @@ export default new Vuex.Store({
       return [alltags['num_indoor'], alltags['num_outdoor']]
     },
     crimeStats: function (state) {
+      // TODO: replace all these csv lookups with json lookups ideally.
       for (let nghd of state.neighborhoodsCrimeStats) {
         if (nghd['Neighborhoods'] === state.currentNeighborhood) {
+          let pop = nghd['Population 2010']
+          let nghdStats = {
+            'Part1Per1000': (1000.0 * nghd['Part I crimes'] / pop).toFixed(2),
+            'Part2Per1000': (1000.0 * nghd['Part II crimes'] / pop).toFixed(2),
+            'TotalPer1000': nghd['Crimes Per 1000']
+          }
+          return nghdStats
+        }
+      }
+      return {}
+    },
+    cityCrimeStats: function (state) {
+      for (let nghd of state.neighborhoodsCrimeStats) {
+        if (nghd['Neighborhoods'] === state.currentCity) {
           let pop = nghd['Population 2010']
           let nghdStats = {
             'Part1Per1000': (1000.0 * nghd['Part I crimes'] / pop).toFixed(2),

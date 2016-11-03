@@ -5,8 +5,7 @@
 
 import argparse, csv, collections, json, ujson, os, time, math, util.cities
 parser = argparse.ArgumentParser()
-parser.add_argument('--city', default='pgh', choices=util.cities.CITY_NAMES)
-parser.add_argument('--output_file', default='data/pgh/tweet_tfidf.json')
+parser.add_argument('--nghd_tweets_file', default='data/pgh/nghd_tweets.json')
 parser.add_argument('--top10_output_file', default='data/pgh/tweet_tfidf_top10.json')
 args = parser.parse_args()
 
@@ -24,16 +23,25 @@ def get_context_tweets(all_tweets, nghd, word):
 if __name__ == '__main__':
     print "%s\tLoading json." % time.asctime()
     # data/pgh/nghd_tweets.json, for example.
-    jsondata = ujson.load(open('data%s%s%s%s' %\
-            (os.sep, args.city, os.sep, 'nghd_tweets.json')))
+    jsondata = ujson.load(open(args.nghd_tweets_file))
 
     print "%s\tDone loading json, counting words." % time.asctime()
-    nghd_counts = collections.defaultdict(collections.Counter)
+    # nghd -> (word -> set of ppl using it)
+    # lambda function: trick to do nested defaultdicts
+    nghd_word_users = collections.defaultdict(lambda: collections.defaultdict(set))
     for nghd, tweets in jsondata.iteritems():
         if nghd == 'None':
             continue
         for tweet in tweets:
-            nghd_counts[nghd].update(list(set(tweet['words']))) # unique words per tweet.
+            words = tweet['words']
+            for word in words:
+                nghd_word_users[nghd][word].add(tweet['username'])
+
+    nghd_counts = collections.defaultdict(collections.Counter)
+    # nghd -> (word -> count)
+    for nghd, word_users in nghd_word_users.iteritems():
+        for word, users in word_users.iteritems():
+            nghd_counts[nghd][word] = len(users)
 
     print "%s\tDone counting words." % time.asctime()
     print "%s\tCounting neighborhoods each word is in." % time.asctime()
@@ -55,6 +63,6 @@ if __name__ == '__main__':
         top10_output[nghd] = []
         for word, score in counter.most_common(10):
             context_tweets = get_context_tweets(jsondata, nghd, word)
-            top10_output[nghd].append({'word': word, 'context': context_tweets})
+            top10_output[nghd].append({'word': word, 'context': context_tweets, 'score': score})
 
     json.dump(top10_output, open(args.top10_output_file, 'w'))
