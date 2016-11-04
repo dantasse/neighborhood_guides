@@ -6,9 +6,7 @@ Not all data in this file might be checked in to git. (It's not usually a good p
 One directory per city. Then hopefully we'll have the same data in each directory.
 
 ## Neighborhood Boundaries
-`sf/sf_planning_neighborhoods.json` is from the SF Department of City Planning, [link](https://data.sfgov.org/Geographic-Locations-and-Boundaries/Neighborhood-Groups-Map/qc6m-r4ih)
-
-`sf/sffind_neighborhoods.json` is from the SF Mayor's Office, [link](https://data.sfgov.org/Geographic-Locations-and-Boundaries/SFFind-Neighborhoods/ejmn-jyk6). It is finer-grained than the Planning department neighborhoods.
+`sf/analysis_neighborhoods.json` is from the SF Department of City Planning, [link](https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h#). There are other neighborhood divisions available through data.sfgov.org, but this looks the most like what I'm used to.
 
 `pgh/Pittsburgh_Neighborhoods.geojson` is from the City of Pittsburgh, [link](https://data.wprdc.org/dataset/pittsburgh-neighborhoods2de67)
 
