@@ -5,8 +5,8 @@
 
 import argparse, csv, collections, json, ujson, os, time, math, util.cities
 parser = argparse.ArgumentParser()
-parser.add_argument('--nghd_tweets_file', default='data/pgh/nghd_tweets.json')
-parser.add_argument('--top10_output_file', default='data/pgh/tweet_tfidf_top10.json')
+parser.add_argument('--nghd_tweets_file', default='data/pgh/nghd_tweets.json', help='Usually data/city/nghd_tweets.json')
+parser.add_argument('--top10_output_file', default='data/pgh/tweet_tfidf_top10.json', help='Usually data/city/tweet_tfidf_top10.json.')
 args = parser.parse_args()
 
 def get_context_tweets(all_tweets, nghd, word):
