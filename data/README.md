@@ -20,7 +20,7 @@ One directory per city. Then hopefully we'll have the same data in each director
 
 ## Convenience
 
-`nghd_walkscores` - I think I manually scraped this at one point?
+`nghd_walkscores` - These are just copy/pasted from Walkscore, [here](https://www.walkscore.com/CA/San_Francisco)
 
 ## Localness
 

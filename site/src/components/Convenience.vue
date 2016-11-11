@@ -1,11 +1,28 @@
 <template>
   <div class="convenience">
     <h3>Location convenience in {{store.state.currentNeighborhood}}</h3>
-    <ul v-if="'Walk Score' in walkscores">
-      <li>Walk Score: {{walkscores['Walk Score']}}</li>
-      <li>Transit Score: {{walkscores['Transit Score']}}</li>
-      <li>Bike Score: {{walkscores['Bike Score']}}</li>
-    </ul>
+    <table v-if="'Walk Score' in walkscores">
+      <tr>
+        <th></th>
+        <th>{{store.state.currentNeighborhood}}</th>
+        <th>{{store.state.currentCity}}</th>
+      </tr>
+      <tr>
+        <td>Walk Score</td>
+        <td>{{walkscores['Walk Score']}}</td>
+        <td>{{cityWalkscores['Walk Score']}}</td>
+      </tr>
+      <tr>
+        <td>Transit Score</td>
+        <td>{{walkscores['Transit Score']}}</td>
+        <td>{{cityWalkscores['Transit Score']}}</td>
+      </tr>
+      <tr>
+        <td>Bike Score</td>
+        <td>{{walkscores['Bike Score']}}</td>
+        <td>{{cityWalkscores['Bike Score']}}</td>
+      </tr>
+    </table>
     <div v-else>
       No data for {{store.state.currentNeighborhood}}
     </div>
@@ -20,7 +37,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'walkscores'
+    'walkscores',
+    'cityWalkscores'
   ]),
   data () {
     return {

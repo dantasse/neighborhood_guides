@@ -6,7 +6,7 @@ Vue.use(Vuex)
 let neighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 // TODO not sure how to load this asychronously.
 let crimeStats = require('../assets/pgh/crimes.csv')
-let nghdsWalkscores = require('../assets/pgh_nghd_walkscores.csv')
+let nghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 
@@ -87,6 +87,14 @@ export default new Vuex.Store({
     walkscores: function (state) {
       for (let nghd of state.neighborhoodsWalkscores) {
         if (nghd['Name'] === state.currentNeighborhood) {
+          return nghd
+        }
+      }
+      return {}
+    },
+    cityWalkscores: function (state) {
+      for (let nghd of state.neighborhoodsWalkscores) {
+        if (nghd['Name'] === state.currentCity) {
           return nghd
         }
       }
