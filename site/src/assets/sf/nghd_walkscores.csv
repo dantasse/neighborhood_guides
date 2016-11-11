@@ -1,0 +1,105 @@
+Rank,Name,Walk Score,Transit Score,Bike Score,Population
+1,Chinatown,100,100,72,8646
+2,Downtown-Union Square,99,100,81,2112
+3,Lower Nob Hill,99,100,74,14408
+4,North Beach,99,96,71,10684
+5,Tenderloin,99,100,90,21848
+6,Civic Center,98,100,98,3237
+7,Japantown,98,91,79,3118
+9,Polk Gulch,98,96,75,5096
+10,Nob Hill,98,100,67,15778
+11,Union Street,98,86,75,5279
+12,Mission Dolores,97,99,96,11935
+13,Hayes Valley,97,100,92,4663
+14,Duboce Triangle,97,100,88,4733
+15,Cathedral Hill,97,98,83,6245
+16,Mission,97,87,98,39206
+17,Mint Hill,97,100,88,1693
+18,Lower Pacific Heights,97,81,84,6145
+19,Russian Hill,97,94,63,14083
+20,Telegraph Hill,96,97,61,3080
+21,Northern Waterfront,96,99,80,2406
+23,Lower Haight,96,99,87,7355
+24,Pacific Heights,96,89,66,19973
+25,Western Addition,96,89,92,15059
+26,Fishermans Wharf,96,88,78,1425
+27,South of Market,96,100,96,25457
+28,Haight Ashbury,95,82,91,4804
+29,Dolores Heights,95,87,82,9675
+30,Cole Valley,95,77,90,2366
+31,Alamo Square,95,91,86,3067
+32,Panhandle,94,83,95,6506
+33,Anza Vista,94,81,81,1993
+34,Laurel Heights-Jordan Park,93,77,87,3778
+35,Cow Hollow,93,77,65,3258
+36,Inner Richmond,93,77,94,24154
+37,Inner Sunset,93,70,83,12832
+38,Marina District,92,76,81,12435
+39,Corona Heights,92,94,73,2011
+40,Noe Valley,92,73,78,13193
+41,Aquatic Park-Fort Mason,91,90,68,849
+42,Buena Vista,91,90,77,5964
+43,Lone Mountain/USF,90,79,86,7046
+44,Presidio Heights,90,75,77,4219
+45,Presidio Terrace,90,71,89,2386
+46,Eureka Valley,90,87,70,6782
+47,West Portal,90,80,71,3756
+48,Showplace Square,89,94,98,1054
+49,Ashbury Heights,89,78,75,3072
+50,Lake Street,88,72,86,3780
+52,Cayuga,87,90,78,6761
+53,Dogpatch,87,81,92,1282
+54,Outer Richmond,87,73,78,28410
+55,Rincon Hill,87,100,83,4112
+56,Bernal Heights,86,77,75,15114
+57,Potrero Hill,86,77,76,12669
+58,Mission Bay,86,94,96,6576
+59,Stonestown,85,70,80,1949
+60,Holly Park,84,78,77,4222
+61,St. Francis Wood,84,79,69,1317
+62,Peralta Heights,84,77,77,2141
+63,Fairmount,83,80,70,3963
+64,Parnassus Heights,83,69,69,2955
+65,Silver Terrace,83,71,64,10210
+66,Outer Mission,81,75,66,7918
+67,Mt. Davidson Manor,81,74,66,1607
+68,Mission Terrace,81,85,74,10529
+69,Westwood Park,81,78,69,2103
+70,Excelsior,80,79,62,19839
+72,St. Marys Park,79,81,75,3010
+73,Balboa Terrace,78,72,73,990
+74,Merced Manor,78,66,75,2731
+76,Ingleside Terraces,77,72,78,1999
+80,Seacliff,76,64,70,1768
+81,Glen Park,76,80,59,3218
+82,Sutro Heights,76,68,62,3134
+83,Portola,76,69,67,14411
+84,Bret Harte,76,66,60,5398
+85,Golden Gate Heights,74,72,60,10995
+86,Crocker Amazon,73,69,49,13710
+87,Sunnyside,72,80,59,6805
+88,Diamond Heights,71,66,57,3020
+89,Merced Heights,70,75,62,5997
+90,Westwood Highlands,68,70,52,640
+91,Visitacion Valley,67,68,50,13360
+92,Laguna Honda,67,79,59,3307
+95,Little Hollywood,66,69,56,1705
+96,Monterey Heights,64,72,59,1000
+97,Forest Hill,63,80,55,2069
+98,Clarendon Heights,60,75,56,1914
+99,Miraloma Park,60,68,50,4558
+100,Sunnydale,58,62,43,4107
+101,Sherwood Forest,53,71,45,1663
+102,University Mound,52,66,54,4694
+103,Forest Knolls,51,69,51,1798
+104,Candlestick Point State Recreation Area,47,64,36,1230
+105,Midtown Terrace,47,74,47,1699
+107,Lakeshore,40,49,59,3541
+108,McLaren Park,40,65,31,603
+109,Presidio,39,59,56,3276
+110,Treasure Island,32,34,56,2506
+,Financial District/South Beach,92,100,86,5854
+,Oceanview/Merced/Ingleside,73.6,74.2,69.6,37438
+,Sunset/Parkside,77,63,72.5,71600
+,Castro/Upper Market,82,80.5,70.5,6502
+,Bayview Hunters Point,63.5,62.5,50,16628
