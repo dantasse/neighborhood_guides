@@ -14,9 +14,11 @@ One directory per city. Then hopefully we'll have the same data in each director
 
 ## Safety
 
-`pgh/crimes.csv` is from [this report](http://apps.pittsburghpa.gov/pghbop/ANNUAL_REPORT_DRAFT_2015_May_31.pdf). (for now I think this is the most straightforward to use. Other sources are in `other_crime`.
+`pgh/crimes.csv` is from [this report](http://apps.pittsburghpa.gov/pghbop/ANNUAL_REPORT_DRAFT_2015_May_31.pdf). (for now I think this is the most straightforward to use. Other sources are in `other_crime`. Population stats are from 2010.
 
 "Type 1": Homicide, rape, aggravated assault, robbery, theft, burglary, motor vehicle theft, arson. "Type 2": Simple assault, vandalism, drug violations, fraud, disorderly conduct, drunk driving, forgery, weapons violations, prostitution, public intoxication, other.
+
+`sf/sfpd_2015.csv` is a list of all the police incidents in 2015. Unfortunately, they don't seem to be categorized all that well. Population stats are from 2014.
 
 ## Convenience
 
