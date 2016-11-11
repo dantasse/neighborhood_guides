@@ -58,28 +58,16 @@ export default new Vuex.Store({
     crimeStats: function (state) {
       // TODO: replace all these csv lookups with json lookups ideally.
       for (let nghd of state.neighborhoodsCrimeStats) {
-        if (nghd['Neighborhoods'] === state.currentNeighborhood) {
-          let pop = nghd['Population 2010']
-          let nghdStats = {
-            'Part1Per1000': (1000.0 * nghd['Part I crimes'] / pop).toFixed(2),
-            'Part2Per1000': (1000.0 * nghd['Part II crimes'] / pop).toFixed(2),
-            'TotalPer1000': nghd['Crimes Per 1000']
-          }
-          return nghdStats
+        if (nghd['neighborhood'] === state.currentNeighborhood) {
+          return nghd
         }
       }
       return {}
     },
     cityCrimeStats: function (state) {
       for (let nghd of state.neighborhoodsCrimeStats) {
-        if (nghd['Neighborhoods'] === state.currentCity) {
-          let pop = nghd['Population 2010']
-          let nghdStats = {
-            'Part1Per1000': (1000.0 * nghd['Part I crimes'] / pop).toFixed(2),
-            'Part2Per1000': (1000.0 * nghd['Part II crimes'] / pop).toFixed(2),
-            'TotalPer1000': nghd['Crimes Per 1000']
-          }
-          return nghdStats
+        if (nghd['neighborhood'] === state.currentCity) {
+          return nghd
         }
       }
       return {}

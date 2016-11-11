@@ -66,7 +66,7 @@ if __name__ == '__main__':
     # Read and tally each crime by neighborhood and type.
     crimes_reader = csv.DictReader(open(args.crimes_data))
     output_writer = csv.writer(open(args.output_file, 'w'))
-    output_writer.writerow(['Neighborhoods', 'Population 2010', 'Part I crimes', 'Part II crimes', 'part1_per_1000_ppl', 'part2_per_1000_ppl', 'total_per_1000_ppl'])
+    output_writer.writerow(['neighborhood', 'population', 'Part I crimes', 'Part II crimes', 'part1_per_1000_ppl', 'part2_per_1000_ppl', 'total_per_1000_ppl'])
     pointmap = Pointmap(args.pointmap_file)
     part1_counter = collections.Counter()
     part2_counter = collections.Counter()
@@ -88,5 +88,12 @@ if __name__ == '__main__':
             round(part1 * 1000.0 / pop, 2),
             round(part2 * 1000.0 / pop, 2),
             round((part1 + part2) * 1000.0 / pop, 2)])
-
-
+    # Write one more for SF as a whole.
+    total_pop = sum(nghds_pops.values())
+    total_part1 = sum(part1_counter.values())
+    total_part2 = sum(part2_counter.values())
+    output_writer.writerow(['San Francisco', total_pop, total_part1, total_part2,
+            round(total_part1 * 1000.0 / total_pop, 2),
+            round(total_part2 * 1000.0 / total_pop, 2),
+            round((total_part1 + total_part2) * 1000.0 / total_pop, 2)])
+ 

@@ -1,4 +1,4 @@
-Neighborhoods,Population 2010,Part I crimes,Part II crimes,part1_per_1000_ppl,part2_per_1000_ppl,total_per_1000_ppl
+neighborhood,population,Part I crimes,Part II crimes,part1_per_1000_ppl,part2_per_1000_ppl,total_per_1000_ppl
 Portola,15937,620,700,38.9,43.92,82.83
 Japantown,3918,799,294,203.93,75.04,278.97
 Glen Park,8317,347,283,41.72,34.03,75.75
@@ -40,3 +40,4 @@ Tenderloin,27636,4673,7852,169.09,284.12,453.21
 Russian Hill,18609,1757,825,94.42,44.33,138.75
 Outer Mission,23610,741,969,31.39,41.04,72.43
 Twin Peaks,6953,228,170,32.79,24.45,57.24
+San Francisco,829072,63702,62357,76.84,75.21,152.05

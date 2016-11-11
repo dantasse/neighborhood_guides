@@ -9,18 +9,18 @@
       </tr>
       <tr>
         <td>Part 1 crimes (most serious)</td>
-        <td>{{crimeStats['Part1Per1000']}}</td>
-        <td>{{cityCrimeStats['Part1Per1000']}}</td>
+        <td>{{crimeStats['part1_per_1000_ppl']}}</td>
+        <td>{{cityCrimeStats['part1_per_1000_ppl']}}</td>
       </tr>
       <tr>
         <td>Part 2 crimes (less serious)</td>
-        <td>{{crimeStats['Part2Per1000']}}</td>
-        <td>{{cityCrimeStats['Part2Per1000']}}</td>
+        <td>{{crimeStats['part2_per_1000_ppl']}}</td>
+        <td>{{cityCrimeStats['part2_per_1000_ppl']}}</td>
       </tr>
       <tr>
         <td>Total crimes</td>
-        <td>{{crimeStats['TotalPer1000']}}</td>
-        <td>{{cityCrimeStats['TotalPer1000']}}</td>
+        <td>{{crimeStats['total_per_1000_ppl']}}</td>
+        <td>{{cityCrimeStats['total_per_1000_ppl']}}</td>
       </tr>
   </div>
 </template>
