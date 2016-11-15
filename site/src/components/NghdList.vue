@@ -21,12 +21,16 @@ let selectName = function (name) {
 
 export default {
   data () {
-    var neighborhoodNames = store.state.neighborhoodNames.sort()
-    neighborhoodNames.splice(neighborhoodNames.indexOf('None'), 1)
     return {
-      nghdNames: neighborhoodNames,
       selectName: selectName,
       store: store
+    }
+  },
+  computed: {
+    nghdNames: function () {
+      var nghdNames = store.state.neighborhoodNames[store.state.currentCity].sort()
+      nghdNames.splice(nghdNames.indexOf('None'), 1)
+      return nghdNames
     }
   }
 }

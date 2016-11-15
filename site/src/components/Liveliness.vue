@@ -63,7 +63,6 @@ export default {
     cityPerSqMi () {
       let cityVenuesPerSqMi = {}
       let cityVenues = store.getters.cityFoursquareVenues
-      console.log(cityVenues['All Venues'])
       cityVenuesPerSqMi['all'] = parseFloat(cityVenues['All Venues']).toFixed(2)
       cityVenuesPerSqMi['food'] = parseFloat(cityVenues['Food']).toFixed(2)
       cityVenuesPerSqMi['arts'] = parseFloat(cityVenues['Arts and Entertainment']).toFixed(2)

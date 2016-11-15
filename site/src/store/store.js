@@ -12,14 +12,24 @@ let sfNghdsWalkscores = require('../assets/sf/nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 
+let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
+let sfBounds = require('../assets/sf/nghd_bounds.geojson')
+let nghdNames = {'Pittsburgh': [], 'San Francisco': []}
+for (let nghd of pghBounds['features']) {
+  nghdNames['Pittsburgh'].push(nghd['properties']['name'])
+}
+for (let nghd of sfBounds['features']) {
+  nghdNames['San Francisco'].push(nghd['properties']['name'])
+}
+console.log(nghdNames)
 export default new Vuex.Store({
   state: {
     cityList: ['Pittsburgh', 'San Francisco'],
     currentNeighborhood: 'Shadyside',
     currentCity: 'Pittsburgh',
-    compareNeighborhood: 'Mission',
+    compareNeighborhood: '',
     compareCity: 'San Francisco',
-    neighborhoodNames: _.union(Object.keys(neighborhoodsAutotags), ['Mission', 'Noe Valley']),
+    neighborhoodNames: nghdNames,
     neighborhoodsAutotags: neighborhoodsAutotags,
     neighborhoodsCrimeStats: crimeStats,
     pghNeighborhoodsWalkscores: pghNghdsWalkscores,
