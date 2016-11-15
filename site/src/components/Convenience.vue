@@ -1,26 +1,34 @@
 <template>
   <div class="convenience">
     <h3>Location convenience in {{store.state.currentNeighborhood}}</h3>
-    <table v-if="'Walk Score' in walkscores">
+    <table v-if="'currentNghd' in walkscores">
       <tr>
         <th></th>
         <th>{{store.state.currentNeighborhood}}</th>
         <th>{{store.state.currentCity}}</th>
+        <th>{{store.state.compareNeighborhood}}</th>
+        <th>{{store.state.compareCity}}</th>
       </tr>
       <tr>
         <td>Walk Score</td>
-        <td>{{walkscores['Walk Score']}}</td>
-        <td>{{cityWalkscores['Walk Score']}}</td>
+        <td>{{walkscores['currentNghd']['Walk Score']}}</td>
+        <td>{{walkscores['currentCity']['Walk Score']}}</td>
+        <td>{{walkscores['compareNghd']['Walk Score']}}</td>
+        <td>{{walkscores['compareCity']['Walk Score']}}</td>
       </tr>
       <tr>
         <td>Transit Score</td>
-        <td>{{walkscores['Transit Score']}}</td>
-        <td>{{cityWalkscores['Transit Score']}}</td>
+        <td>{{walkscores['currentNghd']['Transit Score']}}</td>
+        <td>{{walkscores['currentCity']['Transit Score']}}</td>
+        <td>{{walkscores['compareNghd']['Transit Score']}}</td>
+        <td>{{walkscores['compareCity']['Transit Score']}}</td>
       </tr>
       <tr>
         <td>Bike Score</td>
-        <td>{{walkscores['Bike Score']}}</td>
-        <td>{{cityWalkscores['Bike Score']}}</td>
+        <td>{{walkscores['currentNghd']['Bike Score']}}</td>
+        <td>{{walkscores['currentCity']['Bike Score']}}</td>
+        <td>{{walkscores['compareNghd']['Bike Score']}}</td>
+        <td>{{walkscores['compareCity']['Bike Score']}}</td>
       </tr>
     </table>
     <div v-else>
@@ -37,8 +45,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'walkscores',
-    'cityWalkscores'
+    'walkscores'
   ]),
   data () {
     return {

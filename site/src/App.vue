@@ -5,7 +5,8 @@
   <div id="app" class="container">
     <div class="row">
       <div class="col-md-12">
-        <city-map>
+        <city-picker></city-picker>
+        <city-map></city-map>
       </div>
     </div>
     <div class="row">
@@ -30,6 +31,7 @@
 
 <script>
 // Here are the "subcomponents" we're using:
+import CityPicker from './components/CityPicker'
 import CityMap from './components/CityMap'
 import NghdList from './components/NghdList'
 import Aesthetics from './components/Aesthetics'
@@ -41,6 +43,7 @@ import store from './store/store.js'
 
 export default {
   components: {
+    CityPicker,
     CityMap,
     NghdList,
     Aesthetics,

@@ -1,7 +1,6 @@
 <template>
   <div class="nghd-list">
     <!-- A component must have one top level element, in this case the div.-->
-    Click a neighborhood to see its photos.
     <ul>
       <li v-for='name in nghdNames' v-on:click='selectName(name)'>
           {{name}}
@@ -37,5 +36,6 @@ export default {
 <style scoped>
 li:hover {
   color: #42b983;
+  cursor: pointer;
 }
 </style>

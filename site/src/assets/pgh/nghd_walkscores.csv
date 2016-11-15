@@ -13,7 +13,7 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 12,Central Northside,80,62,50,2825
 13,West Oakland,78,71,35,2621
 14,East Liberty,75,61,65,5829
-15,Crawford Roberts,73,82,28,2277
+15,Crawford-Roberts,73,82,28,2277
 16,Central Lawrenceville,73,49,63,4847
 17,Squirrel Hill South,71,49,55,15172
 18,Squirrel Hill North,70,62,55,11319
@@ -54,13 +54,13 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 53,Perry South,42,46,21,4196
 54,Banksville,42,38,16,4205
 55,Duquesne Heights,41,59,25,2396
-56,Spring Hill - City View,41,43,34,2656
+56,Spring Hill-City View,41,43,34,2656
 57,Beltzhoover,41,63,21,1964
 58,Brighton Heights,40,41,27,7157
 59,Elliott,40,44,21,2405
 60,Arlington,40,43,18,1874
 61,Hazelwood,39,38,28,4441
-62,Marshall - Shadeland,39,42,35,5847
+62,Marshall-Shadeland,39,42,35,5847
 63,Overbrook,36,49,11,3706
 64,Crafton Heights,35,43,14,3809
 65,Perry North,35,41,9,4110

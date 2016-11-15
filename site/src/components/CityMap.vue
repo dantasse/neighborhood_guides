@@ -113,7 +113,7 @@ export default {
     border-radius: 5px;
 }
 .infobox h4 {
-    margin: 0 0 5px;
+    margin: 0;
     color: #777;
 }
 </style>

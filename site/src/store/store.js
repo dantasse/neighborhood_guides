@@ -1,23 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import _ from 'underscore'
 
 Vue.use(Vuex)
 
 let neighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 // TODO not sure how to load this asychronously.
 let crimeStats = require('../assets/pgh/crimes.csv')
-let nghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
+let pghNghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
+let sfNghdsWalkscores = require('../assets/sf/nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 
 export default new Vuex.Store({
   state: {
+    cityList: ['Pittsburgh', 'San Francisco'],
     currentNeighborhood: 'Shadyside',
     currentCity: 'Pittsburgh',
-    neighborhoodNames: Object.keys(neighborhoodsAutotags),
+    compareNeighborhood: 'Mission',
+    compareCity: 'San Francisco',
+    neighborhoodNames: _.union(Object.keys(neighborhoodsAutotags), ['Mission', 'Noe Valley']),
     neighborhoodsAutotags: neighborhoodsAutotags,
     neighborhoodsCrimeStats: crimeStats,
-    neighborhoodsWalkscores: nghdsWalkscores,
+    pghNeighborhoodsWalkscores: pghNghdsWalkscores,
+    sfNeighborhoodsWalkscores: sfNghdsWalkscores,
     neighborhoodsTop10TweetTfidf: top10TweetTfidf,
     neighborhoodsFoursquareVenues: foursquareVenues
   },
@@ -26,6 +32,15 @@ export default new Vuex.Store({
     // Mutations are synchronous.
     selectNeighborhood: function (state, newNghd) {
       state.currentNeighborhood = newNghd
+    },
+    selectCurrentCity: function (state, newCurrentCity) {
+      state.currentCity = newCurrentCity
+    },
+    selectCompareNghd: function (state, newCompareNghd) {
+      state.compareNeighborhood = newCompareNghd
+    },
+    selectCompareCity: function (state, newCompareCity) {
+      state.compareCity = newCompareCity
     }
   },
   actions: {
@@ -35,6 +50,15 @@ export default new Vuex.Store({
       commit('selectNeighborhood', newNghd)
       // This seems dumb here, this action just redirects to the mutation, but
       // I think it will make sense when we have bigger actions.
+    },
+    selectCurrentCity ({ commit }, newCurrentCity) {
+      commit('selectCurrentCity', newCurrentCity)
+    },
+    selectCompareNghd ({ commit }, newCompareNghd) {
+      commit('selectCompareNghd', newCompareNghd)
+    },
+    selectCompareCity ({ commit }, newCompareCity) {
+      commit('selectCompareCity', newCompareCity)
     }
   },
   getters: {
@@ -73,20 +97,19 @@ export default new Vuex.Store({
       return {}
     },
     walkscores: function (state) {
-      for (let nghd of state.neighborhoodsWalkscores) {
+      for (let nghd of _.union(state.pghNeighborhoodsWalkscores, state.sfNeighborhoodsWalkscores)) {
         if (nghd['Name'] === state.currentNeighborhood) {
-          return nghd
+          var currentNghd = nghd
+          var compareNghd = nghd
+        } else if (nghd['Name'] === state.currentCity) {
+          var currentCity = nghd
+          var compareCity = nghd
         }
       }
-      return {}
-    },
-    cityWalkscores: function (state) {
-      for (let nghd of state.neighborhoodsWalkscores) {
-        if (nghd['Name'] === state.currentCity) {
-          return nghd
-        }
-      }
-      return {}
+      return {'currentNghd': currentNghd,
+        'currentCity': currentCity,
+        'compareNghd': compareNghd,
+        'compareCity': compareCity}
     },
     top10TweetTfidf: function (state) {
       return state.neighborhoodsTop10TweetTfidf[state.currentNeighborhood]
@@ -107,7 +130,6 @@ export default new Vuex.Store({
       }
       return {}
     }
-
   }
 })
 
