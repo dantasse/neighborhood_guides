@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import _ from 'underscore'
 
 Vue.use(Vuex)
 
@@ -32,8 +31,7 @@ export default new Vuex.Store({
     neighborhoodNames: nghdNames,
     neighborhoodsAutotags: neighborhoodsAutotags,
     neighborhoodsCrimeStats: crimeStats,
-    pghNeighborhoodsWalkscores: pghNghdsWalkscores,
-    sfNeighborhoodsWalkscores: sfNghdsWalkscores,
+    neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
     neighborhoodsTop10TweetTfidf: top10TweetTfidf,
     neighborhoodsFoursquareVenues: foursquareVenues
   },
@@ -107,12 +105,17 @@ export default new Vuex.Store({
       return {}
     },
     walkscores: function (state) {
-      for (let nghd of _.union(state.pghNeighborhoodsWalkscores, state.sfNeighborhoodsWalkscores)) {
+      for (let nghd of state.neighborhoodsWalkscores[state.currentCity]) {
         if (nghd['Name'] === state.currentNeighborhood) {
           var currentNghd = nghd
-          var compareNghd = nghd
         } else if (nghd['Name'] === state.currentCity) {
           var currentCity = nghd
+        }
+      }
+      for (let nghd of state.neighborhoodsWalkscores[state.compareCity]) {
+        if (nghd['Name'] === state.compareNeighborhood) {
+          var compareNghd = nghd
+        } else if (nghd['Name'] === state.compareCity) {
           var compareCity = nghd
         }
       }
