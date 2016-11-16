@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 let neighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 // TODO not sure how to load this asychronously.
-let crimeStats = require('../assets/pgh/crimes.csv')
+let pghCrimeStats = require('../assets/pgh/crimes.csv')
+let sfCrimeStats = require('../assets/sf/crimes.csv')
 let pghNghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
 let sfNghdsWalkscores = require('../assets/sf/nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
@@ -30,7 +31,7 @@ export default new Vuex.Store({
     compareCity: 'San Francisco',
     neighborhoodNames: nghdNames,
     neighborhoodsAutotags: neighborhoodsAutotags,
-    neighborhoodsCrimeStats: crimeStats,
+    neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats},
     neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
     neighborhoodsTop10TweetTfidf: top10TweetTfidf,
     neighborhoodsFoursquareVenues: foursquareVenues
@@ -89,12 +90,24 @@ export default new Vuex.Store({
     },
     crimeStats: function (state) {
       // TODO: replace all these csv lookups with json lookups ideally.
-      for (let nghd of state.neighborhoodsCrimeStats) {
+      for (let nghd of state.neighborhoodsCrimeStats[state.currentCity]) {
         if (nghd['neighborhood'] === state.currentNeighborhood) {
-          return nghd
+          var currentNghd = nghd
+        } else if (nghd['neighborhood'] === state.currentCity) {
+          var currentCity = nghd
         }
       }
-      return {}
+      for (let nghd of state.neighborhoodsCrimeStats[state.compareCity]) {
+        if (nghd['neighborhood'] === state.compareNeighborhood) {
+          var compareNghd = nghd
+        } else if (nghd['neighborhood'] === state.compareCity) {
+          var compareCity = nghd
+        }
+      }
+      return {'currentNghd': currentNghd,
+        'currentCity': currentCity,
+        'compareNghd': compareNghd,
+        'compareCity': compareCity}
     },
     cityCrimeStats: function (state) {
       for (let nghd of state.neighborhoodsCrimeStats) {
