@@ -10,7 +10,8 @@ let sfCrimeStats = require('../assets/sf/crimes.csv')
 let pghNghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
 let sfNghdsWalkscores = require('../assets/sf/nghd_walkscores.csv')
 let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
-let foursquareVenues = require('../assets/pgh/nghd_4sq.csv')
+let pghFoursquareVenues = require('../assets/pgh/nghd_4sq.csv')
+let sfFoursquareVenues = require('../assets/sf/nghd_4sq.csv')
 
 let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
 let sfBounds = require('../assets/sf/nghd_bounds.geojson')
@@ -34,7 +35,7 @@ export default new Vuex.Store({
     neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats},
     neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
     neighborhoodsTop10TweetTfidf: top10TweetTfidf,
-    neighborhoodsFoursquareVenues: foursquareVenues
+    neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues}
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
@@ -141,20 +142,25 @@ export default new Vuex.Store({
       return state.neighborhoodsTop10TweetTfidf[state.currentNeighborhood]
     },
     foursquareVenues: function (state) {
-      for (let nghd of state.neighborhoodsFoursquareVenues) {
+      for (let nghd of state.neighborhoodsFoursquareVenues[state.currentCity]) {
         if (nghd['Neighborhood'] === state.currentNeighborhood) {
-          return nghd
+          var currentNghd = nghd
+        } else if (nghd['Neighborhood'] === state.currentCity) {
+          var currentCity = nghd
         }
       }
-      return {}
-    },
-    cityFoursquareVenues: function (state) {
-      for (let nghd of state.neighborhoodsFoursquareVenues) {
-        if (nghd['Neighborhood'] === state.currentCity) {
-          return nghd
+      for (let nghd of state.neighborhoodsFoursquareVenues[state.compareCity]) {
+        if (nghd['Neighborhood'] === state.compareNeighborhood) {
+          var compareNghd = nghd
+        } else if (nghd['Neighborhood'] === state.compareCity) {
+          var compareCity = nghd
         }
       }
-      return {}
+      return {'currentNghd': currentNghd,
+        'currentCity': currentCity,
+        'compareNghd': compareNghd,
+        'compareCity': compareCity
+      }
     }
   }
 })
