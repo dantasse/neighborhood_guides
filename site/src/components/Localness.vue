@@ -53,7 +53,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+span {
+  cursor: pointer;
+}
+span:hover {
+  color: #42b983;
+}
 </style>
 
 
