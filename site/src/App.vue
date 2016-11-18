@@ -14,13 +14,9 @@
         <nghd-list></nghd-list>
       </div>
       <div class="col-md-8">
+        <compare-picker></compare-picker>
         <h1>{{store.state.currentNeighborhood}}</h1>
-        <h3>Compared to
-          <select v-model='newCompareNghd'
-            v-on:change='selectCompareNghd(newCompareNghd)'>
-            <option v-for='nghd in compareNghds'>{{nghd}}</option>
-          </select>
-        </h3>
+        <h1>{{store.state.compareNeighborhood}}</h1>
         <!-- These all match the "export default" components below.-->
         <aesthetics></aesthetics>
         <safety></safety>
@@ -39,6 +35,7 @@
 import CityPicker from './components/CityPicker'
 import CityMap from './components/CityMap'
 import NghdList from './components/NghdList'
+import ComparePicker from './components/ComparePicker'
 import Aesthetics from './components/Aesthetics'
 import Safety from './components/Safety'
 import Convenience from './components/Convenience'
@@ -46,15 +43,12 @@ import Localness from './components/Localness'
 import Liveliness from './components/Liveliness'
 import store from './store/store.js'
 
-let newCompareNghd = ''
-let selectCompareNghd = function (newHood) {
-  store.dispatch('selectCompareNghd', newHood)
-}
 export default {
   components: {
     CityPicker,
     CityMap,
     NghdList,
+    ComparePicker,
     Aesthetics,
     Safety,
     Convenience,
@@ -63,14 +57,7 @@ export default {
   },
   data () {
     return {
-      store: store,
-      newCompareNghd: newCompareNghd,
-      selectCompareNghd: selectCompareNghd // not sure why this is in data... whatever.
-    }
-  },
-  computed: {
-    compareNghds: function () {
-      return store.state.neighborhoodNames[store.state.compareCity]
+      store: store
     }
   }
 }
