@@ -4,7 +4,8 @@
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
     <ul>
       <li v-for='tag in top10tags'>
-        {{tag[0]}}
+        {{tag['autotag']}}
+        <img v-bind:src="tag['example_url'][0]" class='preview_photo'/>
       </li>
     </ul>
     <br/>
@@ -37,6 +38,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.preview_photo {
+  width: 200px;
+  height: 150px;
+}
 </style>
 

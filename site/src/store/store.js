@@ -73,17 +73,7 @@ export default new Vuex.Store({
   },
   getters: {
     top10tags: function (state) {
-      let alltags = state.neighborhoodsAutotags[state.currentNeighborhood]['autotags_90plus_minusbaseline']
-      // Get the top 10 for each neighborhood.
-      // TODO: push this into the data pipeline instead.
-      let sortable = []
-      Object.keys(alltags).forEach(function (key) {
-        sortable.push([key, alltags[key]])
-      })
-      sortable.sort(function (x, y) {
-        return y[1] - x[1]
-      })
-      return sortable.slice(0, 10)
+      return state.neighborhoodsAutotags[state.currentNeighborhood]['autotags_90plus_minusbaseline']
     },
     indoor_outdoor: function (state) {
       let alltags = state.neighborhoodsAutotags[state.currentNeighborhood]

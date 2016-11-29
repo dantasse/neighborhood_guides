@@ -2,7 +2,7 @@
 
 # Simplest version: get the average autotag for each neighborhood.
 
-import argparse, csv, collections, ast, json, operator
+import argparse, csv, collections, ast, json, operator, random
 from util import pointmap
 
 parser = argparse.ArgumentParser()
@@ -29,7 +29,7 @@ if __name__ == '__main__':
         nghd = pgh_pointmap[lat, lon]
 
         # autotags_90plus is the autotags for each pic with >=0.9 score
-        autotags_90plus = ast.literal_eval(row[4])
+        autotags_90plus = ast.literal_eval(row[5])
         autotags_90plus = filter(lambda x: x not in STOPTAGS, autotags_90plus)
 
         #'NUM_PHOTOS' is number of photos of that neighborhood            
@@ -39,7 +39,6 @@ if __name__ == '__main__':
         # this looks like Counter({'NUM_PHOTOS': 15, 'outdoor': 5, 'building':
         # 2, 'gable': 2, 'nature': 2, 'indoor': 2, 'plant': 2, etc.})
 
-        print url
         for tag in autotags_90plus:
             if tag in nghd_autotags_urls[nghd]: 
                 nghd_autotags_urls[nghd][tag].append(url)
@@ -82,13 +81,16 @@ if __name__ == '__main__':
     # this is the final output, with sorted top 10 autotags and urls
     output_autotag_url = dict()
     for nghd in sorted_output: 
-        output_autotag_url[nghd] = {'autotags_90plus_minusbaseline': [], 'NUM_PHOTOS': sorted_output[nghd]['NUM_PHOTOS']}
+        output_autotag_url[nghd] = {'autotags_90plus_minusbaseline': [],
+                'NUM_PHOTOS': sorted_output[nghd]['NUM_PHOTOS'],
+                'num_indoor': sorted_output[nghd]['num_indoor'],
+                'num_outdoor': sorted_output[nghd]['num_outdoor']}
         for tag in sorted_output[nghd]['autotags_90plus_minusbaseline']: 
-            if tag == 'indoor' or tag == 'outdoor': 
-                output_autotag_url[nghd][tag] = sorted_output[nghd]['autotags_90plus_minusbaseline'][tag]
-                continue
             
             urls = nghd_autotags_urls[nghd][tag]
+            # Add only 10 random URLs; that will be enough sample photos.
+            if len(urls) > 10:
+                urls = random.sample(urls, 10)
             score = sorted_output[nghd]['autotags_90plus_minusbaseline'][tag]
             output_autotag_url[nghd]['autotags_90plus_minusbaseline'] += [{'autotag': tag, 'score': score, 'example_url': urls}]
 
