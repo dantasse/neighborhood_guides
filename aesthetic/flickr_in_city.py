@@ -46,9 +46,10 @@ def process_some_rows(start_point, end_point):
             nsid = row[3] # user ID
             lon = float(row[12])
             lat = float(row[13])
+            url = row[16]
             if lat > city_bounds[1] and lat < city_bounds[3] and \
                     lon > city_bounds[0] and lon < city_bounds[2]:
-                process_some_rows.output_queue.put([photo_id, nsid, lat, lon])
+                process_some_rows.output_queue.put([photo_id, nsid, lat, lon, url])
 
         if infile.tell() > end_point:
             process_some_rows.output_queue.put(None)
