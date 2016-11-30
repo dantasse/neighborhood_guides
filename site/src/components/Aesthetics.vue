@@ -3,9 +3,13 @@
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
     <ul>
-      <li v-for='tag in top10tags'>
+      <li v-for='tag in top10tags' v-on:click="should_display=!should_display">
         {{tag['autotag']}}
-        <img v-bind:src="tag['example_url'][0]" class='preview_photo'/>
+        <div v-if="should_display">
+          <span v-for="i in [0,1,2]">
+            <img v-bind:src="tag['example_url'][i]" class='preview_photo'/>
+          </span>
+        </div>
       </li>
     </ul>
     <br/>
@@ -30,7 +34,8 @@ export default {
   // },
   data () {
     return {
-      store: store
+      store: store,
+      should_display: false
     }
   }
 }
