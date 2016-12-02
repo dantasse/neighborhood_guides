@@ -85,6 +85,22 @@ function setUpMap (latlon) {
   })
 }
 
+// Not the official centers, just ones that look good.
+var cityCenters = {
+  'Pittsburgh': [40.441, -79.97],
+  'San Francisco': [37.77, -122.416]
+}
+
+// Need to make this a function instead of just a map b/c apparently you can't
+// require() an expression that's not a literal string?
+function getGeojsonForCity (city) {
+  if (city === 'Pittsburgh') {
+    return require('assets/pgh/nghd_bounds.geojson')
+  } else if (city === 'San Francisco') {
+    return require('assets/sf/nghd_bounds.geojson')
+  }
+}
+
 export default {
   data () {
     return {
@@ -92,19 +108,21 @@ export default {
     }
   },
   watch: {
-    // When |cityCenter| changes, do something.
-    cityCenter: function (newCityCenter) {
+    // When |currentCity| changes, do something.
+    currentCity: function (newCity) {
+      var newCityCenter = cityCenters[newCity]
       map.setView(newCityCenter, 12)
+
+      // Put the new city's neighborhoods on the map.
+      geojsonLayer.removeFrom(map)
+      var neighborhoodsGeojson = getGeojsonForCity(newCity)
+      geojsonLayer = L.geoJSON(neighborhoodsGeojson, {
+        onEachFeature: addHandlers
+      }).addTo(map)
     }
   },
   computed: {
-    cityCenter: function () {
-      if (store.state.currentCity === 'Pittsburgh') {
-        return [40.441, -79.99]
-      } else if (store.state.currentCity === 'San Francisco') {
-        return [37.783, -122.416]
-      }
-    }
+    currentCity: function () { return store.state.currentCity }
   },
   mounted: setUpMap
 }
