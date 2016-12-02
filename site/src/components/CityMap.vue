@@ -14,6 +14,7 @@ import neighborhoodsGeojson from 'assets/pgh/nghd_bounds.geojson'
 // Define this here so we can reference it in setUpMap and resetHighlight.
 var geojsonLayer
 var infoBox
+var map
 
 function addHandlers (feature, layer) {
   layer.on({
@@ -48,9 +49,9 @@ function resetHighlight (e) {
   infoBox.update()
 }
 
-function setUpMap () {
+function setUpMap (latlon) {
   this.$nextTick(function () { // happen when the DOM is ready.
-    var map = L.map('leafletMap', {
+    map = L.map('leafletMap', {
       minZoom: 3,
       maxZoom: 18,
       inertia: false
@@ -88,6 +89,21 @@ export default {
   data () {
     return {
       store: store
+    }
+  },
+  watch: {
+    // When |cityCenter| changes, do something.
+    cityCenter: function (newCityCenter) {
+      map.setView(newCityCenter, 12)
+    }
+  },
+  computed: {
+    cityCenter: function () {
+      if (store.state.currentCity === 'Pittsburgh') {
+        return [40.441, -79.99]
+      } else if (store.state.currentCity === 'San Francisco') {
+        return [37.783, -122.416]
+      }
     }
   },
   mounted: setUpMap
