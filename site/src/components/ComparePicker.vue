@@ -1,7 +1,7 @@
 <template>
-  <div class="nghd-list">
+  <div class="compare-picker">
     <h3>Compared to
-      <select v-model='newCompareNghd' v-on:change='selectName(newCompareNghd)'>
+      <select v-model='compareNghd' v-on:change='selectName'>
         <option v-for='nghd in nghdNames'>{{nghd}}</option>
       </select>
     </h3>
@@ -12,18 +12,16 @@
 <script>
 import store from '../store/store.js'
 
-// Here we can use ES6 (ES2015) features, like 'let'.
-let selectName = function (name) {
-  // This is how you call a method on the store:
-  store.dispatch('selectCompareNghd', name)
+let selectName = function (ev) {
+  var selectedNghd = ev.target.value
+  store.dispatch('selectCompareNghd', selectedNghd)
 }
-let newCompareNghd = ''
+
 export default {
   data () {
     return {
       selectName: selectName,
-      store: store,
-      newCompareNghd: newCompareNghd
+      store: store
     }
   },
   computed: {
@@ -31,20 +29,14 @@ export default {
       var nghdNames = store.state.neighborhoodNames[store.state.compareCity].slice()
       // Work on a slice copy b/c sort() mutates, which makes the property
       // compute again.
-      nghdNames = nghdNames.sort()
-      if (nghdNames.indexOf('None') >= 0) {
-        nghdNames.splice(nghdNames.indexOf('None'), 1)
-      }
+      nghdNames = nghdNames.sort().filter(function (x) { return x !== 'None' })
       return nghdNames
-    }
+    },
+    compareNghd: function () { return store.state.compareNeighborhood }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-li:hover {
-  color: #42b983;
-  cursor: pointer;
-}
 </style>
