@@ -1,5 +1,5 @@
 Input: tweets in a city.
-Output: a "representative" feature vector of twitter words for that nghd?
+Output: lists of all the TF-iDF most common words in each neighborhood.
 
 Before running, get: (e.g. for Pittsburgh)
 
