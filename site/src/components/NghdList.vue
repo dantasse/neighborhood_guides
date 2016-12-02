@@ -1,12 +1,12 @@
 <template>
   <div class="nghd-list">
     <!-- A component must have one top level element, in this case the div.-->
-    <h3>Looking at
+    <h4>Particularly, this neighborhood:
       <select v-model='currentNghd' v-on:change='selectName'>
         <option value="" disabled>Select a Neighborhood</option>
         <option v-for='nghd in nghdNames' :value='nghd'>{{nghd}}</option>
       </select>
-    </h3>
+    </h4>
   </div>
 </template>
 
@@ -21,13 +21,11 @@ let selectName = function (ev) {
   store.dispatch('selectNeighborhood', selectedNghd)
 }
 
-let newNghd = store.state.currentNeighborhood
 export default {
   data () {
     return {
       selectName: selectName,
-      store: store,
-      newNghd: newNghd
+      store: store
     }
   },
   computed: {

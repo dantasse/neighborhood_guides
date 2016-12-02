@@ -1,10 +1,11 @@
 <template>
   <div class="compare-picker">
-    <h3>Compared to
+    <h4>I know this neighborhood:
       <select v-model='compareNghd' v-on:change='selectName'>
-        <option v-for='nghd in nghdNames'>{{nghd}}</option>
+        <option value="" disabled>Select a Neighborhood</option>
+        <option v-for='nghd in nghdNames' :value='nghd'>{{nghd}}</option>
       </select>
-    </h3>
+    </h4>
   </div>
 </template>
 

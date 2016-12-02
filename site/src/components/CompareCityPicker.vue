@@ -1,10 +1,10 @@
 <template>
-  <div class="current-city-picker">
-    <div id='current_city'>
-      <h3>I want to learn about:
+  <div class="compare-city-picker">
+    <div id='compare_city'>
+      <h3>I know:
         <span class='city-name' v-for='city in store.state.cityList'
-          v-bind:class="{selected: city === store.state.currentCity}"
-          v-on:click="store.dispatch('selectCurrentCity', city)">{{city}}</span>
+          v-bind:class="{selected: city === store.state.compareCity}"
+          v-on:click="store.dispatch('selectCompareCity', city)">{{city}}</span>
       </h3>
     </div>
   </div>
@@ -34,3 +34,4 @@ export default {
   color: #fff;
 }
 </style>
+

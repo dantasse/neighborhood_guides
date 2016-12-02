@@ -5,16 +5,15 @@
   <div id="app" class="container">
     <div class="row">
       <div class="col-md-12">
+        <compare-city-picker></compare-city-picker>
+        <compare-picker></compare-picker>
         <city-picker></city-picker>
+        <nghd-list></nghd-list>
         <city-map></city-map>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
-        <nghd-list></nghd-list>
-      </div>
-      <div class="col-md-8">
-        <compare-picker></compare-picker>
+      <div class="col-md-12">
         <h1>{{store.state.currentNeighborhood}}</h1>
         <h1>{{store.state.compareNeighborhood}}</h1>
         <!-- These all match the "export default" components below.-->
@@ -36,6 +35,7 @@ import CityPicker from './components/CityPicker'
 import CityMap from './components/CityMap'
 import NghdList from './components/NghdList'
 import ComparePicker from './components/ComparePicker'
+import CompareCityPicker from './components/CompareCityPicker'
 import Aesthetics from './components/Aesthetics'
 import Safety from './components/Safety'
 import Convenience from './components/Convenience'
@@ -49,6 +49,7 @@ export default {
     CityMap,
     NghdList,
     ComparePicker,
+    CompareCityPicker,
     Aesthetics,
     Safety,
     Convenience,
