@@ -16,8 +16,7 @@ Are where the scripts for computing the parts of the models are. There's also:
 
 - `data` for "input" data files, like neighborhood boundary GeoJSON files etc. Probably don't check big files into there though still - git doesn't work great with big files.
 - `util` for python scripts that are used throughout a bunch of different files.
-- `site` for the website!
-  - `site/models` for the five computed models above.
+- `site` for the website
   
 
 ## Getting started

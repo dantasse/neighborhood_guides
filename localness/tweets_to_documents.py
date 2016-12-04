@@ -7,8 +7,8 @@ import argparse, csv, collections, ast, json, os, multiprocessing, io
 from util import pointmap, tweetutil
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--city_tweets_file', default='data/tweet_pgh_with_text.csv')
-parser.add_argument('--pointmap_file', default='data/pgh_pointmap.csv')
+parser.add_argument('--city_tweets_file', default='data/pgh/tweets.csv')
+parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv')
 parser.add_argument('--output_file', default='pgh_nghd_tweets.json')
 parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count())
 args = parser.parse_args()
@@ -55,7 +55,10 @@ def process_lines(start, end):
             skipped_rows.append(row)
             continue
 
-        nghds_tweettexts_thischunk[nghd].append(formatted_text)
+        nghds_tweettexts_thischunk[nghd].append({
+            'words':formatted_text,
+            'fulltext': text,
+            'username': username})
 
     print "Skipped this many: %s" % len(skipped_rows)
     for row in skipped_rows:
@@ -86,4 +89,4 @@ if __name__ == '__main__':
     worker_pool.join()
 
     print "Dumping to json file"
-    json.dump(nghds_tweettexts, open(args.output_file, 'w'))
+    json.dump(nghds_tweettexts, open(args.output_file, 'w'), indent=2)

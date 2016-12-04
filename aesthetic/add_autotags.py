@@ -53,6 +53,7 @@ if __name__ == '__main__':
     print "%s\tStarting." % time.asctime()
     city_csv_reader = csv.reader(open(args.city_csv_file))
     photos = {int(row[0]): row for row in city_csv_reader}
+
     file_size = os.path.getsize(args.autotags_file)
     start_indices = [i * file_size / args.num_processes for i in range(args.num_processes)]
     end_indices = start_indices[1:] + [file_size]

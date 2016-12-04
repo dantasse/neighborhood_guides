@@ -1,14 +1,42 @@
 <template>
   <div class="convenience">
     <h3>Location convenience in {{store.state.currentNeighborhood}}</h3>
-    <ul v-if="'Walk Score' in walkscores">
-      <li>Walk Score: {{walkscores['Walk Score']}}</li>
-      <li>Transit Score: {{walkscores['Transit Score']}}</li>
-      <li>Bike Score: {{walkscores['Bike Score']}}</li>
-    </ul>
-    <div v-else>
-      No data for {{store.state.currentNeighborhood}}
-    </div>
+    <table>
+      <tr>
+        <th></th>
+        <th>{{store.state.currentNeighborhood}}</th>
+        <th>{{store.state.currentCity}}</th>
+        <th>{{store.state.compareNeighborhood}}</th>
+        <th>{{store.state.compareCity}}</th>
+      </tr>
+      <tr>
+        <td>Walk Score</td>
+        <td v-if="walkscores['currentNghd'] !== undefined">{{walkscores['currentNghd']['Walk Score']}}</td>
+        <td v-else>No data</td>
+        <td>{{walkscores['currentCity']['Walk Score']}}</td>
+        <td v-if="walkscores['compareNghd'] !== undefined">{{walkscores['compareNghd']['Walk Score']}}</td>
+        <td v-else>No data</td>
+        <td>{{walkscores['compareCity']['Walk Score']}}</td>
+      </tr>
+      <tr>
+        <td>Transit Score</td>
+        <td v-if="walkscores['currentNghd'] !== undefined">{{walkscores['currentNghd']['Transit Score']}}</td>
+        <td v-else>No data</td>
+        <td>{{walkscores['currentCity']['Transit Score']}}</td>
+        <td v-if="walkscores['compareNghd'] !== undefined">{{walkscores['compareNghd']['Transit Score']}}</td>
+        <td v-else>No data</td>
+        <td>{{walkscores['compareCity']['Transit Score']}}</td>
+      </tr>
+      <tr>
+        <td>Bike Score</td>
+        <td v-if="walkscores['currentNghd'] !== undefined">{{walkscores['currentNghd']['Bike Score']}}</td>
+        <td v-else>No data</td>
+        <td>{{walkscores['currentCity']['Bike Score']}}</td>
+        <td v-if="walkscores['compareNghd'] !== undefined">{{walkscores['compareNghd']['Bike Score']}}</td>
+        <td v-else>No data</td>
+        <td>{{walkscores['compareCity']['Bike Score']}}</td>
+      </tr>
+    </table>
      <br/>
   </div>
 </template>
@@ -34,6 +62,4 @@ export default {
 <style scoped>
 
 </style>
-
-
 
