@@ -14,8 +14,6 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <h1>{{store.state.currentNeighborhood}}</h1>
-        <h1>{{store.state.compareNeighborhood}}</h1>
         <!-- These all match the "export default" components below.-->
         <aesthetics></aesthetics>
         <safety></safety>

@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-let neighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
+let pghNeighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
+let sfNeighborhoodsAutotags = require('../assets/sf/nghd_autotags.json')
 // TODO not sure how to load this asychronously.
 let pghCrimeStats = require('../assets/pgh/crimes.csv')
 let sfCrimeStats = require('../assets/sf/crimes.csv')
@@ -22,7 +23,6 @@ for (let nghd of pghBounds['features']) {
 for (let nghd of sfBounds['features']) {
   nghdNames['San Francisco'].push(nghd['properties']['name'])
 }
-console.log(nghdNames)
 export default new Vuex.Store({
   state: {
     cityList: ['Pittsburgh', 'San Francisco'],
@@ -31,7 +31,7 @@ export default new Vuex.Store({
     compareNeighborhood: '',
     compareCity: 'San Francisco',
     neighborhoodNames: nghdNames,
-    neighborhoodsAutotags: neighborhoodsAutotags,
+    neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags},
     neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats},
     neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
     neighborhoodsTop10TweetTfidf: top10TweetTfidf,
@@ -73,10 +73,10 @@ export default new Vuex.Store({
   },
   getters: {
     top10tags: function (state) {
-      return state.neighborhoodsAutotags[state.currentNeighborhood]['autotags_90plus_minusbaseline']
+      return state.neighborhoodsAutotags[state.currentCity][state.currentNeighborhood]['autotags_90plus_minusbaseline']
     },
     indoor_outdoor: function (state) {
-      let alltags = state.neighborhoodsAutotags[state.currentNeighborhood]
+      let alltags = state.neighborhoodsAutotags[state.currentCity][state.currentNeighborhood]
       return [alltags['num_indoor'], alltags['num_outdoor']]
     },
     crimeStats: function (state) {
