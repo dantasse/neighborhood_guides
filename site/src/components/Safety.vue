@@ -6,7 +6,9 @@
         <th>Crime type</th>
         <th>Per 1000 people in <br>{{store.state.currentNeighborhood}}</th>
         <th>Per 1000 people in <br>{{store.state.currentCity}}</th>
-        <th>Per 1000 people in <br>{{store.state.compareNeighborhood}}</th>
+
+        <th v-if="store.state.compareNeighborhood !== ''">Per 1000 people in <br>{{store.state.compareNeighborhood}}</th>
+        <th v-else></th>
         <th>Per 1000 people in <br>{{store.state.compareCity}}</th>
       </tr>
       <tr>
@@ -14,12 +16,12 @@
         <td v-if="crimeStats['currentNghd'] !== undefined">
           {{crimeStats['currentNghd']['part1_per_1000_ppl']}}
         </td>
-        <td v-else>No data</td>
+        <td v-else></td>
         <td>{{crimeStats['currentCity']['part1_per_1000_ppl']}}</td>
         <td v-if="crimeStats['compareNghd'] !== undefined">
           {{crimeStats['compareNghd']['part1_per_1000_ppl']}}
         </td>
-        <td v-else>No data</td>
+        <td v-else></td>
         <td>{{crimeStats['compareCity']['part1_per_1000_ppl']}}</td>
       </tr>
       <tr>
@@ -27,12 +29,12 @@
         <td v-if="crimeStats['currentNghd'] !== undefined">
           {{crimeStats['currentNghd']['part2_per_1000_ppl']}}
         </td>
-        <td v-else>No data</td>
+        <td v-else></td>
         <td>{{crimeStats['currentCity']['part2_per_1000_ppl']}}</td>
         <td v-if="crimeStats['compareNghd'] !== undefined">
           {{crimeStats['compareNghd']['part2_per_1000_ppl']}}
         </td>
-        <td v-else>No data</td>
+        <td v-else></td>
         <td>{{crimeStats['compareCity']['part2_per_1000_ppl']}}</td>
       </tr>
       <tr>
@@ -40,12 +42,12 @@
         <td v-if="crimeStats['currentNghd'] !== undefined">
           {{crimeStats['currentNghd']['total_per_1000_ppl']}}
         </td>
-        <td v-else>No data</td>
+        <td v-else></td>
         <td>{{crimeStats['currentCity']['total_per_1000_ppl']}}</td>
         <td v-if="crimeStats['compareNghd'] !== undefined">
           {{crimeStats['compareNghd']['total_per_1000_ppl']}}
         </td>
-        <td v-else>No data</td>
+        <td v-else></td>
         <td>{{crimeStats['compareCity']['total_per_1000_ppl']}}</td>
       </tr>
   </div>
@@ -70,7 +72,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+table {
+  width:100%;
+}
 </style>
 
 

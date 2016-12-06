@@ -2,11 +2,14 @@
   <div class="aesthetics">
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
+    <div  v-on:click="should_display=!should_display">
+    Expand
+    </div>
     <ul>
-      <li v-for='tag in top10tags' v-on:click="should_display=!should_display">
+      <li v-for='tag in top10tags'>
         {{tag['autotag']}}
         <div v-if="should_display">
-          <span v-for="i in [0,1,2]">
+          <span v-for="i in [0,1,2,3,4]">
             <img v-bind:src="tag['example_url'][i]" class='preview_photo'/>
           </span>
         </div>

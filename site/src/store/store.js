@@ -10,7 +10,8 @@ let pghCrimeStats = require('../assets/pgh/crimes.csv')
 let sfCrimeStats = require('../assets/sf/crimes.csv')
 let pghNghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
 let sfNghdsWalkscores = require('../assets/sf/nghd_walkscores.csv')
-let top10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
+let pghTop10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
+let sfTop10TweetTfidf = require('../assets/sf/tweet_tfidf_top10.json')
 let pghFoursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 let sfFoursquareVenues = require('../assets/sf/nghd_4sq.csv')
 
@@ -34,7 +35,7 @@ export default new Vuex.Store({
     neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags},
     neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats},
     neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
-    neighborhoodsTop10TweetTfidf: top10TweetTfidf,
+    neighborhoodsTop10TweetTfidf: {'Pittsburgh': pghTop10TweetTfidf, 'San Francisco': sfTop10TweetTfidf},
     neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues}
   },
   mutations: {
@@ -129,7 +130,7 @@ export default new Vuex.Store({
         'compareCity': compareCity}
     },
     top10TweetTfidf: function (state) {
-      return state.neighborhoodsTop10TweetTfidf[state.currentNeighborhood]
+      return state.neighborhoodsTop10TweetTfidf[state.currentCity][state.currentNeighborhood]
     },
     foursquareVenues: function (state) {
       for (let nghd of state.neighborhoodsFoursquareVenues[state.currentCity]) {
