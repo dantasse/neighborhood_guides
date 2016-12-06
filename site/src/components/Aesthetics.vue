@@ -3,7 +3,7 @@
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
     <div  v-on:click="should_display=!should_display">
-    Expand
+      <a>Hide photos</a>
     </div>
     <ul>
       <li v-for='tag in top10tags'>
@@ -38,7 +38,7 @@ export default {
   data () {
     return {
       store: store,
-      should_display: false
+      should_display: true
     }
   }
 }

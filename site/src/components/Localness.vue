@@ -32,7 +32,6 @@ let expandTweetWord = function (word) {
   } else {
     expanded.push(word)
   }
-  console.log(expanded)
 }
 
 export default {
