@@ -21,7 +21,7 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 20,Allentown,69,59,32,2602
 21,Larimer,69,63,55,1808
 22,Strip District,69,70,71,592
-23,Southside Slopes,66,52,26,4546
+23,South Side Slopes,66,52,26,4546
 24,Homewood South,65,61,50,2271
 25,Polish Hill,64,64,42,1305
 26,Knoxville,63,54,29,3733
@@ -37,9 +37,9 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 36,Bedford Dwellings,60,64,16,1107
 37,Highland Park,59,48,53,6384
 38,Upper Hill,58,68,37,2142
-39,California-Kirkbride,57,54,,39778
+39,California-Kirkbride,57,54,38,39778
 40,Point Breeze,57,60,65,5553
-41,Fine View,57,53,29,1269
+41,Fineview,57,53,29,1269
 42,Homewood North,57,55,29,3270
 43,Regent Square,55,49,60,1066
 44,Carrick,55,45,22,10325
@@ -50,7 +50,7 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 49,Brookline,48,43,21,13189
 50,Beechview,45,49,22,8034
 51,Morningside,45,44,32,3176
-52,Mt Oliver,44,42,20,503
+52,Mt. Oliver,44,42,20,503
 53,Perry South,42,46,21,4196
 54,Banksville,42,38,16,4205
 55,Duquesne Heights,41,59,25,2396
@@ -70,7 +70,7 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 69,Swisshelm Park,27,45,30,1413
 70,East Carnegie,27,40,23,583
 71,East Hills,27,46,11,2944
-72,Wind Gap,25,39,14,1421
+72,Windgap,25,39,14,1421
 73,Lincoln Place,22,30,13,3116
 74,Glen Hazel,19,39,19,745
 75,Fairywood,18,38,16,1092
@@ -78,3 +78,17 @@ Rank,Name,Walk Score,Transit Score,Bike Score,Population
 77,Summer Hill,9,39,3,991
 78,Hays,4,17,1,571
 79,Pittsburgh,54.47,53.38,35.66,339585
+,South Shore,0,0,0,0
+,Chartiers City,0,0,0,0
+,Allegheny West,83,71,66,575
+,North Shore,83,71,66,575
+,Chateau,0,0,0,0
+,Arlington Heights,40,43,18,1874
+,West End,40,44,21,2405
+,New Homestead,0,0,0,0
+52,Mount Oliver Borough,44,42,20,503
+48,Esplen,49,45,23,5317
+46,Ridgemont,52,37,17,2973
+52,St. Clair,44,42,20,503
+7,Central Oakland,84,68,52,9834
+7,South Oakland,84,68,52,9834
