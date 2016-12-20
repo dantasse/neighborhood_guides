@@ -14,6 +14,8 @@ let pghTop10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 let sfTop10TweetTfidf = require('../assets/sf/tweet_tfidf_top10.json')
 let pghFoursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 let sfFoursquareVenues = require('../assets/sf/nghd_4sq.csv')
+let pghMapillaryPhotos = require('../assets/pgh/nghd_mapillary_keys.csv')
+let sfMapillaryPhotos = require('../assets/sf/nghd_mapillary_keys.csv')
 
 let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
 let sfBounds = require('../assets/sf/nghd_bounds.geojson')
@@ -36,7 +38,8 @@ export default new Vuex.Store({
     neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats},
     neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
     neighborhoodsTop10TweetTfidf: {'Pittsburgh': pghTop10TweetTfidf, 'San Francisco': sfTop10TweetTfidf},
-    neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues}
+    neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues},
+    neighborhoodsMapillaryPhotos: {'Pittsburgh': pghMapillaryPhotos, 'San Francisco': sfMapillaryPhotos}
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
@@ -152,6 +155,25 @@ export default new Vuex.Store({
         'compareNghd': compareNghd,
         'compareCity': compareCity
       }
+    },
+    mapillaryPhotos: function (state) {
+      console.log('here')
+      console.log(state.neighborhoodsMapillaryPhotos['Pittsburgh'])
+      for (let nghd of state.neighborhoodsMapillaryPhotos[state.currentCity]) {
+        if (nghd['neighborhood'] === state.currentNeighborhood) {
+          console.log('match')
+          console.log(nghd['neighborhood'])
+          var currentNghd = nghd
+        }
+      }
+      for (let nghd of state.neighborhoodsMapillaryPhotos[state.compareCity]) {
+        if (nghd['neighborhood'] === state.compareNeighborhood) {
+          var compareNghd = nghd
+        }
+      }
+      console.log({'currentNghd': currentNghd, 'compareNghd': compareNghd})
+
+      return {'currentNghd': currentNghd, 'compareNghd': compareNghd}
     }
   }
 })
