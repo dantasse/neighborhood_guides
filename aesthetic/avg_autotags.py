@@ -2,7 +2,7 @@
 
 # Simplest version: get the average autotag for each neighborhood.
 
-import argparse, csv, collections, ast, json, operator, random
+import argparse, csv, collections, ast, json, operator, random, requests
 from util import pointmap
 
 parser = argparse.ArgumentParser()
@@ -13,6 +13,15 @@ args = parser.parse_args()
 
 # Tags that are meaningless so let's not include them at all.
 STOPTAGS = ['photo border']
+
+def is_good_url(url_to_test):
+    """ Check a URL to see if there's actually a photo there (and it's not a
+    video) """
+    resp = requests.get(url_to_test)
+    if 'photo_unavailable' in resp.url or 'video' in resp.url:
+        return False
+    else:
+        return True
 
 if __name__ == '__main__':
     pgh_pointmap = pointmap.Pointmap(args.pointmap_file)
@@ -81,16 +90,21 @@ if __name__ == '__main__':
     # this is the final output, with sorted top 10 autotags and urls
     output_autotag_url = dict()
     for nghd in sorted_output: 
+        print "Getting URLs for %s" % nghd
         output_autotag_url[nghd] = {'autotags_90plus_minusbaseline': [],
                 'NUM_PHOTOS': sorted_output[nghd]['NUM_PHOTOS'],
                 'num_indoor': sorted_output[nghd]['num_indoor'],
                 'num_outdoor': sorted_output[nghd]['num_outdoor']}
+
         for tag in sorted_output[nghd]['autotags_90plus_minusbaseline']: 
-            
             urls = nghd_autotags_urls[nghd][tag]
             # Add only 10 random URLs; that will be enough sample photos.
             if len(urls) > 10:
                 urls = random.sample(urls, 10)
+            # Actually GET each photo to make sure it's still there and isn't
+            # "This photo has been removed."
+            urls = filter(lambda u: is_good_url(u), urls)
+
             score = sorted_output[nghd]['autotags_90plus_minusbaseline'][tag]
             output_autotag_url[nghd]['autotags_90plus_minusbaseline'] += [{'autotag': tag, 'score': score, 'example_url': urls}]
 
