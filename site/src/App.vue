@@ -2,28 +2,32 @@
     http://vuejs.org/guide/single-file-components.html-->
 
 <template>
-  <div id="app" class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <compare-city-picker></compare-city-picker>
-        <compare-picker></compare-picker>
-        <city-picker></city-picker>
-        <nghd-list></nghd-list>
-        <city-map></city-map>
+  <div id="outer-container">
+    <!--outer-container so we can bleed to the edge (header, footer)-->
+    <div id="app" class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <compare-city-picker></compare-city-picker>
+          <compare-picker></compare-picker>
+          <city-picker></city-picker>
+          <nghd-list></nghd-list>
+          <city-map></city-map>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- These all match the "export default" components below.-->
+          <aesthetics></aesthetics>
+          <convenience></convenience>
+          <localness></localness>
+          <liveliness></liveliness>
+          <safety></safety>
+          <!--To get a better understanding of how this boilerplate works, check out-->
+          <!--<a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.-->
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <!-- These all match the "export default" components below.-->
-        <aesthetics></aesthetics>
-        <safety></safety>
-        <convenience></convenience>
-        <localness></localness>
-        <liveliness></liveliness>
-        <!--To get a better understanding of how this boilerplate works, check out-->
-        <!--<a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.-->
-      </div>
-    </div>
+    <page-footer></page-footer>
   </div>
 </template>
 
@@ -39,6 +43,7 @@ import Safety from './components/Safety'
 import Convenience from './components/Convenience'
 import Localness from './components/Localness'
 import Liveliness from './components/Liveliness'
+import PageFooter from './components/PageFooter'
 import store from './store/store.js'
 
 export default {
@@ -52,7 +57,8 @@ export default {
     Safety,
     Convenience,
     Localness,
-    Liveliness
+    Liveliness,
+    PageFooter
   },
   data () {
     return {
@@ -64,4 +70,5 @@ export default {
 </script>
 
 <style>
+
 </style>
