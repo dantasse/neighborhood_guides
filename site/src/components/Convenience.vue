@@ -1,42 +1,7 @@
 <template>
   <div class="convenience">
     <h3>Location convenience in {{store.state.currentNeighborhood}}</h3>
-    <table>
-      <tr>
-        <th></th>
-        <th>{{store.state.currentNeighborhood}}</th>
-        <th>{{store.state.currentCity}} Average</th>
-        <th>{{store.state.compareNeighborhood}}</th>
-        <th>{{store.state.compareCity}} Average</th>
-      </tr>
-      <tr>
-        <td>Walk Score</td>
-        <td v-if="walkscores['currentNghd'] !== undefined">{{walkscores['currentNghd']['Walk Score']}}</td>
-        <td v-else></td>
-        <td>{{walkscores['currentCity']['Walk Score']}}</td>
-        <td v-if="walkscores['compareNghd'] !== undefined">{{walkscores['compareNghd']['Walk Score']}}</td>
-        <td v-else></td>
-        <td>{{walkscores['compareCity']['Walk Score']}}</td>
-      </tr>
-      <tr>
-        <td>Transit Score</td>
-        <td v-if="walkscores['currentNghd'] !== undefined">{{walkscores['currentNghd']['Transit Score']}}</td>
-        <td v-else></td>
-        <td>{{walkscores['currentCity']['Transit Score']}}</td>
-        <td v-if="walkscores['compareNghd'] !== undefined">{{walkscores['compareNghd']['Transit Score']}}</td>
-        <td v-else></td>
-        <td>{{walkscores['compareCity']['Transit Score']}}</td>
-      </tr>
-      <tr>
-        <td>Bike Score</td>
-        <td v-if="walkscores['currentNghd'] !== undefined">{{walkscores['currentNghd']['Bike Score']}}</td>
-        <td v-else></td>
-        <td>{{walkscores['currentCity']['Bike Score']}}</td>
-        <td v-if="walkscores['compareNghd'] !== undefined">{{walkscores['compareNghd']['Bike Score']}}</td>
-        <td v-else></td>
-        <td>{{walkscores['compareCity']['Bike Score']}}</td>
-      </tr>
-    </table>
+    <div id="walkscoreChart" style="min-width: 310px; max-width: 960px; height: 400px; margin: 0 auto"> </div>
      <br/>
   </div>
 </template>
@@ -44,18 +9,115 @@
 
 <script>
 import store from '../store/store.js'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import Highcharts from 'highcharts'
 
 export default {
-  computed: mapGetters([
-    'walkscores'
-  ]),
   data () {
     return {
       store: store
     }
+  },
+  computed: mapState({
+    nghd: state => state.currentNeighborhood,
+    compareNghd: state => state.compareNeighborhood
+  }),
+  mounted: function () {
+    makeChart(store.getters.walkscores, store.state)
+  },
+  watch: {
+    nghd: function () {
+      makeChart(store.getters.walkscores, store.state)
+    },
+    compareNghd: function () {
+      makeChart(store.getters.walkscores, store.state)
+    }
   }
 }
+
+function makeChart (walkscores, state) {
+    // *sigh* just a lot of annoying protecting against nulls.
+  let compareNghdData = []
+  if (state.compareNeighborhood !== '') {
+    compareNghdData = [parseFloat(walkscores['compareNghd']['Walk Score']),
+      parseFloat(walkscores['compareNghd']['Transit Score']),
+      parseFloat(walkscores['compareNghd']['Bike Score'])]
+  }
+  let currentNghdData = []
+  if (state.currentNeighborhood !== '') {
+    currentNghdData = [parseFloat(walkscores['currentNghd']['Walk Score']),
+      parseFloat(walkscores['currentNghd']['Transit Score']),
+      parseFloat(walkscores['currentNghd']['Bike Score'])]
+  }
+
+  Highcharts.chart('walkscoreChart', {
+    chart: {
+      type: 'bar',
+      renderTo: 'walkscoreChart'
+    },
+    title: {
+      text: ''
+    },
+    xAxis: {
+      categories: ['Walk Score', 'Transit Score', 'Bike Score'],
+      title: {
+        text: null
+      }
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Scores (from walkscore.com)',
+        align: 'high'
+      },
+      labels: {
+        overflow: 'justify'
+      }
+    },
+    tooltip: {
+      valueSuffix: ''
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+      x: -40,
+      y: 80,
+      floating: true,
+      borderWidth: 1,
+      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+      shadow: true
+    },
+    credits: {
+      enabled: false
+    },
+    series: [{
+      name: state.currentNeighborhood || ' ',
+      data: currentNghdData
+    }, {
+      name: state.currentCity,
+      data: [parseFloat(walkscores['currentCity']['Walk Score']),
+        parseFloat(walkscores['currentCity']['Transit Score']),
+        parseFloat(walkscores['currentCity']['Bike Score'])]
+    }, {
+      name: state.compareNeighborhood || ' ',
+      data: compareNghdData
+    }, {
+      name: state.compareCity,
+      data: [parseFloat(walkscores['compareCity']['Walk Score']),
+        parseFloat(walkscores['compareCity']['Transit Score']),
+        parseFloat(walkscores['compareCity']['Bike Score'])]
+    }]
+  })
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

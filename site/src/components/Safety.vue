@@ -40,20 +40,15 @@ export default {
 }
 
 function makeTheChart (crimeStats, state) {
-  let nghdName = state.currentNeighborhood
-  let cityName = state.currentCity
-  let compareNghdName = state.compareNeighborhood
-  let compareCityName = state.compareCity
-
   // *sigh* just a lot of annoying protecting against nulls.
   let compareNghdData = []
-  if (compareNghdName !== '') {
+  if (state.compareNeighborhood !== '') {
     compareNghdData = [parseFloat(crimeStats['compareNghd']['part1_per_1000_ppl']),
       parseFloat(crimeStats['compareNghd']['part2_per_1000_ppl']),
       parseFloat(crimeStats['compareNghd']['total_per_1000_ppl'])]
   }
   let currentNghdData = []
-  if (nghdName !== '') {
+  if (state.currentNeighborhood !== '') {
     currentNghdData = [parseFloat(crimeStats['currentNghd']['part1_per_1000_ppl']),
       parseFloat(crimeStats['currentNghd']['part2_per_1000_ppl']),
       parseFloat(crimeStats['currentNghd']['total_per_1000_ppl'])]
@@ -108,18 +103,18 @@ function makeTheChart (crimeStats, state) {
       enabled: false
     },
     series: [{
-      name: nghdName || ' ',
+      name: state.currentNeighborhood || ' ',
       data: currentNghdData
     }, {
-      name: cityName,
+      name: state.currentCity,
       data: [parseFloat(crimeStats['currentCity']['part1_per_1000_ppl']),
         parseFloat(crimeStats['currentCity']['part2_per_1000_ppl']),
         parseFloat(crimeStats['currentCity']['total_per_1000_ppl'])]
     }, {
-      name: compareNghdName || ' ',
+      name: state.compareNeighborhood || ' ',
       data: compareNghdData
     }, {
-      name: compareCityName,
+      name: state.compareCity,
       data: [parseFloat(crimeStats['compareCity']['part1_per_1000_ppl']),
         parseFloat(crimeStats['compareCity']['part2_per_1000_ppl']),
         parseFloat(crimeStats['compareCity']['total_per_1000_ppl'])]
