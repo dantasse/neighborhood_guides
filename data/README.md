@@ -16,7 +16,10 @@ One directory per city. Then hopefully we'll have the same data in each director
 
 `Detroit_Neighborhoods.geojson` is from [Detroit open data](https://data.detroitmi.gov/Government/Detroit-Neighborhoods/5mn6-ihjv)
 
-`Boundaries-Neighborhoods.geojson` in `chi` folder is from [City of Chicago data portal](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Neighborhoods/bbvz-uum9)
+`Boundaries-Neighborhoods.geojson` in `chicago` folder is from [City of Chicago data portal](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Neighborhoods/bbvz-uum9)
+
+`austin_neighborhoods.geojson` is from [City of Austin open data portal](https://data.austintexas.gov/Neighborhood/Neighborhood-Planning-Areas/ci6h-vmgm)
+
 ## Safety
 
 `pgh/crimes.csv` is from [this report](http://apps.pittsburghpa.gov/pghbop/ANNUAL_REPORT_DRAFT_2015_May_31.pdf). (for now I think this is the most straightforward to use. Other sources are in `other_crime`. Population stats are from 2010.
