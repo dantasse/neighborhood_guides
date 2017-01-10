@@ -2,125 +2,149 @@
   <div class="liveliness">
     <h3>How lively is {{store.state.currentNeighborhood}}</h3>
     Venues per square mile:
-    <table>
-      <tr>
-        <th>Business type</th>
-        <th>{{store.state.currentNeighborhood}}</th>
-        <th>All of {{store.state.currentCity}}</th>
-        <th>{{store.state.compareNeighborhood}}</th>
-        <th>All of {{store.state.compareCity}}</th>
-      </tr>
-      <tr>
-        <td>All venues</td>
-        <td>{{ perSqMi['all'] }}</td>
-        <td>{{ cityPerSqMi['all'] }}</td>
-        <td>{{ compareNghdPerSqMi['all'] }}</td>
-        <td>{{ compareCityPerSqMi['all'] }}</td>
-      </tr>
-       <tr>
-        <td>Food</td>
-        <td>{{ perSqMi['food'] }}</td>
-        <td>{{ cityPerSqMi['food'] }}</td>
-        <td>{{ compareNghdPerSqMi['food'] }}</td>
-        <td>{{ compareCityPerSqMi['food'] }}</td>
-      </tr>
-       <tr>
-        <td>Arts and entertainment</td>
-        <td>{{ perSqMi['arts'] }}</td>
-        <td>{{ cityPerSqMi['arts'] }}</td>
-        <td>{{ compareNghdPerSqMi['arts'] }}</td>
-        <td>{{ compareCityPerSqMi['arts'] }}</td>
-      </tr>
-       <tr>
-        <td>Nightlife</td>
-        <td>{{ perSqMi['nightlife'] }}</td>
-        <td>{{ cityPerSqMi['nightlife'] }}</td>
-        <td>{{ compareNghdPerSqMi['nightlife'] }}</td>
-        <td>{{ compareCityPerSqMi['nightlife'] }}</td>
-      </tr>
-       <tr>
-        <td>Outdoors and recreation</td>
-        <td>{{ perSqMi['outdoors'] }}</td>
-        <td>{{ cityPerSqMi['outdoors'] }}</td>
-        <td>{{ compareNghdPerSqMi['outdoors'] }}</td>
-        <td>{{ compareCityPerSqMi['outdoors'] }}</td>
-      </tr>
-       <tr>
-        <td>Shops</td>
-        <td>{{ perSqMi['shop'] }}</td>
-        <td>{{ cityPerSqMi['shop'] }}</td>
-        <td>{{ compareNghdPerSqMi['shop'] }}</td>
-        <td>{{ compareCityPerSqMi['shop'] }}</td>
-      </tr>
-    </table>
+    <div id="venuesChart" style="min-width: 310px; max-width: 960px; height: 400px; margin: 0 auto"> </div>
   </div>
 </template>
 
 
 <script>
 import store from '../store/store.js'
+import Highcharts from 'highcharts'
+import { mapState } from 'vuex'
 
 export default {
-  computed: {
-    perSqMi () {
-      let venuesPerSqMi = {}
-      let nghdVenues = store.getters.foursquareVenues['currentNghd']
-      if (nghdVenues === undefined) {
-        return {'all': 'No Data', 'food': 'No Data', 'arts': 'No Data', 'nightlife': 'No Data', 'outdoors': 'No Data', 'shop': 'No Data'}
-      }
-      let area = parseFloat(nghdVenues['Area in Sq Mi'])
-      venuesPerSqMi['all'] = (parseFloat(nghdVenues['All Venues']) / area).toFixed(2)
-      venuesPerSqMi['food'] = (parseFloat(nghdVenues['Food']) / area).toFixed(2)
-      venuesPerSqMi['arts'] = (parseFloat(nghdVenues['Arts and Entertainment']) / area).toFixed(2)
-      venuesPerSqMi['nightlife'] = (parseFloat(nghdVenues['Nightlife Spot']) / area).toFixed(2)
-      venuesPerSqMi['outdoors'] = (parseFloat(nghdVenues['Outdoors & Recreation']) / area).toFixed(2)
-      venuesPerSqMi['shop'] = (parseFloat(nghdVenues['Shop & Service']) / area).toFixed(2)
-      return venuesPerSqMi
-    },
-    cityPerSqMi () {
-      let cityVenuesPerSqMi = {}
-      let cityVenues = store.getters.foursquareVenues['currentCity']
-      cityVenuesPerSqMi['all'] = parseFloat(cityVenues['All Venues']).toFixed(2)
-      cityVenuesPerSqMi['food'] = parseFloat(cityVenues['Food']).toFixed(2)
-      cityVenuesPerSqMi['arts'] = parseFloat(cityVenues['Arts and Entertainment']).toFixed(2)
-      cityVenuesPerSqMi['nightlife'] = parseFloat(cityVenues['Nightlife Spot']).toFixed(2)
-      cityVenuesPerSqMi['outdoors'] = parseFloat(cityVenues['Outdoors & Recreation']).toFixed(2)
-      cityVenuesPerSqMi['shop'] = parseFloat(cityVenues['Shop & Service']).toFixed(2)
-      return cityVenuesPerSqMi
-    },
-    compareNghdPerSqMi () {
-      let venuesPerSqMi = {}
-      let nghdVenues = store.getters.foursquareVenues['compareNghd']
-      if (nghdVenues === undefined) {
-        return {'all': 'No Data', 'food': 'No Data', 'arts': 'No Data', 'nightlife': 'No Data', 'outdoors': 'No Data', 'shop': 'No Data'}
-      }
-      let area = parseFloat(nghdVenues['Area in Sq Mi'])
-      venuesPerSqMi['all'] = (parseFloat(nghdVenues['All Venues']) / area).toFixed(2)
-      venuesPerSqMi['food'] = (parseFloat(nghdVenues['Food']) / area).toFixed(2)
-      venuesPerSqMi['arts'] = (parseFloat(nghdVenues['Arts and Entertainment']) / area).toFixed(2)
-      venuesPerSqMi['nightlife'] = (parseFloat(nghdVenues['Nightlife Spot']) / area).toFixed(2)
-      venuesPerSqMi['outdoors'] = (parseFloat(nghdVenues['Outdoors & Recreation']) / area).toFixed(2)
-      venuesPerSqMi['shop'] = (parseFloat(nghdVenues['Shop & Service']) / area).toFixed(2)
-      return venuesPerSqMi
-    },
-    compareCityPerSqMi () {
-      let cityVenuesPerSqMi = {}
-      let cityVenues = store.getters.foursquareVenues['compareCity']
-      cityVenuesPerSqMi['all'] = parseFloat(cityVenues['All Venues']).toFixed(2)
-      cityVenuesPerSqMi['food'] = parseFloat(cityVenues['Food']).toFixed(2)
-      cityVenuesPerSqMi['arts'] = parseFloat(cityVenues['Arts and Entertainment']).toFixed(2)
-      cityVenuesPerSqMi['nightlife'] = parseFloat(cityVenues['Nightlife Spot']).toFixed(2)
-      cityVenuesPerSqMi['outdoors'] = parseFloat(cityVenues['Outdoors & Recreation']).toFixed(2)
-      cityVenuesPerSqMi['shop'] = parseFloat(cityVenues['Shop & Service']).toFixed(2)
-      return cityVenuesPerSqMi
-    }
-  },
   data () {
     return {
       store: store
     }
+  },
+  computed: mapState({
+    nghd: state => state.currentNeighborhood,
+    compareNghd: state => state.compareNeighborhood
+  }),
+  mounted: function () {
+    makeChart(store.getters.foursquareVenues, store.state)
+  },
+  watch: {
+    nghd: function () {
+      makeChart(store.getters.foursquareVenues, store.state)
+    },
+    compareNghd: function () {
+      makeChart(store.getters.foursquareVenues, store.state)
+    }
   }
 }
+
+function makeChart (venuesData, state) {
+    // *sigh* just a lot of annoying protecting against nulls.
+  let currentNghdData = []
+  if (state.currentNeighborhood !== '') {
+    let venuesPerSqMi = []
+    let nghdVenues = venuesData['currentNghd']
+    let area = parseFloat(nghdVenues['Area in Sq Mi'])
+    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues']) / area
+    venuesPerSqMi[1] = parseFloat(nghdVenues['Food']) / area
+    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment']) / area
+    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot']) / area
+    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation']) / area
+    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service']) / area
+    currentNghdData = venuesPerSqMi
+  }
+  let currentCityData = []
+  let cityVenues = venuesData['currentCity']
+  let cityArea = parseFloat(cityVenues['Area in Sq Mi'])
+  currentCityData[0] = parseFloat(cityVenues['All Venues']) / cityArea
+  currentCityData[1] = parseFloat(cityVenues['Food']) / cityArea
+  currentCityData[2] = parseFloat(cityVenues['Arts and Entertainment']) / cityArea
+  currentCityData[3] = parseFloat(cityVenues['Nightlife Spot']) / cityArea
+  currentCityData[4] = parseFloat(cityVenues['Outdoors & Recreation']) / cityArea
+  currentCityData[5] = parseFloat(cityVenues['Shop & Service']) / cityArea
+
+  let compareNghdData = []
+  if (state.compareNeighborhood !== '') {
+    let venuesPerSqMi = []
+    let nghdVenues = venuesData['compareNghd']
+    let area = parseFloat(nghdVenues['Area in Sq Mi'])
+    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues']) / area
+    venuesPerSqMi[1] = parseFloat(nghdVenues['Food']) / area
+    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment']) / area
+    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot']) / area
+    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation']) / area
+    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service']) / area
+    compareNghdData = venuesPerSqMi
+  }
+
+  let compareCityData = []
+  let compareCityVenues = venuesData['compareCity']
+  cityArea = parseFloat(compareCityVenues['Area in Sq Mi'])
+  compareCityData[0] = parseFloat(compareCityVenues['All Venues']) / cityArea
+  compareCityData[1] = parseFloat(compareCityVenues['Food']) / cityArea
+  compareCityData[2] = parseFloat(compareCityVenues['Arts and Entertainment']) / cityArea
+  compareCityData[3] = parseFloat(compareCityVenues['Nightlife Spot']) / cityArea
+  compareCityData[4] = parseFloat(compareCityVenues['Outdoors & Recreation']) / cityArea
+  compareCityData[5] = parseFloat(compareCityVenues['Shop & Service']) / cityArea
+
+  Highcharts.chart('venuesChart', {
+    chart: {
+      type: 'bar',
+      renderTo: 'venuesChart'
+    },
+    title: { text: '' },
+    xAxis: {
+      categories: ['All venues', 'Food', 'Arts and entertainment', 'Nightlife', 'Outdoors and recreation', 'Shops'],
+      title: { text: null }
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Venues per square mile',
+        align: 'high'
+      },
+      labels: {
+        overflow: 'justify'
+      }
+    },
+    tooltip: {
+      valueSuffix: ' venues per square mile'
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          enabled: true,
+          format: '{point.y:,.1f}'
+        }
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+      x: -40,
+      y: 80,
+      floating: true,
+      borderWidth: 1,
+      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+      shadow: true
+    },
+    credits: {
+      enabled: false
+    },
+    series: [{
+      name: state.currentNeighborhood || ' ',
+      data: currentNghdData
+    }, {
+      name: state.currentCity + ' average',
+      data: currentCityData
+    }, {
+      name: state.compareNeighborhood || ' ',
+      data: compareNghdData
+    }, {
+      name: state.compareCity + ' average',
+      data: compareCityData
+    }]
+  })
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -102,7 +102,7 @@ function makeChart (walkscores, state) {
       name: state.currentNeighborhood || ' ',
       data: currentNghdData
     }, {
-      name: state.currentCity,
+      name: state.currentCity + ' average',
       data: [parseFloat(walkscores['currentCity']['Walk Score']),
         parseFloat(walkscores['currentCity']['Transit Score']),
         parseFloat(walkscores['currentCity']['Bike Score'])]
@@ -110,7 +110,7 @@ function makeChart (walkscores, state) {
       name: state.compareNeighborhood || ' ',
       data: compareNghdData
     }, {
-      name: state.compareCity,
+      name: state.compareCity + ' average',
       data: [parseFloat(walkscores['compareCity']['Walk Score']),
         parseFloat(walkscores['compareCity']['Transit Score']),
         parseFloat(walkscores['compareCity']['Bike Score'])]
