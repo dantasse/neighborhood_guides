@@ -12,7 +12,7 @@ parser.add_argument('--output_file', default='data/pgh/nghd_autotags.json')
 args = parser.parse_args()
 
 # Tags that are meaningless so let's not include them at all.
-STOPTAGS = ['photo border']
+STOPTAGS = ['photo border', 'blackandwhite', 'depth of field', 'monochrome', 'head']
 
 def is_good_url(url_to_test):
     """ Check a URL to see if there's actually a photo there (and it's not a
