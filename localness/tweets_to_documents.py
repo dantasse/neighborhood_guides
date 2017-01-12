@@ -81,7 +81,13 @@ if __name__ == '__main__':
         res = worker_pool.apply_async(process_lines, (start_indices[i], end_indices[i]))
         results.append(res)
     for res in results:
-        nghds_tweettexts_thatchunk = res.get()
+        try:
+            nghds_tweettexts_thatchunk = res.get()
+        except ValueError as e:
+            print "Missed a chunk because of a ValueError"
+            print e
+            continue
+        
         for nghd, tweettexts in nghds_tweettexts_thatchunk.iteritems():
             nghds_tweettexts[nghd].extend(tweettexts)
 

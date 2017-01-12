@@ -7,10 +7,13 @@
 import argparse, csv, collections, ujson, geojson, area
 parser = argparse.ArgumentParser()
 parser.add_argument('--input_file', default='pgh/Pittsburgh_Neighborhoods.geojson')
+parser.add_argument('--name_field', help='what variable in the geojson file means "neighborhood name."')
 parser.add_argument('--output_file', default='pgh/nghd_bounds.geojson')
 args = parser.parse_args()
 
 def get_nghd_name(props):
+    if args.name_field:
+        return props[args.name_field]
     if 'hood' in props:
         return props['hood']
     elif 'nhood' in props:
