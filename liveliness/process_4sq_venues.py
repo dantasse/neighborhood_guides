@@ -5,13 +5,14 @@
 # km or something.
 
 import argparse, csv, collections, ujson, util.pointmap, pprint
-parser = argparse.ArgumentParser()
-parser.add_argument('--foursquare_venue_file', default='data/pgh/4sq_venues.json')
-parser.add_argument('--foursquare_category_file', default='liveliness/4sq_categories.json')
-parser.add_argument('--nghd_bounds_file', default='data/pgh/nghd_bounds.geojson')
-parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv')
-parser.add_argument('--city_name', default='Pittsburgh')
-parser.add_argument('--output_file', default='data/pgh/nghd_4sq.csv')
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+# This formatter, and the "helps" below, means it shows the defaults when you call --help.
+parser.add_argument('--foursquare_venue_file', default='data/pgh/4sq_venues.json', help=' ')
+parser.add_argument('--foursquare_category_file', default='liveliness/4sq_categories.json', help=' ')
+parser.add_argument('--nghd_bounds_file', default='data/pgh/nghd_bounds.geojson', help=' ')
+parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv', help=' ')
+parser.add_argument('--city_name', default='Pittsburgh', help=' ')
+parser.add_argument('--output_file', default='data/pgh/nghd_4sq.csv', help=' ')
 args = parser.parse_args()
 
 def get_categories(venue):

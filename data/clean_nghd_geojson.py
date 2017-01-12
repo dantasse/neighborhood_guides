@@ -5,10 +5,10 @@
 # take less space. Nobody needs 11 decimal digits :P
 
 import argparse, csv, collections, ujson, geojson, area
-parser = argparse.ArgumentParser()
-parser.add_argument('--input_file', default='pgh/Pittsburgh_Neighborhoods.geojson')
+parser = argparse.ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+parser.add_argument('--input_file', default='pgh/Pittsburgh_Neighborhoods.geojson', help=' ')
 parser.add_argument('--name_field', help='what variable in the geojson file means "neighborhood name."')
-parser.add_argument('--output_file', default='pgh/nghd_bounds.geojson')
+parser.add_argument('--output_file', default='pgh/nghd_bounds.geojson', help=' ')
 args = parser.parse_args()
 
 def get_nghd_name(props):

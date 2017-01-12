@@ -6,11 +6,11 @@
 import argparse, csv, collections, ast, json, os, multiprocessing, io
 from util import pointmap, tweetutil
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--city_tweets_file', default='data/pgh/tweets.csv')
-parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv')
-parser.add_argument('--output_file', default='pgh_nghd_tweets.json')
-parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count())
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--city_tweets_file', default='data/pgh/tweets.csv', help=' ')
+parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv', help=' ')
+parser.add_argument('--output_file', default='pgh_nghd_tweets.json', help=' ')
+parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count(), help=' ')
 args = parser.parse_args()
 
 def process_lines(start, end):

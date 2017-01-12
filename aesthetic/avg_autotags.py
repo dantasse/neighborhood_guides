@@ -5,10 +5,10 @@
 import argparse, csv, collections, ast, json, operator, random, requests
 from util import pointmap
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--yfcc_autotags_file', default='data/pgh/yfcc100m.csv')
-parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv')
-parser.add_argument('--output_file', default='data/pgh/nghd_autotags.json')
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--yfcc_autotags_file', default='data/pgh/yfcc100m.csv', help=' ')
+parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv', help=' ')
+parser.add_argument('--output_file', default='data/pgh/nghd_autotags.json', help=' ')
 args = parser.parse_args()
 
 # Tags that are meaningless so let's not include them at all.

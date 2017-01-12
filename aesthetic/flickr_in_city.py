@@ -6,12 +6,12 @@
 
 import argparse, csv, multiprocessing, os, signal, time, json
 from util.cities import CITY_LOCATIONS
-parser = argparse.ArgumentParser()
-parser.add_argument('--yfcc_file', default='data/yfcc100m_1k.tsv')
-parser.add_argument('--city', default='pgh',choices=CITY_LOCATIONS.keys())
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--yfcc_file', default='data/yfcc100m_1k.tsv', help=' ')
+parser.add_argument('--city', default='pgh',choices=CITY_LOCATIONS.keys(), help=' ')
 #['pgh','ny','sf','houston', 'detroit', 'chicago', ...
-parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count())
-parser.add_argument('--output_file', default='yfcc100m_in_city.csv')
+parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count(), help=' ')
+parser.add_argument('--output_file', default='yfcc100m_in_city.csv', help=' ')
 args = parser.parse_args()
 
 csv.field_size_limit(200*1000) # There are some big fields in YFCC100M.

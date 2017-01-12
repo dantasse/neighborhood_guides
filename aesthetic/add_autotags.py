@@ -3,11 +3,11 @@
 # Add autotags to the output of flickr_in_city.py.
 
 import argparse, csv, multiprocessing, os, signal, time
-parser = argparse.ArgumentParser()
-parser.add_argument('--city_csv_file', default='yfcc100m_in_city.csv')
-parser.add_argument('--autotags_file', default='data/yfcc100m_autotags')
-parser.add_argument('--output_file', default='yfcc100m_in_city_autotagged.csv')
-parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count())
+parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--city_csv_file', default='yfcc100m_in_city.csv', help=' ')
+parser.add_argument('--autotags_file', default='data/yfcc100m_autotags', help=' ')
+parser.add_argument('--output_file', default='yfcc100m_in_city_autotagged.csv', help=' ')
+parser.add_argument('--num_processes', type=int, default=multiprocessing.cpu_count(), help=' ')
 args = parser.parse_args()
 
 csv.field_size_limit(200*1000) # There are some big fields in YFCC100M.
