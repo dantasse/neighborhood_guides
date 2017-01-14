@@ -28,6 +28,8 @@ One directory per city. Then hopefully we'll have the same data in each director
 
 `sf/sfpd_2015.csv` is a list of all the police incidents in 2015. Unfortunately, they don't seem to be categorized all that well. Population stats are from 2014.
 
+`chicago/2015_crimes.csv` is from [here](https://data.cityofchicago.org/Public-Safety/Crimes-2015/vwwp-7yr9)
+
 ## Convenience
 
 `nghd_walkscores` - These are just copy/pasted from Walkscore, [here](https://www.walkscore.com/CA/San_Francisco)
