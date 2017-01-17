@@ -41,48 +41,44 @@ function makeChart (venuesData, state) {
   if (state.currentNeighborhood !== '') {
     let venuesPerSqMi = []
     let nghdVenues = venuesData['currentNghd']
-    let area = parseFloat(nghdVenues['Area in Sq Mi'])
-    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues']) / area
-    venuesPerSqMi[1] = parseFloat(nghdVenues['Food']) / area
-    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment']) / area
-    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot']) / area
-    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation']) / area
-    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service']) / area
+    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
+    venuesPerSqMi[1] = parseFloat(nghdVenues['Food'])
+    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment'])
+    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot'])
+    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation'])
+    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service'])
     currentNghdData = venuesPerSqMi
   }
   let currentCityData = []
   let cityVenues = venuesData['currentCity']
-  let cityArea = parseFloat(cityVenues['Area in Sq Mi'])
-  currentCityData[0] = parseFloat(cityVenues['All Venues']) / cityArea
-  currentCityData[1] = parseFloat(cityVenues['Food']) / cityArea
-  currentCityData[2] = parseFloat(cityVenues['Arts and Entertainment']) / cityArea
-  currentCityData[3] = parseFloat(cityVenues['Nightlife Spot']) / cityArea
-  currentCityData[4] = parseFloat(cityVenues['Outdoors & Recreation']) / cityArea
-  currentCityData[5] = parseFloat(cityVenues['Shop & Service']) / cityArea
+  currentCityData[0] = parseFloat(cityVenues['All Venues'])
+  currentCityData[1] = parseFloat(cityVenues['Food'])
+  currentCityData[2] = parseFloat(cityVenues['Arts and Entertainment'])
+  currentCityData[3] = parseFloat(cityVenues['Nightlife Spot'])
+  currentCityData[4] = parseFloat(cityVenues['Outdoors & Recreation'])
+  currentCityData[5] = parseFloat(cityVenues['Shop & Service'])
 
   let compareNghdData = []
   if (state.compareNeighborhood !== '') {
     let venuesPerSqMi = []
     let nghdVenues = venuesData['compareNghd']
-    let area = parseFloat(nghdVenues['Area in Sq Mi'])
-    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues']) / area
-    venuesPerSqMi[1] = parseFloat(nghdVenues['Food']) / area
-    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment']) / area
-    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot']) / area
-    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation']) / area
-    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service']) / area
+    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
+    venuesPerSqMi[1] = parseFloat(nghdVenues['Food'])
+    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment'])
+    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot'])
+    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation'])
+    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service'])
     compareNghdData = venuesPerSqMi
   }
 
   let compareCityData = []
   let compareCityVenues = venuesData['compareCity']
-  cityArea = parseFloat(compareCityVenues['Area in Sq Mi'])
-  compareCityData[0] = parseFloat(compareCityVenues['All Venues']) / cityArea
-  compareCityData[1] = parseFloat(compareCityVenues['Food']) / cityArea
-  compareCityData[2] = parseFloat(compareCityVenues['Arts and Entertainment']) / cityArea
-  compareCityData[3] = parseFloat(compareCityVenues['Nightlife Spot']) / cityArea
-  compareCityData[4] = parseFloat(compareCityVenues['Outdoors & Recreation']) / cityArea
-  compareCityData[5] = parseFloat(compareCityVenues['Shop & Service']) / cityArea
+  compareCityData[0] = parseFloat(compareCityVenues['All Venues'])
+  compareCityData[1] = parseFloat(compareCityVenues['Food'])
+  compareCityData[2] = parseFloat(compareCityVenues['Arts and Entertainment'])
+  compareCityData[3] = parseFloat(compareCityVenues['Nightlife Spot'])
+  compareCityData[4] = parseFloat(compareCityVenues['Outdoors & Recreation'])
+  compareCityData[5] = parseFloat(compareCityVenues['Shop & Service'])
 
   Highcharts.chart('venuesChart', {
     chart: {

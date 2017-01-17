@@ -18,6 +18,11 @@ args = parser.parse_args()
 def get_categories(venue):
     return list(set(foursquare_categories[category['id']] for category in venue['categories']))
 
+def median(lst):
+    even = (0 if len(lst) % 2 else 1) + 1
+    half = (len(lst) - 1) / 2
+    return sum(sorted(lst)[half:half + even]) / float(even)
+
 if __name__ == '__main__':
     nghds_venues = collections.defaultdict(list)
     foursquare_data = ujson.load(open(args.foursquare_venue_file))
@@ -40,30 +45,45 @@ if __name__ == '__main__':
     # Possible top-level types: [u'Travel & Transport', u'Food', u'Residence', u'College & University', u'Nightlife Spot', u'Arts & Entertainment', u'Shop & Service', u'Outdoors & Recreation', u'Professional & Other Places', u'Event'])
     # Also track the total # of venues to get averages.
     all_venues = all_foods = all_nightlifes = all_arts = all_shops = all_recs = 0
+    all_venues = []
+    all_foods = []
+    all_nightlifes = []
+    all_arts = []
+    all_shops = []
+    all_recs = []
     for nghd, venues in nghds_venues.iteritems():
-        print nghd
-        print 'all venues: ', len(venues)
         foods = len(filter(lambda x: 'Food' in get_categories(x), venues))
         nightlifes = len(filter(lambda x: 'Nightlife Spot' in get_categories(x), venues))
         arts = len(filter(lambda x: 'Arts & Entertainment' in get_categories(x), venues))
         shops = len(filter(lambda x: 'Shop & Service' in get_categories(x), venues))
         recs = len(filter(lambda x: 'Outdoors & Recreation' in get_categories(x), venues))
-        all_venues += len(venues)
-        all_foods += foods
-        all_nightlifes += nightlifes
-        all_arts += arts
-        all_shops += shops
-        all_recs += recs
         # events = len(filter(lambda x: 'Event' in get_categories(x), venues))
         # There are almost no Events in foursquare.
         area = round(nghd_areas[nghd], 5)
-        outwriter.writerow([nghd, area, len(venues), foods, nightlifes, arts, shops, recs])
-    all_venues *= 1.0 / len(nghds_venues)
-    all_foods *= 1.0 / len(nghds_venues)
-    all_nightlifes *= 1.0 / len(nghds_venues)
-    all_arts *= 1.0 / len(nghds_venues)
-    all_shops *= 1.0 / len(nghds_venues)
-    all_recs *= 1.0 / len(nghds_venues)
-    outwriter.writerow([args.city_name, 1, all_venues, all_foods, all_nightlifes,\
-            all_arts, all_shops, all_recs])
+        venues_persqmi = round(len(venues) * 1.0 / area, 1)
+        foods_persqmi = round(foods * 1.0 / area, 1)
+        nightlifes_persqmi = round(arts * 1.0 / area, 1)
+        arts_persqmi = round(arts * 1.0 / area, 1)
+        shops_persqmi = round(shops * 1.0 / area, 1)
+        recs_persqmi = round(recs * 1.0 / area, 1)
+        outwriter.writerow([nghd, area, venues_persqmi, foods_persqmi,
+            nightlifes_persqmi, arts_persqmi, shops_persqmi, recs_persqmi])
+
+        all_venues.append(venues_persqmi)
+        all_foods.append(foods_persqmi)
+        all_nightlifes.append(nightlifes_persqmi)
+        all_arts.append(arts_persqmi)
+        all_shops.append(shops_persqmi)
+        all_recs.append(recs_persqmi)
+
+    # Instead of (total venues / total sq mi), we are using median(venues per sqmi)
+    # This is so super-sparse neighborhoods don't skew the averages.
+    median_venues = median(all_venues)
+    median_foods = median(all_foods)
+    median_nightlifes = median(all_nightlifes)
+    median_arts = median(all_arts)
+    median_shops = median(all_shops)
+    median_recs = median(all_recs)
+    outwriter.writerow([args.city_name, 1, median_venues, median_foods,\
+            median_nightlifes, median_arts, median_shops, median_recs])
 
