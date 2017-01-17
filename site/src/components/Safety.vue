@@ -79,13 +79,18 @@ function makeTheChart (crimeStats, state) {
       }
     },
     tooltip: {
-      valueSuffix: ' crimes per 1000 people'
+      valueSuffix: ' crimes per 1000 people',
+      valueDecimals: 2,
+      shared: true
     },
     plotOptions: {
       bar: {
         dataLabels: {
           enabled: true
-        }
+        },
+        grouping: false,
+        shadow: false,
+        borderwidth: 0
       }
     },
     legend: {
@@ -103,21 +108,33 @@ function makeTheChart (crimeStats, state) {
       enabled: false
     },
     series: [{
-      name: state.currentNeighborhood || ' ',
-      data: currentNghdData
-    }, {
       name: state.currentCity,
       data: [parseFloat(crimeStats['currentCity']['part1_per_1000_ppl']),
         parseFloat(crimeStats['currentCity']['part2_per_1000_ppl']),
-        parseFloat(crimeStats['currentCity']['total_per_1000_ppl'])]
+        parseFloat(crimeStats['currentCity']['total_per_1000_ppl'])],
+      color: 'rgba(165,170,217,1)',
+      pointPadding: 0.3,
+      pointPlacement: 0.15
     }, {
-      name: state.compareNeighborhood || ' ',
-      data: compareNghdData
+      name: state.currentNeighborhood || ' ',
+      data: currentNghdData,
+      color: 'rgba(126,86,134,.9)',
+      pointPadding: 0.4,
+      pointPlacement: 0.15
     }, {
       name: state.compareCity,
       data: [parseFloat(crimeStats['compareCity']['part1_per_1000_ppl']),
         parseFloat(crimeStats['compareCity']['part2_per_1000_ppl']),
-        parseFloat(crimeStats['compareCity']['total_per_1000_ppl'])]
+        parseFloat(crimeStats['compareCity']['total_per_1000_ppl'])],
+      color: 'rgba(248,161,63,1)',
+      pointPadding: 0.3,
+      pointPlacement: -0.15
+    }, {
+      name: state.compareNeighborhood || ' ',
+      data: compareNghdData,
+      color: 'rgba(186,60,61,.9)',
+      pointPadding: 0.4,
+      pointPlacement: -0.15
     }]
   })
 }

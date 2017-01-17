@@ -75,13 +75,18 @@ function makeChart (walkscores, state) {
       }
     },
     tooltip: {
-      valueSuffix: ''
+      valueSuffix: '',
+      shared: true
     },
     plotOptions: {
       bar: {
         dataLabels: {
-          enabled: true
-        }
+          enabled: true,
+          format: '{point.y:,.0f}'
+        },
+        grouping: false,
+        shadow: false,
+        borderwidth: 0
       }
     },
     legend: {
@@ -99,21 +104,33 @@ function makeChart (walkscores, state) {
       enabled: false
     },
     series: [{
-      name: state.currentNeighborhood || ' ',
-      data: currentNghdData
-    }, {
       name: state.currentCity + ' average',
       data: [parseFloat(walkscores['currentCity']['Walk Score']),
         parseFloat(walkscores['currentCity']['Transit Score']),
-        parseFloat(walkscores['currentCity']['Bike Score'])]
+        parseFloat(walkscores['currentCity']['Bike Score'])],
+      color: 'rgba(165,170,217,1)',
+      pointPadding: 0.3,
+      pointPlacement: 0.15
     }, {
-      name: state.compareNeighborhood || ' ',
-      data: compareNghdData
+      name: state.currentNeighborhood || ' ',
+      data: currentNghdData,
+      color: 'rgba(126,86,134,.9)',
+      pointPadding: 0.4,
+      pointPlacement: 0.15
     }, {
       name: state.compareCity + ' average',
       data: [parseFloat(walkscores['compareCity']['Walk Score']),
         parseFloat(walkscores['compareCity']['Transit Score']),
-        parseFloat(walkscores['compareCity']['Bike Score'])]
+        parseFloat(walkscores['compareCity']['Bike Score'])],
+      color: 'rgba(248,161,63,1)',
+      pointPadding: 0.3,
+      pointPlacement: -0.15
+    }, {
+      name: state.compareNeighborhood || ' ',
+      data: compareNghdData,
+      color: 'rgba(186,60,61,.9)',
+      pointPadding: 0.4,
+      pointPlacement: -0.15
     }]
   })
 }

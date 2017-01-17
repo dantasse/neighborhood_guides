@@ -101,14 +101,19 @@ function makeChart (venuesData, state) {
       }
     },
     tooltip: {
-      valueSuffix: ' venues per square mile'
+      shared: true,
+      valueSuffix: ' venues per square mile',
+      valueDecimals: 0
     },
     plotOptions: {
       bar: {
         dataLabels: {
           enabled: true,
-          format: '{point.y:,.1f}'
-        }
+          format: '{point.y:,.0f}'
+        },
+        grouping: false,
+        shadow: false,
+        borderwidth: 0
       }
     },
     legend: {
@@ -126,17 +131,29 @@ function makeChart (venuesData, state) {
       enabled: false
     },
     series: [{
-      name: state.currentNeighborhood || ' ',
-      data: currentNghdData
+      name: state.currentCity + ' median neighborhood',
+      data: currentCityData,
+      color: 'rgba(165,170,217,1)',
+      pointPadding: 0.3,
+      pointPlacement: 0.15
     }, {
-      name: state.currentCity + ' average',
-      data: currentCityData
+      name: state.currentNeighborhood || ' ',
+      data: currentNghdData,
+      color: 'rgba(126,86,134,.9)',
+      pointPadding: 0.4,
+      pointPlacement: 0.15
+    }, {
+      name: state.compareCity + ' median neighborhood',
+      data: compareCityData,
+      color: 'rgba(248,161,63,1)',
+      pointPadding: 0.3,
+      pointPlacement: -0.15
     }, {
       name: state.compareNeighborhood || ' ',
-      data: compareNghdData
-    }, {
-      name: state.compareCity + ' average',
-      data: compareCityData
+      data: compareNghdData,
+      color: 'rgba(186,60,61,.9)',
+      pointPadding: 0.4,
+      pointPlacement: -0.15
     }]
   })
 }
