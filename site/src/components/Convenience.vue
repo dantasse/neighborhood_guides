@@ -76,7 +76,8 @@ function makeChart (walkscores, state) {
     },
     tooltip: {
       valueSuffix: '',
-      shared: true
+      shared: true,
+      valueDecimals: 0
     },
     plotOptions: {
       bar: {
