@@ -47,4 +47,6 @@ Foursquare venue data in `4sq_venues.json`. Yelp data (which is way more limited
 ## Aesthetics
 `yfcc100m.csv` is all the yfcc100m photos in Pittsburgh. `nghd_autotags.json` is the top 10 autotags for each neighborhood.
 
+`yfcc100m.csv_nghds.json` is the awkwardly-named file that includes the precomputed list of each neighborhood's autotag vector. So like "{Bloomfield: [outdoor: 0.25, car: 0.1]}" means 25% of photos in Bloomfield have 'outdoor' and 10% have 'car'. Computed as part of `compute_feature_vectors.py`
+
 The directory `yfcc100m_autotagged` is to store YFCC100M dumps from other cities, just so I don't have to compute them again.
