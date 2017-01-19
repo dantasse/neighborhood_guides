@@ -1,6 +1,7 @@
 <template>
   <div class="aesthetics">
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
+    Photos are from Flickr; selected photos have tags that appear more often in {{store.state.currentNeighborhood}} than in other neighborhoods.<br>
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
     <div v-on:click="should_display=!should_display" id="toggle_link">
       <a v-show="should_display">Hide photos</a>

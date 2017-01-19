@@ -1,7 +1,7 @@
 <template>
   <div class="liveliness">
     <h3>How lively is {{store.state.currentNeighborhood}}</h3>
-    Venues per square mile:
+    Venues per square mile (via Foursquare):
     <div id="venuesChart" style="min-width: 310px; max-width: 960px; height: 400px; margin: 0 auto"> </div>
   </div>
 </template>

@@ -1,6 +1,8 @@
 <template>
   <div class="safety">
     <h3>Crime in {{store.state.currentNeighborhood}}</h3>
+    Part 1 and Part 2 crimes are defined by the FBI. <a href="https://en.wikipedia.org/wiki/Uniform_Crime_Reports#UCR_crime_categories">More info</a> <br>
+    For some cities, only Part 1 crime data is available.
     <div id="crimeChart" style="min-width: 310px; max-width: 960px; height: 400px; margin: 0 auto"> </div>
   </div>
 </template>

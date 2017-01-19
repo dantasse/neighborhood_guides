@@ -88,8 +88,6 @@ export default {
       let comparisons = store.getters.comparisons[store.state.compareNeighborhood]
       let retval = []
       for (let key in comparisons) {
-        console.log(key)
-        console.log(comparisons[key])
         let stats = comparisons[key]
         retval.push({name: key,
           average: (100 - Math.round(stats['average'] * 100)),

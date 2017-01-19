@@ -1,7 +1,7 @@
 <template>
   <div class="localness">
-    <h3>What do people talk about in {{store.state.currentNeighborhood}}</h3>
-    Click for context.
+    <h3>What do people talk about on Twitter in {{store.state.currentNeighborhood}}</h3>
+    These are terms that are used more often in {{store.state.currentNeighborhood}} than in other neighborhoods. Click each word for context.
     <ul>
       <li v-for="tweetword in top10TweetTfidf">
         <span v-on:click="expandTweetWord(tweetword['word'])" >{{tweetword['word']}}</span>
