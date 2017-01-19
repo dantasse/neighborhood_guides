@@ -3,9 +3,9 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+// TODO not sure how to load this asychronously.
 let pghNeighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 let sfNeighborhoodsAutotags = require('../assets/sf/nghd_autotags.json')
-// TODO not sure how to load this asychronously.
 let pghCrimeStats = require('../assets/pgh/crimes.csv')
 let sfCrimeStats = require('../assets/sf/crimes.csv')
 let pghNghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
@@ -16,6 +16,9 @@ let pghFoursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 let sfFoursquareVenues = require('../assets/sf/nghd_4sq.csv')
 let pghMapillaryPhotos = require('../assets/pgh/nghd_mapillary_keys.csv')
 let sfMapillaryPhotos = require('../assets/sf/nghd_mapillary_keys.csv')
+
+let pghSfComparisons = require('../assets/pgh_sf_comparisons.json')
+let sfPghComparisons = require('../assets/sf_pgh_comparisons.json')
 
 let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
 let sfBounds = require('../assets/sf/nghd_bounds.geojson')
@@ -31,7 +34,7 @@ export default new Vuex.Store({
     cityList: ['Pittsburgh', 'San Francisco'],
     currentNeighborhood: 'Shadyside',
     currentCity: 'Pittsburgh',
-    compareNeighborhood: '',
+    compareNeighborhood: 'Mission',
     compareCity: 'San Francisco',
     neighborhoodNames: nghdNames,
     neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags},
@@ -39,7 +42,15 @@ export default new Vuex.Store({
     neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
     neighborhoodsTop10TweetTfidf: {'Pittsburgh': pghTop10TweetTfidf, 'San Francisco': sfTop10TweetTfidf},
     neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues},
-    neighborhoodsMapillaryPhotos: {'Pittsburgh': pghMapillaryPhotos, 'San Francisco': sfMapillaryPhotos}
+    neighborhoodsMapillaryPhotos: {'Pittsburgh': pghMapillaryPhotos, 'San Francisco': sfMapillaryPhotos},
+    comparisons: {
+      'Pittsburgh': {
+        'San Francisco': pghSfComparisons
+      },
+      'San Francisco': {
+        'Pittsburgh': sfPghComparisons
+      }
+    }
   },
   mutations: {
     // To call this, call e.g. store.commit('selectNeighborhood', 'Shadyside')
@@ -174,6 +185,9 @@ export default new Vuex.Store({
       console.log({'currentNghd': currentNghd, 'compareNghd': compareNghd})
 
       return {'currentNghd': currentNghd, 'compareNghd': compareNghd}
+    },
+    comparisons: function (state) {
+      return state.comparisons[state.compareCity][state.currentCity]
     }
   }
 })
