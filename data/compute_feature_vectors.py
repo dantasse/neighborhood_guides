@@ -8,8 +8,8 @@ from numpy import linalg as LA
 from scipy.spatial import distance
 from gensim import corpora, similarities
 parser = argparse.ArgumentParser()
-parser.add_argument('--city1', choices=['pgh', 'sf'], default='pgh')
-parser.add_argument('--city2', choices=['pgh', 'sf'], default='sf')
+parser.add_argument('--city1', choices=['pgh', 'sf', 'chicago', 'austin', 'houston'], default='pgh')
+parser.add_argument('--city2', choices=['pgh', 'sf', 'chicago', 'austin', 'houston'], default='sf')
 parser.add_argument('--skip_twitter', action='store_true', help='If true, do not \
         compute twitter summaries, in order to save time while debugging.')
 # parser.add_argument('--output_file', help='json output', default='nghd_recommendations.json')
@@ -25,7 +25,7 @@ files2 = {}
 filenames2 = {}
 # Argh. This is useful because all of these files have the city listed as one
 # of the neighborhoods.
-CITY_FULL_NAMES = ['San Francisco', 'Pittsburgh', 'Austin', 'Houston', 'Chicago']
+CITY_FULL_NAMES = ['San Francisco', 'Pittsburgh', 'Austin', 'HOUSTON', 'Chicago']
 
 for type, filename in filenames.items():
     files1[type] = open(args.city1 + os.sep + filename)
@@ -71,6 +71,8 @@ def twitter_dissimilarity(nghd1, nghd2):
     global twitter_docs, twitter_dictionary, twitter_index
     if len(twitter_docs) == 0:
         generate_twitter_docs(files1['tweets'], files2['tweets'])
+    if nghd1 not in twitter_docs or nghd2 not in twitter_docs:
+        return 1 # if there's 0 tweets in either neighborhood
     similarity = twitter_index[twitter_docs[nghd1]][twitter_docs.keys().index(nghd2)]
     return 1 - similarity
 
@@ -83,6 +85,8 @@ def foursquare_dissimilarity(nghd1, nghd2):
             'Shop & Service', 'Outdoors & Recreation']:
         vec1.append(float(nghd1[item]) / float(nghd1['Area in Sq Mi']))
         vec2.append(float(nghd2[item]) / float(nghd2['Area in Sq Mi']))
+    if sum(vec2) == 0 or sum(vec1) == 0:
+        return 1 # I guess if one nghd has literally nothing, it's 100% dissimilar.
     vec1 = normalize(vec1)
     vec2 = normalize(vec2)
 
@@ -113,6 +117,8 @@ def crime_dissimilarity(nghd1, nghd2):
     else:
         total1 = float(nghd1['total_per_1000_ppl'])
         total2 = float(nghd2['total_per_1000_ppl'])
+    if total1 == 0 or total2 == 0:
+        return 1 # I guess if one place has no crime, they're 100% different? eh.
     return 1 - min(total1 / total2, total2 / total1)
 
 def read_flickr_file(file):
@@ -178,6 +184,8 @@ def flickr_dissimilarity(nghd1, nghd2):
             sum_diffs += val2
         # if tag in nghd2_tags:
         #     sum += value * nghd2_tags[tag]
+    if nghd1_tags == {} and nghd2_tags == {}:
+        return 1 # If both nghds have 0 photos.
     return sum_diffs/(sum(nghd1_tags.values()) + sum(nghd2_tags.values()))
 
 foursq_lines1 = {line['Neighborhood']: line for line in csv.DictReader(files1['4sq'])}

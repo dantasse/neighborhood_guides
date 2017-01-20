@@ -86,18 +86,26 @@ function setUpMap (latlon) {
 }
 
 // Not the official centers, just ones that look good.
+// TODO pull these out to the store.js
 var cityCenters = {
   'Pittsburgh': [40.441, -79.97],
-  'San Francisco': [37.77, -122.416]
+  'San Francisco': [37.77, -122.416],
+  'Chicago': [41.876, -87.625],
+  'Houston': [29.756, -95.371]
 }
 
 // Need to make this a function instead of just a map b/c apparently you can't
 // require() an expression that's not a literal string?
+// TODO pull these out to the store.js
 function getGeojsonForCity (city) {
   if (city === 'Pittsburgh') {
     return require('assets/pgh/nghd_bounds.geojson')
   } else if (city === 'San Francisco') {
     return require('assets/sf/nghd_bounds.geojson')
+  } else if (city === 'Chicago') {
+    return require('assets/chicago/nghd_bounds.geojson')
+  } else if (city === 'Houston') {
+    return require('assets/houston/nghd_bounds.geojson')
   }
 }
 

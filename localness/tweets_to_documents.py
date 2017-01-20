@@ -45,7 +45,14 @@ def process_lines(start, end):
         if tweetutil.is_spammer(username):
             continue
 
-        nghd = pgh_pointmap[lat, lon]
+        try:
+            nghd = pgh_pointmap[lat, lon]
+        except ValueError as e:
+            print "ValueError"
+            print row
+            print counter
+            continue
+        # nghd = pgh_pointmap[lat, lon]
         formatted_text = tweetutil.format(text)
 
         try:

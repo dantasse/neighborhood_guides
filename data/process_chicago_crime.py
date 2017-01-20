@@ -7,7 +7,7 @@ from util.pointmap import Pointmap
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--crimes_data', default='data/chicago/2015_crimes.csv', help=' ')
 parser.add_argument('--pointmap_file', default='data/chicago/pointmap.csv', help=' ')
-parser.add_argument('--nghd_populations_file', default='data/chicago/walkscores.csv', help=' ')
+parser.add_argument('--nghd_populations_file', default='data/chicago/nghd_walkscores.csv', help=' ')
 parser.add_argument('--output_file', default='data/chicago/crimes.csv', help=' ')
 args = parser.parse_args()
 
@@ -65,6 +65,7 @@ if __name__ == '__main__':
     pointmap = Pointmap(args.pointmap_file)
     part1_counter = collections.Counter()
     part2_counter = collections.Counter()
+    missed_ctr = 0
     for line in crimes_reader:
         type = get_type(line) # FBI UCR Part 1 or 2, or 3 (not a crime).
         if line['Latitude'] == '':
@@ -83,6 +84,9 @@ if __name__ == '__main__':
         pop = nghds_pops[nghd]
         part1 = part1_counter[nghd]
         part2 = part2_counter[nghd]
+        if part1 == 0 and part2 == 0:
+            # 0 crimes: probably a fake neighborhood from Walkscore, not a real one.
+            continue
         if pop == 0:
             # for parks, for example, which have no population.
             p1_per_1k = p2_per_1k = total_per_1k = 0

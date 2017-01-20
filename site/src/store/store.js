@@ -6,49 +6,81 @@ Vue.use(Vuex)
 // TODO not sure how to load this asychronously.
 let pghNeighborhoodsAutotags = require('../assets/pgh/nghd_autotags.json')
 let sfNeighborhoodsAutotags = require('../assets/sf/nghd_autotags.json')
+let chiNeighborhoodsAutotags = require('../assets/chicago/nghd_autotags.json')
+let houNeighborhoodsAutotags = require('../assets/houston/nghd_autotags.json')
+
 let pghCrimeStats = require('../assets/pgh/crimes.csv')
 let sfCrimeStats = require('../assets/sf/crimes.csv')
+let chiCrimeStats = require('../assets/chicago/crimes.csv')
+let houCrimeStats = require('../assets/houston/crimes.csv')
+
 let pghNghdsWalkscores = require('../assets/pgh/nghd_walkscores.csv')
 let sfNghdsWalkscores = require('../assets/sf/nghd_walkscores.csv')
+let chiNghdsWalkscores = require('../assets/chicago/nghd_walkscores.csv')
+let houNghdsWalkscores = require('../assets/houston/nghd_walkscores.csv')
+
 let pghTop10TweetTfidf = require('../assets/pgh/tweet_tfidf_top10.json')
 let sfTop10TweetTfidf = require('../assets/sf/tweet_tfidf_top10.json')
+let chiTop10TweetTfidf = require('../assets/chicago/tweet_tfidf_top10.json')
+let houTop10TweetTfidf = require('../assets/houston/tweet_tfidf_top10.json')
+
 let pghFoursquareVenues = require('../assets/pgh/nghd_4sq.csv')
 let sfFoursquareVenues = require('../assets/sf/nghd_4sq.csv')
+let chiFoursquareVenues = require('../assets/chicago/nghd_4sq.csv')
+let houFoursquareVenues = require('../assets/houston/nghd_4sq.csv')
+
 let pghMapillaryPhotos = require('../assets/pgh/nghd_mapillary_keys.csv')
 let sfMapillaryPhotos = require('../assets/sf/nghd_mapillary_keys.csv')
+let chiMapillaryPhotos = require('../assets/chicago/nghd_mapillary_keys.csv')
+let houMapillaryPhotos = require('../assets/houston/nghd_mapillary_keys.csv')
 
 let pghSfComparisons = require('../assets/pgh_sf_comparisons.json')
+let pghHouComparisons = require('../assets/pgh_houston_comparisons.json')
 let sfPghComparisons = require('../assets/sf_pgh_comparisons.json')
+let houPghComparisons = require('../assets/houston_pgh_comparisons.json')
 
 let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
 let sfBounds = require('../assets/sf/nghd_bounds.geojson')
-let nghdNames = {'Pittsburgh': [], 'San Francisco': []}
+let chiBounds = require('../assets/chicago/nghd_bounds.geojson')
+let houBounds = require('../assets/houston/nghd_bounds.geojson')
+
+let nghdNames = {'Pittsburgh': [], 'San Francisco': [], 'Chicago': [], 'Houston': []}
 for (let nghd of pghBounds['features']) {
   nghdNames['Pittsburgh'].push(nghd['properties']['name'])
 }
 for (let nghd of sfBounds['features']) {
   nghdNames['San Francisco'].push(nghd['properties']['name'])
 }
+for (let nghd of chiBounds['features']) {
+  nghdNames['Chicago'].push(nghd['properties']['name'])
+}
+for (let nghd of houBounds['features']) {
+  nghdNames['Houston'].push(nghd['properties']['name'])
+}
 export default new Vuex.Store({
   state: {
-    cityList: ['Pittsburgh', 'San Francisco'],
-    currentNeighborhood: 'Shadyside',
-    currentCity: 'Pittsburgh',
-    compareNeighborhood: 'Mission',
-    compareCity: 'San Francisco',
+    cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston'],
+    currentNeighborhood: 'ACRES HOME',
+    currentCity: 'Houston',
+    compareNeighborhood: 'Shadyside',
+    compareCity: 'Pittsburgh',
     neighborhoodNames: nghdNames,
-    neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags},
-    neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats},
-    neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores},
-    neighborhoodsTop10TweetTfidf: {'Pittsburgh': pghTop10TweetTfidf, 'San Francisco': sfTop10TweetTfidf},
-    neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues},
-    neighborhoodsMapillaryPhotos: {'Pittsburgh': pghMapillaryPhotos, 'San Francisco': sfMapillaryPhotos},
+    neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags, 'Chicago': chiNeighborhoodsAutotags, 'Houston': houNeighborhoodsAutotags},
+    neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats, 'Chicago': chiCrimeStats, 'Houston': houCrimeStats},
+    neighborhoodsWalkscores: {'Pittsburgh': pghNghdsWalkscores, 'San Francisco': sfNghdsWalkscores, 'Chicago': chiNghdsWalkscores, 'Houston': houNghdsWalkscores},
+    neighborhoodsTop10TweetTfidf: {'Pittsburgh': pghTop10TweetTfidf, 'San Francisco': sfTop10TweetTfidf, 'Chicago': chiTop10TweetTfidf, 'Houston': houTop10TweetTfidf},
+    neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues, 'Chicago': chiFoursquareVenues, 'Houston': houFoursquareVenues},
+    neighborhoodsMapillaryPhotos: {'Pittsburgh': pghMapillaryPhotos, 'San Francisco': sfMapillaryPhotos, 'Chicago': chiMapillaryPhotos, 'Houston': houMapillaryPhotos},
     comparisons: {
       'Pittsburgh': {
-        'San Francisco': pghSfComparisons
+        'San Francisco': pghSfComparisons,
+        'Houston': pghHouComparisons
       },
       'San Francisco': {
         'Pittsburgh': sfPghComparisons
+      },
+      'Houston': {
+        'Pittsburgh': houPghComparisons
       }
     }
   },
