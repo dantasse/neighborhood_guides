@@ -17,12 +17,15 @@ var geojsonLayer
 var infoBox
 var map
 
+var mapFeatures = {}
+
 function addHandlers (feature, layer) {
   layer.on({
     click: selectNghd,
     mouseover: highlightFeature,
     mouseout: resetHighlight
   })
+  mapFeatures[feature['properties']['name']] = layer
 }
 
 function selectNghd (e) {
@@ -32,7 +35,9 @@ function selectNghd (e) {
 
 function highlightFeature (e) {
   var layer = e.target
-
+  doHighlight(layer)
+}
+function doHighlight (layer) {
   layer.setStyle({
     weight: 5,
     color: '#666',
@@ -82,7 +87,6 @@ function setUpMap (latlon, neighborhoodsGeojson) {
     }
   }
   infoBox.addTo(map)
-//  })
 }
 
 // Not the official centers, just ones that look good.
@@ -127,10 +131,16 @@ export default {
       geojsonLayer = L.geoJSON(neighborhoodsGeojson, {
         onEachFeature: addHandlers
       }).addTo(map)
+    },
+    currentNghd: function (newNghd) {
+      if (newNghd in mapFeatures) {
+        doHighlight(mapFeatures[newNghd])
+      }
     }
   },
   computed: {
-    currentCity: function () { return store.state.currentCity }
+    currentCity: function () { return store.state.currentCity },
+    currentNghd: function () { return store.state.currentNeighborhood }
   },
   mounted: function () {
     this.$nextTick(function () {
