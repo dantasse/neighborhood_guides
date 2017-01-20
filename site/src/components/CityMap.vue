@@ -7,9 +7,10 @@
 
 
 <script>
+// import Vue from 'vue'
 import store from '../store/store.js'
 import L from 'leaflet'
-import neighborhoodsGeojson from 'assets/pgh/nghd_bounds.geojson'
+// import neighborhoodsGeojson from 'assets/pgh/nghd_bounds.geojson'
 
 // Define this here so we can reference it in setUpMap and resetHighlight.
 var geojsonLayer
@@ -49,40 +50,39 @@ function resetHighlight (e) {
   infoBox.update()
 }
 
-function setUpMap (latlon) {
-  this.$nextTick(function () { // happen when the DOM is ready.
-    map = L.map('leafletMap', {
-      minZoom: 3,
-      maxZoom: 18,
-      inertia: false
-    })
-    map.setView([40.441, -79.97], 12)
-    // Tiles are Mapbox Streets v10
-    // https://www.mapbox.com/studio/styles/mapbox/streets-v10/share/
-    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGFudGFzc2UiLCJhIjoiWkpJVUNjSSJ9.EEaUQpuPDkOhI8rX4ihVDQ', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 18
-    }).addTo(map)
-    geojsonLayer = L.geoJSON(neighborhoodsGeojson, {
-      onEachFeature: addHandlers
-    }).addTo(map)
-
-    // Liberal copying from http://leafletjs.com/examples/choropleth/
-    infoBox = L.control()
-    infoBox.onAdd = function (map) {
-      this._div = L.DomUtil.create('div', 'infobox') // create a div with a class "info"
-      this.update()
-      return this._div
-    }
-    infoBox.update = function (props) {
-      if (props) {
-        this._div.innerHTML = '<h4>' + props['name'] + '</h4>'
-      } else {
-        this._div.innerHTML = '<h4>Select a neighborhood</h4>'
-      }
-    }
-    infoBox.addTo(map)
+function setUpMap (latlon, neighborhoodsGeojson) {
+  map = L.map('leafletMap', {
+    minZoom: 3,
+    maxZoom: 18,
+    inertia: false
   })
+  map.setView([latlon[0], latlon[1]], 12)
+  // Tiles are Mapbox Streets v10
+  // https://www.mapbox.com/studio/styles/mapbox/streets-v10/share/
+  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGFudGFzc2UiLCJhIjoiWkpJVUNjSSJ9.EEaUQpuPDkOhI8rX4ihVDQ', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18
+  }).addTo(map)
+  geojsonLayer = L.geoJSON(neighborhoodsGeojson, {
+    onEachFeature: addHandlers
+  }).addTo(map)
+
+  // Liberal copying from http://leafletjs.com/examples/choropleth/
+  infoBox = L.control()
+  infoBox.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'infobox') // create a div with a class "info"
+    this.update()
+    return this._div
+  }
+  infoBox.update = function (props) {
+    if (props) {
+      this._div.innerHTML = '<h4>' + props['name'] + '</h4>'
+    } else {
+      this._div.innerHTML = '<h4>Select a neighborhood</h4>'
+    }
+  }
+  infoBox.addTo(map)
+//  })
 }
 
 // Not the official centers, just ones that look good.
@@ -132,7 +132,12 @@ export default {
   computed: {
     currentCity: function () { return store.state.currentCity }
   },
-  mounted: setUpMap
+  mounted: function () {
+    this.$nextTick(function () {
+      let nghdsGeojson = getGeojsonForCity(store.state.currentCity)
+      setUpMap(cityCenters[store.state.currentCity], nghdsGeojson)
+    })
+  }
 }
 </script>
 
