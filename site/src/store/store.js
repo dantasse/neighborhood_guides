@@ -36,8 +36,10 @@ let houMapillaryPhotos = require('../assets/houston/nghd_mapillary_keys.csv')
 
 let pghSfComparisons = require('../assets/pgh_sf_comparisons.json')
 let pghHouComparisons = require('../assets/pgh_houston_comparisons.json')
+let sfHouComparisons = require('../assets/sf_houston_comparisons.json')
 let sfPghComparisons = require('../assets/sf_pgh_comparisons.json')
 let houPghComparisons = require('../assets/houston_pgh_comparisons.json')
+let houSfComparisons = require('../assets/houston_sf_comparisons.json')
 
 let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
 let sfBounds = require('../assets/sf/nghd_bounds.geojson')
@@ -59,11 +61,12 @@ for (let nghd of houBounds['features']) {
 }
 export default new Vuex.Store({
   state: {
-    cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston'],
-    currentNeighborhood: 'ACRES HOME',
-    currentCity: 'Houston',
-    compareNeighborhood: 'Shadyside',
-    compareCity: 'Pittsburgh',
+    // cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston'],
+    cityList: ['Pittsburgh', 'San Francisco', 'Houston'],
+    currentNeighborhood: 'Shadyside',
+    currentCity: 'Pittsburgh',
+    compareNeighborhood: 'Mission',
+    compareCity: 'San Francisco',
     neighborhoodNames: nghdNames,
     neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags, 'Chicago': chiNeighborhoodsAutotags, 'Houston': houNeighborhoodsAutotags},
     neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats, 'Chicago': chiCrimeStats, 'Houston': houCrimeStats},
@@ -77,10 +80,12 @@ export default new Vuex.Store({
         'Houston': pghHouComparisons
       },
       'San Francisco': {
-        'Pittsburgh': sfPghComparisons
+        'Pittsburgh': sfPghComparisons,
+        'Houston': sfHouComparisons
       },
       'Houston': {
-        'Pittsburgh': houPghComparisons
+        'Pittsburgh': houPghComparisons,
+        'San Francisco': houSfComparisons
       }
     }
   },
