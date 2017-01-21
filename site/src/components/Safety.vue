@@ -81,14 +81,16 @@ function makeTheChart (crimeStats, state) {
       }
     },
     tooltip: {
-      valueSuffix: ' crimes per 1000 people',
-      valueDecimals: 2,
-      shared: true
+      enabled: false
+//      valueSuffix: ' crimes per 1000 people',
+//      valueDecimals: 2,
+//      shared: true
     },
     plotOptions: {
       bar: {
         dataLabels: {
-          enabled: true
+          enabled: true,
+          format: '{series.name}: {point.y:.0f}'
         },
         grouping: false,
         shadow: false,
@@ -96,15 +98,16 @@ function makeTheChart (crimeStats, state) {
       }
     },
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 80,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
+      enabled: false
+//      layout: 'vertical',
+//      align: 'right',
+//      verticalAlign: 'top',
+//      x: -40,
+//      y: 80,
+//      floating: true,
+//      borderWidth: 1,
+//      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+//      shadow: true
     },
     credits: {
       enabled: false

@@ -77,15 +77,16 @@ function makeChart (walkscores, state) {
       }
     },
     tooltip: {
-      valueSuffix: '',
-      shared: true,
-      valueDecimals: 0
+      enabled: false
+//      valueSuffix: '',
+//      shared: true,
+//      valueDecimals: 0
     },
     plotOptions: {
       bar: {
         dataLabels: {
           enabled: true,
-          format: '{point.y:,.0f}'
+          format: '{series.name}: {point.y:.0f}'
         },
         grouping: false,
         shadow: false,
@@ -93,15 +94,16 @@ function makeChart (walkscores, state) {
       }
     },
     legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -40,
-      y: 80,
-      floating: true,
-      borderWidth: 1,
-      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-      shadow: true
+      enabled: false
+//      layout: 'vertical',
+//      align: 'right',
+//      verticalAlign: 'top',
+//      x: -40,
+//      y: 80,
+//      floating: true,
+//      borderWidth: 1,
+//      backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+//      shadow: true
     },
     credits: {
       enabled: false

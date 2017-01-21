@@ -41,44 +41,44 @@ function makeChart (venuesData, state) {
   if (state.currentNeighborhood !== '') {
     let venuesPerSqMi = []
     let nghdVenues = venuesData['currentNghd']
-    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
-    venuesPerSqMi[1] = parseFloat(nghdVenues['Food'])
-    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment'])
-    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot'])
-    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation'])
-    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service'])
+//    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
+    venuesPerSqMi[0] = parseFloat(nghdVenues['Food'])
+    venuesPerSqMi[1] = parseFloat(nghdVenues['Arts and Entertainment'])
+    venuesPerSqMi[2] = parseFloat(nghdVenues['Nightlife Spot'])
+    venuesPerSqMi[3] = parseFloat(nghdVenues['Outdoors & Recreation'])
+    venuesPerSqMi[4] = parseFloat(nghdVenues['Shop & Service'])
     currentNghdData = venuesPerSqMi
   }
   let currentCityData = []
   let cityVenues = venuesData['currentCity']
-  currentCityData[0] = parseFloat(cityVenues['All Venues'])
-  currentCityData[1] = parseFloat(cityVenues['Food'])
-  currentCityData[2] = parseFloat(cityVenues['Arts and Entertainment'])
-  currentCityData[3] = parseFloat(cityVenues['Nightlife Spot'])
-  currentCityData[4] = parseFloat(cityVenues['Outdoors & Recreation'])
-  currentCityData[5] = parseFloat(cityVenues['Shop & Service'])
+//  currentCityData[0] = parseFloat(cityVenues['All Venues'])
+  currentCityData[0] = parseFloat(cityVenues['Food'])
+  currentCityData[1] = parseFloat(cityVenues['Arts and Entertainment'])
+  currentCityData[2] = parseFloat(cityVenues['Nightlife Spot'])
+  currentCityData[3] = parseFloat(cityVenues['Outdoors & Recreation'])
+  currentCityData[4] = parseFloat(cityVenues['Shop & Service'])
 
   let compareNghdData = []
   if (state.compareNeighborhood !== '') {
     let venuesPerSqMi = []
     let nghdVenues = venuesData['compareNghd']
-    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
-    venuesPerSqMi[1] = parseFloat(nghdVenues['Food'])
-    venuesPerSqMi[2] = parseFloat(nghdVenues['Arts and Entertainment'])
-    venuesPerSqMi[3] = parseFloat(nghdVenues['Nightlife Spot'])
-    venuesPerSqMi[4] = parseFloat(nghdVenues['Outdoors & Recreation'])
-    venuesPerSqMi[5] = parseFloat(nghdVenues['Shop & Service'])
+//    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
+    venuesPerSqMi[0] = parseFloat(nghdVenues['Food'])
+    venuesPerSqMi[1] = parseFloat(nghdVenues['Arts and Entertainment'])
+    venuesPerSqMi[2] = parseFloat(nghdVenues['Nightlife Spot'])
+    venuesPerSqMi[3] = parseFloat(nghdVenues['Outdoors & Recreation'])
+    venuesPerSqMi[4] = parseFloat(nghdVenues['Shop & Service'])
     compareNghdData = venuesPerSqMi
   }
 
   let compareCityData = []
   let compareCityVenues = venuesData['compareCity']
-  compareCityData[0] = parseFloat(compareCityVenues['All Venues'])
-  compareCityData[1] = parseFloat(compareCityVenues['Food'])
-  compareCityData[2] = parseFloat(compareCityVenues['Arts and Entertainment'])
-  compareCityData[3] = parseFloat(compareCityVenues['Nightlife Spot'])
-  compareCityData[4] = parseFloat(compareCityVenues['Outdoors & Recreation'])
-  compareCityData[5] = parseFloat(compareCityVenues['Shop & Service'])
+//  compareCityData[0] = parseFloat(compareCityVenues['All Venues'])
+  compareCityData[0] = parseFloat(compareCityVenues['Food'])
+  compareCityData[1] = parseFloat(compareCityVenues['Arts and Entertainment'])
+  compareCityData[2] = parseFloat(compareCityVenues['Nightlife Spot'])
+  compareCityData[3] = parseFloat(compareCityVenues['Outdoors & Recreation'])
+  compareCityData[4] = parseFloat(compareCityVenues['Shop & Service'])
 
   Highcharts.chart('venuesChart', {
     chart: {
@@ -87,7 +87,8 @@ function makeChart (venuesData, state) {
     },
     title: { text: '' },
     xAxis: {
-      categories: ['All venues', 'Food', 'Arts and entertainment', 'Nightlife', 'Outdoors and recreation', 'Shops'],
+      categories: ['Food', 'Arts and entertainment', 'Nightlife', 'Outdoors and recreation', 'Shops'],
+//      categories: ['All venues', 'Food', 'Arts and entertainment', 'Nightlife', 'Outdoors and recreation', 'Shops'],
       title: { text: null }
     },
     yAxis: {
@@ -101,6 +102,7 @@ function makeChart (venuesData, state) {
       }
     },
     tooltip: {
+//      enabled: false
       shared: true,
       valueSuffix: ' venues per square mile',
       valueDecimals: 0
@@ -109,7 +111,8 @@ function makeChart (venuesData, state) {
       bar: {
         dataLabels: {
           enabled: true,
-          format: '{point.y:,.0f}'
+          format: '{point.y:.0f}'
+//          format: '{series.name}: {point.y:.0f}'
         },
         grouping: false,
         shadow: false,
@@ -117,6 +120,7 @@ function makeChart (venuesData, state) {
       }
     },
     legend: {
+//      enabled: false
       layout: 'vertical',
       align: 'right',
       verticalAlign: 'top',
