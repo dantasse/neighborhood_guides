@@ -62,7 +62,7 @@ if __name__ == '__main__':
         area = round(nghd_areas[nghd], 5)
         venues_persqmi = round(len(venues) * 1.0 / area, 1)
         foods_persqmi = round(foods * 1.0 / area, 1)
-        nightlifes_persqmi = round(arts * 1.0 / area, 1)
+        nightlifes_persqmi = round(nightlifes * 1.0 / area, 1)
         arts_persqmi = round(arts * 1.0 / area, 1)
         shops_persqmi = round(shops * 1.0 / area, 1)
         recs_persqmi = round(recs * 1.0 / area, 1)
