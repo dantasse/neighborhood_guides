@@ -247,7 +247,7 @@ for nghd in set(df.ix[:, 'nghd1']):
             reasons_output[row[1]] = round(row[2], 3)
         this_nghd_output[compare_nghd] = reasons_output
     output[nghd] = this_nghd_output
-json.dump(output, open(args.city1 + '_' + args.city2 + '_recommendations.json', 'w'))
+json.dump(output, open(args.city1 + '_' + args.city2 + '_comparisons.json', 'w'))
 
 output = {}
 # Argh now back the other way. For each nghd2, find the closest nghd1.

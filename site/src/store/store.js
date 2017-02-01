@@ -36,10 +36,16 @@ let houMapillaryPhotos = require('../assets/houston/nghd_mapillary_keys.csv')
 
 let pghSfComparisons = require('../assets/pgh_sf_comparisons.json')
 let pghHouComparisons = require('../assets/pgh_houston_comparisons.json')
+let pghChiComparisons = require('../assets/pgh_chicago_comparisons.json')
 let sfHouComparisons = require('../assets/sf_houston_comparisons.json')
 let sfPghComparisons = require('../assets/sf_pgh_comparisons.json')
+let sfChiComparisons = require('../assets/sf_chicago_comparisons.json')
 let houPghComparisons = require('../assets/houston_pgh_comparisons.json')
 let houSfComparisons = require('../assets/houston_sf_comparisons.json')
+let houChiComparisons = require('../assets/houston_chicago_comparisons.json')
+let chiPghComparisons = require('../assets/chicago_pgh_comparisons.json')
+let chiSfComparisons = require('../assets/chicago_sf_comparisons.json')
+let chiHouComparisons = require('../assets/chicago_houston_comparisons.json')
 
 let pghBounds = require('../assets/pgh/nghd_bounds.geojson')
 let sfBounds = require('../assets/sf/nghd_bounds.geojson')
@@ -61,8 +67,7 @@ for (let nghd of houBounds['features']) {
 }
 export default new Vuex.Store({
   state: {
-    // cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston'],
-    cityList: ['Pittsburgh', 'San Francisco', 'Houston'],
+    cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston'],
     currentNeighborhood: 'Shadyside',
     currentCity: 'Pittsburgh',
     compareNeighborhood: 'Mission',
@@ -77,15 +82,23 @@ export default new Vuex.Store({
     comparisons: {
       'Pittsburgh': {
         'San Francisco': pghSfComparisons,
-        'Houston': pghHouComparisons
+        'Houston': pghHouComparisons,
+        'Chicago': pghChiComparisons
       },
       'San Francisco': {
         'Pittsburgh': sfPghComparisons,
-        'Houston': sfHouComparisons
+        'Houston': sfHouComparisons,
+        'Chicago': sfChiComparisons
       },
       'Houston': {
         'Pittsburgh': houPghComparisons,
-        'San Francisco': houSfComparisons
+        'San Francisco': houSfComparisons,
+        'Chicago': houChiComparisons
+      },
+      'Chicago': {
+        'Pittsburgh': chiPghComparisons,
+        'San Francisco': chiSfComparisons,
+        'Houston': chiHouComparisons
       }
     }
   },

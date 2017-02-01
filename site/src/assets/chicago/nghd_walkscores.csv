@@ -1,100 +1,1 @@
-﻿Rank,Name,Walk Score,Transit Score,Bike Score,Population
-26,Albany Park,86,62,69,67843
-,Andersonville,89,72,85,15179
-65,Archer Heights,75,57,61,15593
-21,Armour Square,88,75,84,12718
-109,Ashburn,60,55,53,40049
-73,Auburn Gresham,72,61,63,52409
-54,Austin,77,65,65,80920
-53,Avalon Park,77,61,57,9629
-32,Avondale,83,68,77,17980
-,Belmont Cragin,78.5,59,62,74049
-94,Beverly,65,50,68,20245
-,Boystown,91,79,81,3635
-38,Bridgeport,82,60,82,32884
-74,Brighton Park,71,60,65,46284
-17,Bucktown,91,72,80,17318
-101,Burnside,63,66,49,9931
-97,Calumet Heights,64,57,54,13790
-40,Chatham,78,68,58,31623
-61,Chicago Lawn,71,57,59,51242
-100,Clearing,63,42,60,19136
-66,Douglas,74,67,73,19430
-91,Dunning,62,53,54,33989
-106,East Side,60,37,59,22945
-2,East Village,96,74,93,7233
-19,Edgewater,89,72,85,41326
-93,Edison Park,66,46,56,10972
-84,Englewood,69,64,64,75079
-,Fuller Park,75,61,65,2876
-71,Gage Park,73,60,63,39517
-87,Galewood,68,58,61,14803
-62,Garfield Park,75.5,71,71.5,37894
-115,Garfield Ridge,55,43,56,36247
-,Gold Coast,96,90,81,16337
-20,Goose Island,88,80,79,3790
-,Grand Boulevard,74,67,73,21929
-59,Grand Crossing,73,68,64,27607
-9,Grant Park,93,100,84,1158
-,Greektown,96,100,87,912
-121,Hegewisch,51,33,65,9511
-45,Hermosa,79,61,66,38280
-31,Humboldt Park,80,66,82,53388
-28,Hyde Park,84,66.5,95.5,29788
-29,Irving Park,82,67,72,38467
-,Jackson Park,84,66.5,95.5,0
-76,Jefferson Park,71,64,70,44147
-48,Kenwood,78,66,91,6207
-13,Lake View,91,79,81,83010
-4,Lincoln Park,94,80,88,26167
-30,Lincoln Square,89,65,84,49373
-36,"Little Italy, UIC",82,72,92,21621
-41,Little Village,81,61,66,80787
-22,Logan Square,88,68,81,92596
-8,Loop,94,99,84,14065
-25,Lower West Side,87,65,83,35903
-,Magnificent Mile,96,90,81,1560
-57,Mckinley Park,76,63,66,14484
-,Millennium Park,94,99,84,0
-69,Montclare,74,58,63,16143
-98,Morgan Park,64,48,68,22549
-119,Mount Greenwood,51,43,59,19092
-,Museum Campus,92,93,89,0
-11,Near South Side,92,93,89,35008
-27,Near West Side,85,81,89,8618
-64,New City,75,61,65,44377
-5,Noble Square,94,74,91,8494
-24,North Center,87,66,76,31535
-72,North Lawndale,73,66,68,50720
-68,North Park,74,54,72,17672
-104,Norwood Park,60,51,63,35948
-120,O'Hare,53,47,44,15217
-,Oakland,74,67,73,5918
-,Old Town,94,80,88,18000
-67,Portage Park,74,59,64,43601
-,Printers Row,94,99,84,644
-123,Pullman,50,59,51,7284
-,River North,96,90,81,20000
-35,Rogers Park,83,73,73,55247
-83,Roseland,66,63,58,39146
-,Rush & Division,96,90,81,8242
-118,"Sauganash,Forest Glen",56,41,59,15213
-10,Sheffield & DePaul,92,76,86,30656
-82,South Chicago,69,61,61,30820
-122,South Deering,51,50,49,14340
-60,South Shore,76,66,70,46254
-,Streeterville,96,90,81,27184
-7,Ukrainian Village,94,69,90,6002
-,United Center,85,81,89,8618
-16,Uptown,91,79,82,48579
-95,Washington Heights,64,61,63,29511
-80,Washington Park,70,74,67,11328
-90,West Elsdon,68,62,60,18156
-86,West Lawn,69,57,58,36295
-3,West Loop,96,100,87,5100
-116,West Pullman,54,54,56,29655
-37,West Ridge,82,55,74,71939
-15,West Town,91,78,88,27286
-6,Wicker Park,94,74,86,8833
-85,Woodlawn,71,72,71,22360
-,Wrigleyville,91,79,81,7876
+﻿Rank,Name,Walk Score,Transit Score,Bike Score,Population26,Albany Park,86,62,69,67843,Andersonville,89,72,85,1517965,Archer Heights,75,57,61,1559321,Armour Square,88,75,84,12718109,Ashburn,60,55,53,4004973,Auburn Gresham,72,61,63,5240954,Austin,77,65,65,8092053,Avalon Park,77,61,57,962932,Avondale,83,68,77,17980,Belmont Cragin,78.5,59,62,7404994,Beverly,65,50,68,20245,Boystown,91,79,81,363538,Bridgeport,82,60,82,3288474,Brighton Park,71,60,65,4628417,Bucktown,91,72,80,17318101,Burnside,63,66,49,993197,Calumet Heights,64,57,54,1379040,Chatham,78,68,58,3162361,Chicago Lawn,71,57,59,51242100,Clearing,63,42,60,1913666,Douglas,74,67,73,1943091,Dunning,62,53,54,33989106,East Side,60,37,59,229452,East Village,96,74,93,723319,Edgewater,89,72,85,4132693,Edison Park,66,46,56,1097284,Englewood,69,64,64,75079,Fuller Park,75,61,65,287671,Gage Park,73,60,63,3951787,Galewood,68,58,61,1480362,Garfield Park,75.5,71,71.5,37894115,Garfield Ridge,55,43,56,36247,Gold Coast,96,90,81,1633720,Goose Island,88,80,79,3790,Grand Boulevard,74,67,73,2192959,Grand Crossing,73,68,64,276079,Grant Park,93,100,84,1158,Greektown,96,100,87,912121,Hegewisch,51,33,65,951145,Hermosa,79,61,66,3828031,Humboldt Park,80,66,82,5338828,Hyde Park,84,66.5,95.5,2978829,Irving Park,82,67,72,38467,Jackson Park,84,66.5,95.5,076,Jefferson Park,71,64,70,4414748,Kenwood,78,66,91,620713,Lake View,91,79,81,830104,Lincoln Park,94,80,88,2616730,Lincoln Square,89,65,84,4937336,"Little Italy, UIC",82,72,92,2162141,Little Village,81,61,66,8078722,Logan Square,88,68,81,925968,Loop,94,99,84,1406525,Lower West Side,87,65,83,35903,Magnificent Mile,96,90,81,156057,Mckinley Park,76,63,66,14484,Millennium Park,94,99,84,069,Montclare,74,58,63,1614398,Morgan Park,64,48,68,22549119,Mount Greenwood,51,43,59,19092,Museum Campus,92,93,89,011,Near South Side,92,93,89,3500827,Near West Side,85,81,89,861864,New City,75,61,65,443775,Noble Square,94,74,91,849424,North Center,87,66,76,3153572,North Lawndale,73,66,68,5072068,North Park,74,54,72,17672104,Norwood Park,60,51,63,35948120,O'Hare,53,47,44,15217,Oakland,74,67,73,5918,Old Town,94,80,88,1800067,Portage Park,74,59,64,43601,Printers Row,94,99,84,644123,Pullman,50,59,51,7284,River North,96,90,81,2000035,Rogers Park,83,73,73,5524783,Roseland,66,63,58,39146,Rush & Division,96,90,81,8242118,"Sauganash,Forest Glen",56,41,59,1521310,Sheffield & DePaul,92,76,86,3065682,South Chicago,69,61,61,30820122,South Deering,51,50,49,1434060,South Shore,76,66,70,46254,Streeterville,96,90,81,271847,Ukrainian Village,94,69,90,6002,United Center,85,81,89,861816,Uptown,91,79,82,4857995,Washington Heights,64,61,63,2951180,Washington Park,70,74,67,1132890,West Elsdon,68,62,60,1815686,West Lawn,69,57,58,362953,West Loop,96,100,87,5100116,West Pullman,54,54,56,2965537,West Ridge,82,55,74,7193915,West Town,91,78,88,272866,Wicker Park,94,74,86,883385,Woodlawn,71,72,71,22360,Wrigleyville,91,79,81,7876,Chicago,78.27,67.49,72.47,2685315
