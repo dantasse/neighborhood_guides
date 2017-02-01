@@ -10,7 +10,6 @@
 // import Vue from 'vue'
 import store from '../store/store.js'
 import L from 'leaflet'
-// import neighborhoodsGeojson from 'assets/pgh/nghd_bounds.geojson'
 
 // Define this here so we can reference it in setUpMap and resetHighlight.
 var geojsonLayer
@@ -57,8 +56,8 @@ function resetHighlight (e) {
 
 function setUpMap (latlon, neighborhoodsGeojson) {
   map = L.map('leafletMap', {
-    minZoom: 3,
-    maxZoom: 18,
+    minZoom: 11,
+    maxZoom: 16,
     inertia: false
   })
   map.setView([latlon[0], latlon[1]], 12)
@@ -97,6 +96,12 @@ var cityCenters = {
   'Chicago': [41.876, -87.625],
   'Houston': [29.756, -95.371]
 }
+var cityBounds = {
+  'Pittsburgh': [[40.37, -80.13], [40.51, -79.82]],
+  'San Francisco': [[37.68, -122.55], [37.82, -122.35]],
+  'Chicago': [[41.86, -87.8], [41.89, -87.5]],
+  'Houston': [[29.4, -95.5], [30.1, -95.2]]
+}
 
 // Need to make this a function instead of just a map b/c apparently you can't
 // require() an expression that's not a literal string?
@@ -124,6 +129,7 @@ export default {
     currentCity: function (newCity) {
       var newCityCenter = cityCenters[newCity]
       map.setView(newCityCenter, 12)
+      map.setMaxBounds(cityBounds[newCity])
 
       // Put the new city's neighborhoods on the map.
       geojsonLayer.removeFrom(map)
@@ -146,6 +152,7 @@ export default {
     this.$nextTick(function () {
       let nghdsGeojson = getGeojsonForCity(store.state.currentCity)
       setUpMap(cityCenters[store.state.currentCity], nghdsGeojson)
+      map.setMaxBounds(cityBounds[store.state.currentCity])
     })
   }
 }
