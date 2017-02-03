@@ -3,12 +3,12 @@
 # get_mapillary_photos was just getting photo keys; here we're downloading the
 # actual images from Google Street View instead.
 
-import argparse, csv, collections, ConfigParser, urllib, json, requests, random
+import argparse, csv, collections, ConfigParser, urllib, json, requests, random, ujson
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--pointmap_file', default='data/pgh/pointmap.csv', help=' ')
 parser.add_argument('--photos_per_nghd', type=int, default=10, help=' ')
+parser.add_argument('--venues_file', help='If provided, we will try to get photos near a venue. If not, just random photos.')
 parser.add_argument('--output_dir', default='data/pgh/streetview/', help=' ')
-
 args = parser.parse_args()
 
 config = ConfigParser.ConfigParser()
@@ -25,8 +25,7 @@ def get_photo(lat, lon):
         'size': '600x300',
         'location': '%s,%s' % (lat, lon),
         'key': GOOGLE_API_KEY
-        })
-        # heading=151.78&pitch=-0.76&
+        }) # heading=151.78&pitch=-0.76&
     try:
         metadata_resp = requests.get(GOOGLE_METADATA_URL + params).json()
         if metadata_resp['status'] == 'OK':
@@ -38,21 +37,34 @@ def get_photo(lat, lon):
             print "zero results"
             return 'ZERO_RESULTS'
         else:
-            print "something else"
-            print metadata_resp
+            print "something else: ", metadata_resp
             return 'ZERO_RESULTS'
 
     except Exception as e:
-        print "Request failed"
-        print e
+        print "Request failed, ", e
         return []
 
 if __name__=='__main__':
-    nghd_latlons = collections.defaultdict(list)
+    pointmap = {}
     for line in csv.DictReader(open(args.pointmap_file)):
-        if line['nghd'] != 'None':
-            latlon = (float(line['lat']), float(line['lon']))
-            nghd_latlons[line['nghd']].append(latlon)
+        pointmap[round(float(line['lat']), 3), round(float(line['lon']), 3)] = line['nghd']
+
+    nghd_latlons = collections.defaultdict(list)
+    if args.venues_file:
+        print "Loading json: ", args.venues_file
+        venues_json = ujson.load(open(args.venues_file))
+        print "Done loading json."
+        for venue in venues_json:
+            lat = round(float(venue['location']['lat']), 3)
+            lon = round(float(venue['location']['lng']), 3)
+            if (lat, lon) in pointmap:
+                nghd = pointmap[(lat, lon)]
+                nghd_latlons[nghd].append((lat, lon))
+            # if that latlon isn't in the pointmap, it's outside Pgh, so drop it.
+    else:
+        for latlon, nghd in pointmap.iteritems():
+            if nghd != 'None':
+                nghd_latlons[nghd].append(latlon)
     
     for nghd, latlons in nghd_latlons.iteritems():
         print nghd
