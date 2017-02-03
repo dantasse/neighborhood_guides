@@ -22,7 +22,10 @@ for line in csv.reader(open(args.input_file)):
     url = line[1]
     lat = round(float(line[3]), 3)
     lon = round(float(line[2]), 3)
-    nghd = pointmap[(lat, lon)]
+    if (lat, lon) in pointmap:
+        nghd = pointmap[(lat, lon)]
+    else:
+        nghd = 'None'
     if url.startswith('http://pbs.twimg.com/'):
         good_url = url
     elif 'instagram' in url:
@@ -32,7 +35,6 @@ for line in csv.reader(open(args.input_file)):
             if matches:
                 good_url = matches.group(1)
                 break
-        time.sleep(1)
     else:
         print url
     line.append(nghd)
