@@ -39,7 +39,6 @@ export default {
 function makeChart (walkscores, state) {
     // *sigh* just a lot of annoying protecting against nulls.
   let compareNghdData = []
-  console.log(walkscores)
   if (state.compareNeighborhood !== '') {
     compareNghdData = [parseFloat(walkscores['compareNghd']['Walk Score']),
       parseFloat(walkscores['compareNghd']['Transit Score']),

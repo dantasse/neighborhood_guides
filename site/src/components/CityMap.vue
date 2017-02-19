@@ -94,13 +94,15 @@ var cityCenters = {
   'Pittsburgh': [40.441, -79.97],
   'San Francisco': [37.77, -122.416],
   'Chicago': [41.876, -87.625],
-  'Houston': [29.756, -95.371]
+  'Houston': [29.756, -95.371],
+  'Austin': [30.268, -97.743]
 }
 var cityBounds = {
   'Pittsburgh': [[40.37, -80.13], [40.51, -79.82]],
   'San Francisco': [[37.68, -122.55], [37.82, -122.35]],
   'Chicago': [[41.86, -87.8], [41.89, -87.5]],
-  'Houston': [[29.4, -95.5], [30.1, -95.2]]
+  'Houston': [[29.4, -95.5], [30.1, -95.2]],
+  'Austin': [[30.1, -98.0], [30.5, -97.5]]
 }
 
 // Need to make this a function instead of just a map b/c apparently you can't
@@ -115,6 +117,8 @@ function getGeojsonForCity (city) {
     return require('assets/chicago/nghd_bounds.geojson')
   } else if (city === 'Houston') {
     return require('assets/houston/nghd_bounds.geojson')
+  } else if (city === 'Austin') {
+    return require('assets/austin/nghd_bounds.geojson')
   }
 }
 

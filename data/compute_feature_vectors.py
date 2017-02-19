@@ -265,7 +265,7 @@ for nghd in set(df.ix[:, 'nghd2']):
             reasons_output[row[1]] = row[2]
         this_nghd_output[compare_nghd] = reasons_output
     output[nghd] = this_nghd_output
-json.dump(output, open(args.city2 + '_' + args.city1 + '_recommendations.json', 'w'))
+json.dump(output, open(args.city2 + '_' + args.city1 + '_comparisons.json', 'w'))
 
     
 
