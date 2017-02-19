@@ -5,9 +5,16 @@
 import argparse, csv, collections, requests, re, time
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--input_file', default='tweet_pgh_images.csv', help=' ')
+parser.add_argument('--cache_file', default='tweet_pgh_goodimages.csv', help=' ')
 parser.add_argument('--output_file', default='tweet_pgh_goodimages.csv', help=' ')
 parser.add_argument('--pointmap_file', default='pgh/pointmap.csv', help=' ')
 args = parser.parse_args()
+
+cache = {}
+cachefile = open(args.cache_file)
+for line in csv.reader(open(args.cache_file)):
+    cache[line[1]] = line[8]
+cachefile.close()
 
 pointmap = {}
 for line in csv.DictReader(open(args.pointmap_file)):
@@ -22,17 +29,24 @@ for line in csv.reader(open(args.input_file)):
     url = line[1]
     lat = round(float(line[3]), 3)
     lon = round(float(line[2]), 3)
-    nghd = pointmap[(lat, lon)]
-    if url.startswith('http://pbs.twimg.com/'):
+    if (lat, lon) in pointmap:
+        nghd = pointmap[(lat, lon)]
+    else:
+        nghd = 'None'
+    if url in cache:
+        good_url = cache[url]
+    elif url.startswith('http://pbs.twimg.com/'):
         good_url = url
     elif 'instagram' in url:
-        page = requests.get(url)
-        for page_line in page.content.split('\n'):
-            matches = re.match('.*meta property="og:image" content="(.*)"', page_line)
-            if matches:
-                good_url = matches.group(1)
-                break
-        time.sleep(1)
+        try:
+            page = requests.get(url)
+            for page_line in page.content.split('\n'):
+                matches = re.match('.*meta property="og:image" content="(.*)"', page_line)
+                if matches:
+                    good_url = matches.group(1)
+                    break
+        except:
+            print "Missed a photo: ", url
     else:
         print url
     line.append(nghd)
