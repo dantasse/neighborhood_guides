@@ -169,11 +169,20 @@ export default new Vuex.Store({
   },
   getters: {
     top10tags: function (state) {
-      return state.neighborhoodsAutotags[state.currentCity][state.currentNeighborhood]['autotags_90plus_minusbaseline']
+      let alltags = state.neighborhoodsAutotags[state.currentCity][state.currentNeighborhood]
+      if (alltags === undefined) {
+        return []
+      } else {
+        return alltags['autotags_90plus_minusbaseline']
+      }
     },
     indoor_outdoor: function (state) {
       let alltags = state.neighborhoodsAutotags[state.currentCity][state.currentNeighborhood]
-      return [alltags['num_indoor'], alltags['num_outdoor']]
+      if (alltags === undefined) {
+        return [0, 0]
+      } else {
+        return [alltags['num_indoor'], alltags['num_outdoor']]
+      }
     },
     crimeStats: function (state) {
       // TODO: replace all these csv lookups with json lookups ideally.

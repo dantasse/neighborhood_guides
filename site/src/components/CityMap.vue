@@ -60,7 +60,7 @@ function setUpMap (latlon, neighborhoodsGeojson) {
     maxZoom: 16,
     inertia: false
   })
-  map.setView([latlon[0], latlon[1]], 12)
+  map.setView([latlon[0], latlon[1]], zoomLevel)
   // Tiles are Mapbox Streets v10
   // https://www.mapbox.com/studio/styles/mapbox/streets-v10/share/
   L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGFudGFzc2UiLCJhIjoiWkpJVUNjSSJ9.EEaUQpuPDkOhI8rX4ihVDQ', {
@@ -94,7 +94,7 @@ var cityCenters = {
   'Pittsburgh': [40.441, -79.97],
   'San Francisco': [37.77, -122.416],
   'Chicago': [41.876, -87.625],
-  'Houston': [29.756, -95.371],
+  'Houston': [29.75, -95.371],
   'Austin': [30.268, -97.743]
 }
 var cityBounds = {
@@ -104,6 +104,7 @@ var cityBounds = {
   'Houston': [[29.4, -95.5], [30.1, -95.2]],
   'Austin': [[30.1, -98.0], [30.5, -97.5]]
 }
+var zoomLevel = 12 // Starting zoom when you move to a new city.
 
 // Need to make this a function instead of just a map b/c apparently you can't
 // require() an expression that's not a literal string?
@@ -132,8 +133,13 @@ export default {
     // When |currentCity| changes, do something.
     currentCity: function (newCity) {
       var newCityCenter = cityCenters[newCity]
-      map.setView(newCityCenter, 12)
+      if (newCity === 'Houston') {
+        zoomLevel = 11 // Houston is big.
+      } else {
+        zoomLevel = 12
+      }
       map.setMaxBounds(cityBounds[newCity])
+      map.setView(newCityCenter, zoomLevel)
 
       // Put the new city's neighborhoods on the map.
       geojsonLayer.removeFrom(map)
