@@ -14,6 +14,8 @@ import L from 'leaflet'
 // Define this here so we can reference it in setUpMap and resetHighlight.
 var geojsonLayer
 var infoBox
+var mapPicker // Control to say whether we want to look at crime, walkscores, etc.
+
 var map
 
 var mapFeatures = {}
@@ -63,11 +65,13 @@ function setUpMap (latlon, neighborhoodsGeojson) {
   map.setView([latlon[0], latlon[1]], zoomLevel)
   // Tiles are Mapbox Streets v10
   // https://www.mapbox.com/studio/styles/mapbox/streets-v10/share/
-  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGFudGFzc2UiLCJhIjoiWkpJVUNjSSJ9.EEaUQpuPDkOhI8rX4ihVDQ', {
+  L.tileLayer('http://a.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGFudGFzc2UiLCJhIjoiWkpJVUNjSSJ9.EEaUQpuPDkOhI8rX4ihVDQ', {
+    id: 'mapbox.satellite',
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18
   }).addTo(map)
   geojsonLayer = L.geoJSON(neighborhoodsGeojson, {
+    style: geojsonStyle,
     onEachFeature: addHandlers
   }).addTo(map)
 
@@ -86,6 +90,26 @@ function setUpMap (latlon, neighborhoodsGeojson) {
     }
   }
   infoBox.addTo(map)
+
+  mapPicker = L.control()
+  mapPicker.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'map_picker')
+    var types = ['Neighborhood Bounds', 'Total Crime', 'Part 1 Crime',
+      'Part 2 Crime', 'Walk Score', 'Bike Score', 'Transit Score',
+      'Arts Venues', 'Nightlife Venues', 'Shops',
+      'Outdoor and Recreation Venues', 'Food Venues', 'All Venues']
+    var mapPickerHtml = '<select id="map_picker">'
+    for (var i = 0; i < types.length; i++) {
+      mapPickerHtml += '<option>' + types[i] + '</option>'
+    }
+    mapPickerHtml += '</select>'
+    this._div.innerHTML = mapPickerHtml
+    this.update()
+    return this._div
+  }
+  mapPicker.update = function () {
+  }
+  mapPicker.addTo(map)
 }
 
 // Not the official centers, just ones that look good.
@@ -123,6 +147,48 @@ function getGeojsonForCity (city) {
   }
 }
 
+// Map a walkscore from a number to a color
+var walkscoreColor = function (number) {
+  if (number < 12) {
+    return '#f7fcf5'
+  } else if (number < 25) {
+    return '#e5f5e0'
+  } else if (number < 37) {
+    return '#c7e9c0'
+  } else if (number < 50) {
+    return '#a1d99b'
+  } else if (number < 62) {
+    return '#74c476'
+  } else if (number < 75) {
+    return '#41ab5d'
+  } else if (number < 87) {
+    return '#238b45'
+  } else if (number <= 100) {
+    return '#005a32'
+  } else {
+    console.log('huh?')
+    console.log(number)
+  }
+}
+
+function getColor (feature) {
+  var nghdName = feature['properties']['name']
+  var allWalkscores = store.state.neighborhoodsWalkscores[store.state.currentCity]
+  for (var i = 0; i < allWalkscores.length; i++) {
+    if (allWalkscores[i]['Name'] === nghdName) {
+      var walkscore = allWalkscores[i]['Walk Score']
+
+      return walkscoreColor(walkscore)
+    }
+  }
+  return '#333'
+}
+function geojsonStyle (feature) {
+  return {
+    color: getColor(feature)
+  }
+}
+
 export default {
   data () {
     return {
@@ -145,6 +211,7 @@ export default {
       geojsonLayer.removeFrom(map)
       var neighborhoodsGeojson = getGeojsonForCity(newCity)
       geojsonLayer = L.geoJSON(neighborhoodsGeojson, {
+        style: geojsonStyle,
         onEachFeature: addHandlers
       }).addTo(map)
     },
@@ -189,6 +256,9 @@ export default {
 .infobox h4 {
     margin: 0;
     color: #777;
+}
+.map_picker {
+  font-size:14pt;
 }
 </style>
 
