@@ -89,6 +89,7 @@ for (let nghd of ausBounds['features']) {
 export default new Vuex.Store({
   state: {
     cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston', 'Austin'],
+    currentMap: 'Neighborhood Bounds',
     currentNeighborhood: 'Shadyside',
     currentCity: 'Pittsburgh',
     compareNeighborhood: 'Mission',
@@ -147,6 +148,9 @@ export default new Vuex.Store({
     },
     selectCompareCity: function (state, newCompareCity) {
       state.compareCity = newCompareCity
+    },
+    setCurrentMap: function (state, newCurrentMap) {
+      state.currentMap = newCurrentMap
     }
   },
   actions: {
@@ -165,6 +169,9 @@ export default new Vuex.Store({
     },
     selectCompareCity ({ commit }, newCompareCity) {
       commit('selectCompareCity', newCompareCity)
+    },
+    setCurrentMap ({ commit }, newCurrentMap) {
+      commit('setCurrentMap', newCurrentMap)
     }
   },
   getters: {
@@ -206,7 +213,7 @@ export default new Vuex.Store({
         'compareCity': compareCity}
     },
     cityCrimeStats: function (state) {
-      for (let nghd of state.neighborhoodsCrimeStats) {
+      for (let nghd of state.neighborhoodsCrimeStats[state.currentCity]) {
         if (nghd['neighborhood'] === state.currentCity) {
           return nghd
         }
@@ -258,12 +265,8 @@ export default new Vuex.Store({
       }
     },
     mapillaryPhotos: function (state) {
-      console.log('here')
-      console.log(state.neighborhoodsMapillaryPhotos['Pittsburgh'])
       for (let nghd of state.neighborhoodsMapillaryPhotos[state.currentCity]) {
         if (nghd['neighborhood'] === state.currentNeighborhood) {
-          console.log('match')
-          console.log(nghd['neighborhood'])
           var currentNghd = nghd
         }
       }
@@ -272,8 +275,6 @@ export default new Vuex.Store({
           var compareNghd = nghd
         }
       }
-      console.log({'currentNghd': currentNghd, 'compareNghd': compareNghd})
-
       return {'currentNghd': currentNghd, 'compareNghd': compareNghd}
     },
     comparisons: function (state) {

@@ -96,7 +96,7 @@ export default {
           walkscore: (100 - Math.round(stats['walkscore'] * 100)),
           crime: (100 - Math.round(stats['crime'] * 100)),
           flickr: (100 - Math.round(stats['flickr'] * 100))
-          })
+        })
       }
       retval = retval.sort(function (x, y) { return y['average'] - x['average'] })
       return retval

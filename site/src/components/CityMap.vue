@@ -1,5 +1,23 @@
 <template>
   <div class="city-map">
+    <div>
+      <select id="map_picker" v-model="currentMap" v-on:change='setCurrentMap'>
+        <option value='Neighborhood Bounds'>Neighborhood Bounds</option>
+        <option value='Total Crime'>Total Crime</option>
+        <option value='Part 1 Crime'>Part 1 (more serious) crime</option>
+        <option value='Part 2 Crime'>Part 2 (less serious) crime</option>
+        <option value='Walk Score'>Walk Score</option>
+        <option value='Bike Score'>Bike Score</option>
+        <option value='Transit Score'>Transit Score</option>
+        <option value='Arts Venues'>Arts Venues</option>
+        <option value='Nightlife Venues'>Nightlife Venues</option>
+        <option value='Shops'>Shops</option>
+        <option value='Outdoor and Recreation Venues'>Outdoor and Recreation Venues</option>
+        <option value='Food Venues'>Food Venues</option>
+        <option value='All Venues'>All Venues</option>
+      </select>
+
+    </div>
     <div id='leafletMap'>
     </div>
   </div>
@@ -14,11 +32,16 @@ import L from 'leaflet'
 // Define this here so we can reference it in setUpMap and resetHighlight.
 var geojsonLayer
 var infoBox
-var mapPicker // Control to say whether we want to look at crime, walkscores, etc.
-
+// var mapPicker // Control to say whether we want to look at crime, walkscores, etc.
+// let currentMap = ['foo'] // which one we're looking at now.
 var map
 
 var mapFeatures = {}
+
+let setCurrentMap = function (e) {
+  var selectedMap = e.target.value
+  store.dispatch('setCurrentMap', selectedMap)
+}
 
 function addHandlers (feature, layer) {
   layer.on({
@@ -63,10 +86,8 @@ function setUpMap (latlon, neighborhoodsGeojson) {
     inertia: false
   })
   map.setView([latlon[0], latlon[1]], zoomLevel)
-  // Tiles are Mapbox Streets v10
-  // https://www.mapbox.com/studio/styles/mapbox/streets-v10/share/
+  //
   L.tileLayer('http://a.tiles.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGFudGFzc2UiLCJhIjoiWkpJVUNjSSJ9.EEaUQpuPDkOhI8rX4ihVDQ', {
-    id: 'mapbox.satellite',
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18
   }).addTo(map)
@@ -90,26 +111,6 @@ function setUpMap (latlon, neighborhoodsGeojson) {
     }
   }
   infoBox.addTo(map)
-
-  mapPicker = L.control()
-  mapPicker.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'map_picker')
-    var types = ['Neighborhood Bounds', 'Total Crime', 'Part 1 Crime',
-      'Part 2 Crime', 'Walk Score', 'Bike Score', 'Transit Score',
-      'Arts Venues', 'Nightlife Venues', 'Shops',
-      'Outdoor and Recreation Venues', 'Food Venues', 'All Venues']
-    var mapPickerHtml = '<select id="map_picker">'
-    for (var i = 0; i < types.length; i++) {
-      mapPickerHtml += '<option>' + types[i] + '</option>'
-    }
-    mapPickerHtml += '</select>'
-    this._div.innerHTML = mapPickerHtml
-    this.update()
-    return this._div
-  }
-  mapPicker.update = function () {
-  }
-  mapPicker.addTo(map)
 }
 
 // Not the official centers, just ones that look good.
@@ -166,22 +167,23 @@ var walkscoreColor = function (number) {
   } else if (number <= 100) {
     return '#005a32'
   } else {
-    console.log('huh?')
-    console.log(number)
+    return '#999999' // This shouldn't happen.
   }
 }
 
 function getColor (feature) {
   var nghdName = feature['properties']['name']
-  var allWalkscores = store.state.neighborhoodsWalkscores[store.state.currentCity]
-  for (var i = 0; i < allWalkscores.length; i++) {
-    if (allWalkscores[i]['Name'] === nghdName) {
-      var walkscore = allWalkscores[i]['Walk Score']
-
-      return walkscoreColor(walkscore)
+  if (store.state.currentMap === 'Walk Score') {
+    var allWalkscores = store.state.neighborhoodsWalkscores[store.state.currentCity]
+    for (var i = 0; i < allWalkscores.length; i++) {
+      if (allWalkscores[i]['Name'] === nghdName) {
+        var walkscore = allWalkscores[i]['Walk Score']
+        return walkscoreColor(walkscore)
+      }
     }
+  } else {
+    return '#333'
   }
-  return '#333'
 }
 function geojsonStyle (feature) {
   return {
@@ -219,11 +221,18 @@ export default {
       if (newNghd in mapFeatures) {
         doHighlight(mapFeatures[newNghd])
       }
+    },
+    currentMap: function () {
+      geojsonLayer.setStyle(geojsonStyle)
     }
   },
   computed: {
     currentCity: function () { return store.state.currentCity },
-    currentNghd: function () { return store.state.currentNeighborhood }
+    currentNghd: function () { return store.state.currentNeighborhood },
+    currentMap: function () { return store.state.currentMap }
+  },
+  methods: {
+    setCurrentMap
   },
   mounted: function () {
     this.$nextTick(function () {
