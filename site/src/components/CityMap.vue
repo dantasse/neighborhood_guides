@@ -149,36 +149,110 @@ function getGeojsonForCity (city) {
 }
 
 // Map a walkscore from a number to a color
-var walkscoreColor = function (number) {
-  if (number < 12) {
+var walkscoreColor = function (num) {
+  if (num < 12) {
     return '#f7fcf5'
-  } else if (number < 25) {
+  } else if (num < 25) {
     return '#e5f5e0'
-  } else if (number < 37) {
+  } else if (num < 37) {
     return '#c7e9c0'
-  } else if (number < 50) {
+  } else if (num < 50) {
     return '#a1d99b'
-  } else if (number < 62) {
+  } else if (num < 62) {
     return '#74c476'
-  } else if (number < 75) {
+  } else if (num < 75) {
     return '#41ab5d'
-  } else if (number < 87) {
+  } else if (num < 87) {
     return '#238b45'
-  } else if (number <= 100) {
+  } else if (num <= 100) {
     return '#005a32'
   } else {
     return '#999999' // This shouldn't happen.
   }
 }
-
+// TODO adjust this scale
+var crimesColor = function (num) {
+  if (num < 25) {
+    return '#ffffcc'
+  } else if (num < 50) {
+    return '#ffeda0'
+  } else if (num < 75) {
+    return '#fed976'
+  } else if (num < 100) {
+    return '#feb24c'
+  } else if (num < 125) {
+    return '#fd8d3c'
+  } else if (num < 150) {
+    return '#fc4e2a'
+  } else if (num < 175) {
+    return '#e31a1c'
+  } else {
+    return '#b10026'
+  }
+}
+var venuesColor = function (num) {
+  if (num < 5) {
+    return '#fff7fb'
+  } else if (num < 10) {
+    return '#ece7f2'
+  } else if (num < 20) {
+    return '#d0d1e6'
+  } else if (num < 40) {
+    return '#a6bddb'
+  } else if (num < 80) {
+    return '#74a9cf'
+  } else if (num < 160) {
+    return '#3690c0'
+  } else if (num < 320) {
+    return '#0570b0'
+  } else {
+    return '#034e7b'
+  }
+}
 function getColor (feature) {
   var nghdName = feature['properties']['name']
-  if (store.state.currentMap === 'Walk Score') {
+  if (['Walk Score', 'Bike Score', 'Transit Score'].indexOf(store.state.currentMap) >= 0) {
     var allWalkscores = store.state.neighborhoodsWalkscores[store.state.currentCity]
     for (var i = 0; i < allWalkscores.length; i++) {
       if (allWalkscores[i]['Name'] === nghdName) {
-        var walkscore = allWalkscores[i]['Walk Score']
-        return walkscoreColor(walkscore)
+        var score = allWalkscores[i][store.state.currentMap] // e.g. "Walk Score"
+        return walkscoreColor(score)
+      }
+    }
+  } else if (['Total Crime', 'Part 1 Crime', 'Part 2 Crime'].indexOf(store.state.currentMap) >= 0) {
+    var allCrimes = store.state.neighborhoodsCrimeStats[store.state.currentCity]
+    for (var j = 0; j < allCrimes.length; j++) {
+      if (allCrimes[j]['neighborhood'] === nghdName) {
+        if (store.state.currentMap === 'Total Crime') {
+          return crimesColor(parseFloat(allCrimes[j]['total_per_1000_ppl']) / 2)
+          // Divide by 2 b/c there's going to be twice as much "all crime" as
+          // any subtype of crime.
+        } else if (store.state.currentMap === 'Part 1 Crime') {
+          return crimesColor(parseFloat(allCrimes[j]['part1_per_1000_ppl']))
+        } else if (store.state.currentMap === 'Part 2 Crime') {
+          return crimesColor(parseFloat(allCrimes[j]['part2_per_1000_ppl']))
+        }
+      }
+    }
+  } else if (store.state.currentMap.indexOf('Venues') >= 0 || store.state.currentMap === 'Shops') {
+    var allVenues = store.state.neighborhoodsFoursquareVenues[store.state.currentCity]
+    for (var k = 0; k < allVenues.length; k++) {
+      if (allVenues[k]['Neighborhood'] === nghdName) {
+        if (store.state.currentMap === 'Arts Venues') {
+          return venuesColor(parseFloat(allVenues[k]['Arts and Entertainment']))
+        } else if (store.state.currentMap === 'Nightlife Venues') {
+          return venuesColor(parseFloat(allVenues[k]['Nightlife Spot']))
+        } else if (store.state.currentMap === 'Shops') {
+          return venuesColor(parseFloat(allVenues[k]['Shop & Service']))
+        } else if (store.state.currentMap === 'Outdoor and Recreation Venues') {
+          return venuesColor(parseFloat(allVenues[k]['Outdoors & Recreation']))
+        } else if (store.state.currentMap === 'Food Venues') {
+          return venuesColor(parseFloat(allVenues[k]['Food']))
+        } else if (store.state.currentMap === 'All Venues') {
+          return venuesColor(parseFloat(allVenues[k]['All Venues']) / 5)
+          // Divide by 5 b/c otherwise colors wouldn't work; there's going to
+          // be a lot of "all venues."
+        }
       }
     }
   } else {
