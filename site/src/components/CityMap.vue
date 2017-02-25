@@ -72,7 +72,7 @@ function doHighlight (layer) {
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
     layer.bringToFront()
   }
-  infoBox.update(layer.feature.properties)
+  infoBox.update(layer.feature.properties['name'], store.state.currentMap)
 }
 function resetHighlight (e) {
   geojsonLayer.resetStyle(e.target)
@@ -103,9 +103,18 @@ function setUpMap (latlon, neighborhoodsGeojson) {
     this.update()
     return this._div
   }
-  infoBox.update = function (props) {
-    if (props) {
-      this._div.innerHTML = '<h4>' + props['name'] + '</h4>'
+  infoBox.update = function (nghdName, valueType) {
+    if (nghdName) {
+      this._div.innerHTML = '<h4>' + nghdName + '</h4>'
+      if (valueType) {
+        var displayValueType = valueType
+        if (valueType.indexOf('Venues') >= 0 || valueType === 'Shops') {
+          displayValueType += ' (per square mile)'
+        } else if (valueType.indexOf('Crime') >= 0) {
+          displayValueType += ' (per 1000 residents)'
+        }
+        this._div.innerHTML += ('<br>' + displayValueType + ': ' + getValue(nghdName, valueType))
+      }
     } else {
       this._div.innerHTML = '<h4>Select a neighborhood</h4>'
     }
@@ -125,7 +134,7 @@ var cityCenters = {
 var cityBounds = {
   'Pittsburgh': [[40.37, -80.13], [40.51, -79.82]],
   'San Francisco': [[37.68, -122.55], [37.82, -122.35]],
-  'Chicago': [[41.86, -87.8], [41.89, -87.5]],
+  'Chicago': [[41.6, -87.8], [42.20, -87.5]],
   'Houston': [[29.4, -95.5], [30.1, -95.2]],
   'Austin': [[30.1, -98.0], [30.5, -97.5]]
 }
@@ -150,19 +159,19 @@ function getGeojsonForCity (city) {
 
 // Map a walkscore from a number to a color
 var walkscoreColor = function (num) {
-  if (num < 12) {
+  if (num < 30) {
     return '#f7fcf5'
-  } else if (num < 25) {
+  } else if (num < 40) {
     return '#e5f5e0'
-  } else if (num < 37) {
-    return '#c7e9c0'
   } else if (num < 50) {
+    return '#c7e9c0'
+  } else if (num < 60) {
     return '#a1d99b'
-  } else if (num < 62) {
+  } else if (num < 70) {
     return '#74c476'
-  } else if (num < 75) {
+  } else if (num < 80) {
     return '#41ab5d'
-  } else if (num < 87) {
+  } else if (num < 90) {
     return '#238b45'
   } else if (num <= 100) {
     return '#005a32'
@@ -209,54 +218,68 @@ var venuesColor = function (num) {
     return '#034e7b'
   }
 }
-function getColor (feature) {
-  var nghdName = feature['properties']['name']
-  if (['Walk Score', 'Bike Score', 'Transit Score'].indexOf(store.state.currentMap) >= 0) {
+
+// e.g. neighborhood = 'Shadyside' and valueType = 'Walk Score' and it would return 95.
+function getValue (nghdName, valueType) {
+  if (['Walk Score', 'Bike Score', 'Transit Score'].indexOf(valueType) >= 0) {
     var allWalkscores = store.state.neighborhoodsWalkscores[store.state.currentCity]
     for (var i = 0; i < allWalkscores.length; i++) {
       if (allWalkscores[i]['Name'] === nghdName) {
-        var score = allWalkscores[i][store.state.currentMap] // e.g. "Walk Score"
-        return walkscoreColor(score)
+        return allWalkscores[i][valueType]
       }
     }
-  } else if (['Total Crime', 'Part 1 Crime', 'Part 2 Crime'].indexOf(store.state.currentMap) >= 0) {
+  } else if (['Total Crime', 'Part 1 Crime', 'Part 2 Crime'].indexOf(valueType) >= 0) {
     var allCrimes = store.state.neighborhoodsCrimeStats[store.state.currentCity]
     for (var j = 0; j < allCrimes.length; j++) {
       if (allCrimes[j]['neighborhood'] === nghdName) {
-        if (store.state.currentMap === 'Total Crime') {
-          return crimesColor(parseFloat(allCrimes[j]['total_per_1000_ppl']) / 2)
+        if (valueType === 'Total Crime') {
+          return parseFloat(allCrimes[j]['total_per_1000_ppl']) / 2
           // Divide by 2 b/c there's going to be twice as much "all crime" as
           // any subtype of crime.
-        } else if (store.state.currentMap === 'Part 1 Crime') {
-          return crimesColor(parseFloat(allCrimes[j]['part1_per_1000_ppl']))
-        } else if (store.state.currentMap === 'Part 2 Crime') {
-          return crimesColor(parseFloat(allCrimes[j]['part2_per_1000_ppl']))
+        } else if (valueType === 'Part 1 Crime') {
+          return parseFloat(allCrimes[j]['part1_per_1000_ppl'])
+        } else if (valueType === 'Part 2 Crime') {
+          return parseFloat(allCrimes[j]['part2_per_1000_ppl'])
         }
       }
     }
-  } else if (store.state.currentMap.indexOf('Venues') >= 0 || store.state.currentMap === 'Shops') {
+  } else if (valueType.indexOf('Venues') >= 0 || valueType === 'Shops') {
     var allVenues = store.state.neighborhoodsFoursquareVenues[store.state.currentCity]
     for (var k = 0; k < allVenues.length; k++) {
       if (allVenues[k]['Neighborhood'] === nghdName) {
-        if (store.state.currentMap === 'Arts Venues') {
-          return venuesColor(parseFloat(allVenues[k]['Arts and Entertainment']))
-        } else if (store.state.currentMap === 'Nightlife Venues') {
-          return venuesColor(parseFloat(allVenues[k]['Nightlife Spot']))
-        } else if (store.state.currentMap === 'Shops') {
-          return venuesColor(parseFloat(allVenues[k]['Shop & Service']))
-        } else if (store.state.currentMap === 'Outdoor and Recreation Venues') {
-          return venuesColor(parseFloat(allVenues[k]['Outdoors & Recreation']))
-        } else if (store.state.currentMap === 'Food Venues') {
-          return venuesColor(parseFloat(allVenues[k]['Food']))
-        } else if (store.state.currentMap === 'All Venues') {
-          return venuesColor(parseFloat(allVenues[k]['All Venues']) / 5)
-          // Divide by 5 b/c otherwise colors wouldn't work; there's going to
-          // be a lot of "all venues."
+        if (valueType === 'Arts Venues') {
+          return parseFloat(allVenues[k]['Arts and Entertainment'])
+        } else if (valueType === 'Nightlife Venues') {
+          return parseFloat(allVenues[k]['Nightlife Spot'])
+        } else if (valueType === 'Shops') {
+          return parseFloat(allVenues[k]['Shop & Service'])
+        } else if (valueType === 'Outdoor and Recreation Venues') {
+          return parseFloat(allVenues[k]['Outdoors & Recreation'])
+        } else if (valueType === 'Food Venues') {
+          return parseFloat(allVenues[k]['Food'])
+        } else if (valueType === 'All Venues') {
+          return parseFloat(allVenues[k]['All Venues'])
         }
       }
     }
+  }
+}
+
+function getColor (feature) {
+  var nghdName = feature['properties']['name']
+  var score = getValue(nghdName, store.state.currentMap)
+  if (['Walk Score', 'Bike Score', 'Transit Score'].indexOf(store.state.currentMap) >= 0) {
+    return walkscoreColor(score)
+  } else if (['Part 1 Crime', 'Part 2 Crime'].indexOf(store.state.currentMap) >= 0) {
+    return crimesColor(score)
+  } else if (store.state.currentMap === 'Total Crime') {
+    return crimesColor(score / 2.0) // because this includes 2 kinds of crime.
+  } else if (store.state.currentMap === 'All Venues') {
+    return venuesColor(score / 5.0)
+  } else if (store.state.currentMap.indexOf('Venues') >= 0 || store.state.currentMap === 'Shops') {
+    return venuesColor(score)
   } else {
-    return '#333'
+    return '#333' // This shouldn't happen.
   }
 }
 function geojsonStyle (feature) {
