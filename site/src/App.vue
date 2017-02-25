@@ -19,15 +19,22 @@
           <!-- These all match the "export default" components below.-->
           <aesthetics></aesthetics>
           <convenience></convenience>
-          <localness></localness>
           <liveliness></liveliness>
           <safety></safety>
+          <localness></localness>
           <!--To get a better understanding of how this boilerplate works, check out-->
           <!--<a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.-->
         </div>
       </div>
     </div>
     <page-footer></page-footer>
+    <div>
+      Secret controls:
+      <a onclick="$('#similarNghds').toggle()">Similar Neighborhoods</a>
+      <a onclick="$('#liveliness').toggle(); $('#safety').toggle(); $('#convenience').toggle(); ">Graphs</a>
+      <a onclick="$('#localness').toggle()">Tweets</a>
+    </div>
+
   </div>
 </template>
 
@@ -70,5 +77,7 @@ export default {
 </script>
 
 <style>
-
+a {
+  cursor: pointer;
+}
 </style>

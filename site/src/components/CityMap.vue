@@ -113,7 +113,13 @@ function setUpMap (latlon, neighborhoodsGeojson) {
         } else if (valueType.indexOf('Crime') >= 0) {
           displayValueType += ' (per 1000 residents)'
         }
-        this._div.innerHTML += ('<br>' + displayValueType + ': ' + Math.round(getValue(nghdName, valueType)))
+        var val = getValue(nghdName, valueType)
+        if (isNaN(val) || val === 'NaN') {
+          val = 'unknown'
+        } else {
+          val = Math.round(val)
+        }
+        this._div.innerHTML += ('<br>' + displayValueType + ': ' + val)
       }
     } else {
       this._div.innerHTML = '<h4>Select a neighborhood</h4>'
@@ -268,6 +274,9 @@ function getValue (nghdName, valueType) {
 function getColor (feature) {
   var nghdName = feature['properties']['name']
   var score = getValue(nghdName, store.state.currentMap)
+  if (isNaN(score)) {
+    return '#cccccc' // for cases like Houston Type 2 crime, which we just don't have
+  }
   if (['Walk Score', 'Bike Score', 'Transit Score'].indexOf(store.state.currentMap) >= 0) {
     return walkscoreColor(score)
   } else if (['Part 1 Crime', 'Part 2 Crime'].indexOf(store.state.currentMap) >= 0) {

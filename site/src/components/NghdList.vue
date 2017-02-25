@@ -7,7 +7,7 @@
         <option v-for='nghd in nghdNames' :value='nghd'>{{nghd}}</option>
       </select>
     </h4>
-    <p id='similarNghds'>
+    <p id='similarNghds' style='display:none'>
     Similar to {{compareNghd}}:
       <span class='compareNghdName' v-for='nghd in nghdComparisons'>
         <a class="selectNghdLink" v-on:click="selectNameText(nghd['name'])">

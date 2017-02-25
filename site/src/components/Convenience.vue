@@ -1,8 +1,8 @@
 <template>
-  <div class="convenience">
+  <div class="convenience" id="convenience" style="display:none;">
     <h3>Location convenience in {{store.state.currentNeighborhood}}</h3>
     <a href="https://www.walkscore.com/">Walkscore.com</a> has compiled scores showing how easy it is to walk, bike, or take public transit in each neighborhood.
-    <div id="walkscoreChart" style="min-width: 310px; max-width: 960px; height: 400px; margin: 0 auto"> </div>
+    <div id="walkscoreChart" style="min-width: 960px; max-width: 960px; height: 400px; margin: 0 auto"> </div>
      <br/>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="localness">
+  <div class="localness" id="localness" style="display:none">
     <h3>What do people talk about on Twitter in {{store.state.currentNeighborhood}}</h3>
     These are terms that are used more often in {{store.state.currentNeighborhood}} than in other neighborhoods. Click each word for context.
     <ul>
