@@ -106,14 +106,14 @@ function setUpMap (latlon, neighborhoodsGeojson) {
   infoBox.update = function (nghdName, valueType) {
     if (nghdName) {
       this._div.innerHTML = '<h4>' + nghdName + '</h4>'
-      if (valueType) {
+      if (valueType && valueType !== 'Neighborhood Bounds') {
         var displayValueType = valueType
         if (valueType.indexOf('Venues') >= 0 || valueType === 'Shops') {
           displayValueType += ' (per square mile)'
         } else if (valueType.indexOf('Crime') >= 0) {
           displayValueType += ' (per 1000 residents)'
         }
-        this._div.innerHTML += ('<br>' + displayValueType + ': ' + getValue(nghdName, valueType))
+        this._div.innerHTML += ('<br>' + displayValueType + ': ' + Math.round(getValue(nghdName, valueType)))
       }
     } else {
       this._div.innerHTML = '<h4>Select a neighborhood</h4>'
