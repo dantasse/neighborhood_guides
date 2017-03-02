@@ -1,5 +1,5 @@
 <template>
-  <div class="aesthetics">
+  <div class="aesthetics" id="aesthetics">
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
     Photos are from Flickr; selected photos have tags that appear more often in {{store.state.currentNeighborhood}} than in other neighborhoods.<br>
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}
@@ -23,13 +23,13 @@
       </tr>
     </table>
     <br/>
-    <div v-on:click="display_mapillary=!display_mapillary" id="toggle_link">
-      <a v-show="display_mapillary">Hide street view</a>
-      <a v-show="!display_mapillary">Show street view</a>
-    </div>
-    <div v-if="display_mapillary">
-      <iframe width="640" height="480" v-bind:src='getMapillaryUrl()' frameborder="0"></iframe>
-    </div>
+    <!--<div v-on:click="display_mapillary=!display_mapillary" id="toggle_link">-->
+    <!--  <a v-show="display_mapillary">Hide street view</a>-->
+    <!--  <a v-show="!display_mapillary">Show street view</a>-->
+    <!--</div>-->
+    <!--<div v-if="display_mapillary">-->
+    <!--  <iframe width="640" height="480" v-bind:src='getMapillaryUrl()' frameborder="0"></iframe>-->
+    <!--</div>-->
   </div>
 </template>
 

@@ -67,6 +67,8 @@ let chiBounds = require('../assets/chicago/nghd_bounds.geojson')
 let houBounds = require('../assets/houston/nghd_bounds.geojson')
 let ausBounds = require('../assets/austin/nghd_bounds.geojson')
 
+let otherPhotos = require('../assets/photo_urls.json')
+
 let nghdNames = {'Pittsburgh': [], 'San Francisco': [], 'Chicago': [], 'Houston': [], 'Austin': []}
 for (let nghd of pghBounds['features']) {
   nghdNames['Pittsburgh'].push(nghd['properties']['name'])
@@ -101,6 +103,7 @@ export default new Vuex.Store({
     neighborhoodsTop10TweetTfidf: {'Pittsburgh': pghTop10TweetTfidf, 'San Francisco': sfTop10TweetTfidf, 'Chicago': chiTop10TweetTfidf, 'Houston': houTop10TweetTfidf, 'Austin': ausTop10TweetTfidf},
     neighborhoodsFoursquareVenues: {'Pittsburgh': pghFoursquareVenues, 'San Francisco': sfFoursquareVenues, 'Chicago': chiFoursquareVenues, 'Houston': houFoursquareVenues, 'Austin': ausFoursquareVenues},
     neighborhoodsMapillaryPhotos: {'Pittsburgh': pghMapillaryPhotos, 'San Francisco': sfMapillaryPhotos, 'Chicago': chiMapillaryPhotos, 'Houston': houMapillaryPhotos, 'Austin': ausMapillaryPhotos},
+    otherPhotos: otherPhotos,
     comparisons: {
       'Pittsburgh': {
         'San Francisco': pghSfComparisons,
@@ -279,6 +282,13 @@ export default new Vuex.Store({
     },
     comparisons: function (state) {
       return state.comparisons[state.compareCity][state.currentCity]
+    },
+    streetViewPhotos: function (state) {
+      let photos = state.otherPhotos[state.currentCity][state.currentNeighborhood]['streetview_venues']
+      for (var i = 0; i < photos.length; i++) {
+        photos[i] = 'https://raw.githubusercontent.com/dantasse/neighborhood_photo_sets/master/' + photos[i]
+      }
+      return photos
     }
   }
 })

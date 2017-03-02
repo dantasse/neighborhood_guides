@@ -17,6 +17,7 @@
       <div class="row">
         <div class="col-md-12">
           <!-- These all match the "export default" components below.-->
+          <street-view></street-view>
           <aesthetics></aesthetics>
           <convenience></convenience>
           <liveliness></liveliness>
@@ -29,10 +30,12 @@
     </div>
     <page-footer></page-footer>
     <div>
-      Secret controls:
+      Toggle options:
       <a onclick="$('#similarNghds').toggle()">Similar Neighborhoods</a>
       <a onclick="$('#liveliness').toggle(); $('#safety').toggle(); $('#convenience').toggle(); ">Graphs</a>
       <a onclick="$('#localness').toggle()">Tweets</a>
+      <a onclick="$('#aesthetics').toggle()">Photos</a>
+      <a onclick="$('#streetview').toggle()">Street View</a>
     </div>
 
   </div>
@@ -45,6 +48,7 @@ import CityMap from './components/CityMap'
 import NghdList from './components/NghdList'
 import ComparePicker from './components/ComparePicker'
 import CompareCityPicker from './components/CompareCityPicker'
+import StreetView from './components/StreetView'
 import Aesthetics from './components/Aesthetics'
 import Safety from './components/Safety'
 import Convenience from './components/Convenience'
@@ -60,6 +64,7 @@ export default {
     NghdList,
     ComparePicker,
     CompareCityPicker,
+    StreetView,
     Aesthetics,
     Safety,
     Convenience,
