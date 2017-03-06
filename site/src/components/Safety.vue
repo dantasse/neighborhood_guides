@@ -44,13 +44,13 @@ export default {
 function makeTheChart (crimeStats, state) {
   // *sigh* just a lot of annoying protecting against nulls.
   let compareNghdData = []
-  if (state.compareNeighborhood !== '') {
+  if (state.compareNeighborhood !== '' && crimeStats['compareNghd']) {
     compareNghdData = [parseFloat(crimeStats['compareNghd']['part1_per_1000_ppl']),
       parseFloat(crimeStats['compareNghd']['part2_per_1000_ppl']),
       parseFloat(crimeStats['compareNghd']['total_per_1000_ppl'])]
   }
   let currentNghdData = []
-  if (state.currentNeighborhood !== '') {
+  if (state.currentNeighborhood !== '' && crimeStats['currentNghd']) {
     currentNghdData = [parseFloat(crimeStats['currentNghd']['part1_per_1000_ppl']),
       parseFloat(crimeStats['currentNghd']['part2_per_1000_ppl']),
       parseFloat(crimeStats['currentNghd']['total_per_1000_ppl'])]

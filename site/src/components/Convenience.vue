@@ -39,13 +39,13 @@ export default {
 function makeChart (walkscores, state) {
     // *sigh* just a lot of annoying protecting against nulls.
   let compareNghdData = []
-  if (state.compareNeighborhood !== '') {
+  if (state.compareNeighborhood !== '' && walkscores['compareNghd']) {
     compareNghdData = [parseFloat(walkscores['compareNghd']['Walk Score']),
       parseFloat(walkscores['compareNghd']['Transit Score']),
       parseFloat(walkscores['compareNghd']['Bike Score'])]
   }
   let currentNghdData = []
-  if (state.currentNeighborhood !== '') {
+  if (state.currentNeighborhood !== '' && walkscores['currentNghd']) {
     currentNghdData = [parseFloat(walkscores['currentNghd']['Walk Score']),
       parseFloat(walkscores['currentNghd']['Transit Score']),
       parseFloat(walkscores['currentNghd']['Bike Score'])]

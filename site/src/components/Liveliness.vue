@@ -38,7 +38,7 @@ export default {
 function makeChart (venuesData, state) {
     // *sigh* just a lot of annoying protecting against nulls.
   let currentNghdData = []
-  if (state.currentNeighborhood !== '') {
+  if (state.currentNeighborhood !== '' && venuesData['currentNghd']) {
     let venuesPerSqMi = []
     let nghdVenues = venuesData['currentNghd']
 //    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
@@ -59,7 +59,7 @@ function makeChart (venuesData, state) {
   currentCityData[4] = parseFloat(cityVenues['Shop & Service'])
 
   let compareNghdData = []
-  if (state.compareNeighborhood !== '') {
+  if (state.compareNeighborhood !== '' && venuesData['compareNghd']) {
     let venuesPerSqMi = []
     let nghdVenues = venuesData['compareNghd']
 //    venuesPerSqMi[0] = parseFloat(nghdVenues['All Venues'])
