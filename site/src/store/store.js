@@ -284,9 +284,45 @@ export default new Vuex.Store({
       return state.comparisons[state.compareCity][state.currentCity]
     },
     streetViewPhotos: function (state) {
+      if (!state.currentNeighborhood || !state.otherPhotos[state.currentCity][state.currentNeighborhood]) {
+        return []
+      }
       let photos = state.otherPhotos[state.currentCity][state.currentNeighborhood]['streetview_venues']
+      if (!photos) {
+        photos = []
+      }
       for (var i = 0; i < photos.length; i++) {
         photos[i] = 'https://raw.githubusercontent.com/dantasse/neighborhood_photo_sets/master/' + photos[i]
+      }
+      return photos
+    },
+    flickrPhotos2: function (state) {
+      if (!state.currentNeighborhood || !state.otherPhotos[state.currentCity][state.currentNeighborhood]) {
+        return []
+      }
+      let photos = state.otherPhotos[state.currentCity][state.currentNeighborhood]['flickr_selected_tags']
+      if (!photos) {
+        photos = []
+      }
+      return photos
+    },
+    flickrPhotos3: function (state) {
+      if (!state.currentNeighborhood || !state.otherPhotos[state.currentCity][state.currentNeighborhood]) {
+        return []
+      }
+      let photos = state.otherPhotos[state.currentCity][state.currentNeighborhood]['flickr_jaffe']
+      if (!photos) {
+        photos = []
+      }
+      return photos
+    },
+    instagrams: function (state) {
+      if (!state.currentNeighborhood || !state.otherPhotos[state.currentCity][state.currentNeighborhood]) {
+        return []
+      }
+      let photos = state.otherPhotos[state.currentCity][state.currentNeighborhood]['twitter_random']
+      if (!photos) {
+        photos = []
       }
       return photos
     }

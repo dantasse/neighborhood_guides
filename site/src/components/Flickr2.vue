@@ -1,7 +1,7 @@
 <template>
-  <div class="streetview" id="streetview">
-    <h3>What does {{ store.state.currentNeighborhood }} look like?</h3>
-      <span v-for="url in streetViewPhotos.slice(0, 20)">
+  <div class="flickr2" id="flickr2" style="display:none">
+    <h3>Photos from {{ store.state.currentNeighborhood }}</h3>
+      <span v-for="url in flickrPhotos2.slice(0, 20)">
         <a v-bind:href="url">
           <img v-bind:src="url" class='preview_photo'/>
         </a>
@@ -16,14 +16,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: mapGetters([
-    'streetViewPhotos'
+    'flickrPhotos2'
   ]),
-  // mapGetters is syntactic sugar; could also say:
-  // computed: {
-  //   top10tags () {
-  //     return store.getters.top10tags
-  //   }
-  // },
   data () {
     return {
       store: store
@@ -35,7 +29,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .preview_photo {
-  height: 120px;
+  height: 180px;
 }
 </style>
 

@@ -19,6 +19,9 @@
           <!-- These all match the "export default" components below.-->
           <street-view></street-view>
           <aesthetics></aesthetics>
+          <flickr2></flickr2>
+          <flickr3></flickr3>
+          <instagram></instagram>
           <convenience></convenience>
           <liveliness></liveliness>
           <safety></safety>
@@ -34,8 +37,11 @@
       <a onclick="$('#similarNghds').toggle()">Similar Neighborhoods</a>
       <a onclick="$('#liveliness').toggle(); $('#safety').toggle(); $('#convenience').toggle(); ">Graphs</a>
       <a onclick="$('#localness').toggle()">Tweets</a>
-      <a onclick="$('#aesthetics').toggle()">Photos</a>
       <a onclick="$('#streetview').toggle()">Street View</a>
+      <a onclick="$('#aesthetics').toggle()">Photos</a>
+      <a onclick="$('#flickr2').toggle()">Photos 2</a>
+      <a onclick="$('#flickr3').toggle()">Photos 3</a>
+      <a onclick="$('#instagram').toggle()">Photos 4</a>
     </div>
 
   </div>
@@ -50,6 +56,9 @@ import ComparePicker from './components/ComparePicker'
 import CompareCityPicker from './components/CompareCityPicker'
 import StreetView from './components/StreetView'
 import Aesthetics from './components/Aesthetics'
+import Flickr2 from './components/Flickr2'
+import Flickr3 from './components/Flickr3'
+import Instagram from './components/Instagram'
 import Safety from './components/Safety'
 import Convenience from './components/Convenience'
 import Localness from './components/Localness'
@@ -66,6 +75,9 @@ export default {
     CompareCityPicker,
     StreetView,
     Aesthetics,
+    Flickr2,
+    Flickr3,
+    Instagram,
     Safety,
     Convenience,
     Localness,
