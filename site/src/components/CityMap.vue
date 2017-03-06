@@ -83,7 +83,8 @@ function setUpMap (latlon, neighborhoodsGeojson) {
   map = L.map('leafletMap', {
     minZoom: 11,
     maxZoom: 16,
-    inertia: false
+    inertia: false,
+    scrollWheelZoom: false
   })
   map.setView([latlon[0], latlon[1]], zoomLevel)
   //
