@@ -90,12 +90,12 @@ for (let nghd of ausBounds['features']) {
 }
 export default new Vuex.Store({
   state: {
-    cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston', 'Austin'],
+    cityList: ['Pittsburgh', 'San Francisco', 'Chicago', 'Houston'], // , 'Austin']
     currentMap: 'Neighborhood Bounds',
-    currentNeighborhood: 'Shadyside',
-    currentCity: 'Pittsburgh',
-    compareNeighborhood: 'Mission',
-    compareCity: 'San Francisco',
+    currentNeighborhood: 'Loop',
+    currentCity: 'Chicago',
+    compareNeighborhood: 'Squirrel Hill North',
+    compareCity: 'Pittsburgh',
     neighborhoodNames: nghdNames,
     neighborhoodsAutotags: {'Pittsburgh': pghNeighborhoodsAutotags, 'San Francisco': sfNeighborhoodsAutotags, 'Chicago': chiNeighborhoodsAutotags, 'Houston': houNeighborhoodsAutotags, 'Austin': ausNeighborhoodsAutotags},
     neighborhoodsCrimeStats: {'Pittsburgh': pghCrimeStats, 'San Francisco': sfCrimeStats, 'Chicago': chiCrimeStats, 'Houston': houCrimeStats, 'Austin': ausCrimeStats},

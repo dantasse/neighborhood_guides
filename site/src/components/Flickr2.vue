@@ -1,5 +1,5 @@
 <template>
-  <div class="flickr2" id="flickr2" style="display:none">
+  <div class="flickr2" id="flickr2" >
     <h3>Photos from {{ store.state.currentNeighborhood }}</h3>
       <span v-for="url in flickrPhotos2.slice(0, 20)">
         <a v-bind:href="url">
@@ -30,6 +30,7 @@ export default {
 <style scoped>
 .preview_photo {
   height: 180px;
+  padding: 5px;
 }
 </style>
 

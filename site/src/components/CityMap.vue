@@ -166,19 +166,19 @@ function getGeojsonForCity (city) {
 
 // Map a walkscore from a number to a color
 var walkscoreColor = function (num) {
-  if (num < 30) {
+  if (num < 50) {
     return '#f7fcf5'
-  } else if (num < 40) {
+  } else if (num < 57) {
     return '#e5f5e0'
-  } else if (num < 50) {
+  } else if (num < 64) {
     return '#c7e9c0'
-  } else if (num < 60) {
+  } else if (num < 71) {
     return '#a1d99b'
-  } else if (num < 70) {
+  } else if (num < 78) {
     return '#74c476'
-  } else if (num < 80) {
+  } else if (num < 85) {
     return '#41ab5d'
-  } else if (num < 90) {
+  } else if (num < 92) {
     return '#238b45'
   } else if (num <= 100) {
     return '#005a32'
@@ -294,7 +294,8 @@ function getColor (feature) {
 }
 function geojsonStyle (feature) {
   return {
-    color: getColor(feature)
+    color: getColor(feature),
+    fillOpacity: 0.5
   }
 }
 

@@ -30,6 +30,7 @@ export default {
 <style scoped>
 .preview_photo {
   height: 180px;
+  padding: 5px;
 }
 </style>
 
