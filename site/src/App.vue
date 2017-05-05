@@ -17,11 +17,11 @@
       <div class="row">
         <div class="col-md-12">
           <!-- These all match the "export default" components below.-->
-          <street-view></street-view>
           <aesthetics></aesthetics>
           <flickr2></flickr2>
           <flickr3></flickr3>
           <instagram></instagram>
+          <street-view></street-view>
           <convenience></convenience>
           <liveliness></liveliness>
           <safety></safety>
@@ -39,9 +39,9 @@
       <a onclick="$('#localness').toggle()">Tweets</a>
       <a onclick="$('#streetview').toggle()">Street View</a>
       <a onclick="$('#aesthetics').toggle()">Photos</a>
-      <a onclick="$('#flickr2').toggle()">Photos 2</a>
-      <a onclick="$('#flickr3').toggle()">Photos 3</a>
-      <a onclick="$('#instagram').toggle()">Photos 4</a>
+      <a onclick="$('#flickr2').toggle()">Flickr 2</a>
+      <a onclick="$('#flickr3').toggle()">Flickr 3</a>
+      <a onclick="$('#instagram').toggle()">Instagram</a>
     </div>
 
   </div>

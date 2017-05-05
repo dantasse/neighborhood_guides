@@ -281,7 +281,11 @@ export default new Vuex.Store({
       return {'currentNghd': currentNghd, 'compareNghd': compareNghd}
     },
     comparisons: function (state) {
-      return state.comparisons[state.compareCity][state.currentCity]
+      if (state.compareCity === state.currentCity) {
+        return []
+      } else {
+        return state.comparisons[state.compareCity][state.currentCity]
+      }
     },
     streetViewPhotos: function (state) {
       if (!state.currentNeighborhood || !state.otherPhotos[state.currentCity][state.currentNeighborhood]) {

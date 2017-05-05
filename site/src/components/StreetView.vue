@@ -1,6 +1,6 @@
 <template>
   <div class="streetview" id="streetview">
-    <h3>What does {{ store.state.currentNeighborhood }} look like?</h3>
+    <h3>{{ store.state.currentNeighborhood }} from Street View</h3>
       <span v-for="url in streetViewPhotos.slice(0, 20)">
         <a v-bind:href="url">
           <img v-bind:src="url" class='preview_photo'/>

@@ -1,6 +1,6 @@
 <template>
   <div class="flickr2" id="flickr2" >
-    <h3>Photos from {{ store.state.currentNeighborhood }}</h3>
+    <h3>More photos from {{ store.state.currentNeighborhood }}</h3>
       <span v-for="url in flickrPhotos2.slice(0, 20)">
         <a v-bind:href="url">
           <img v-bind:src="url" class='preview_photo'/>
