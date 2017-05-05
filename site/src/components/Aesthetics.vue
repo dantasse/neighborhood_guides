@@ -1,5 +1,5 @@
 <template>
-  <div class="aesthetics" id="aesthetics">
+  <div class="aesthetics" id="aesthetics" v-show="store.state.currentNeighborhood">
     <h3>What do people take photos of in {{store.state.currentNeighborhood}}</h3>
     Photos are from Flickr; selected photos have tags that appear more often in {{store.state.currentNeighborhood}} than in other neighborhoods.<br>
     Indoor photos: {{indoor_outdoor[0]}}, outdoor photos: {{indoor_outdoor[1]}}

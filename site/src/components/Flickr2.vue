@@ -1,5 +1,5 @@
 <template>
-  <div class="flickr2" id="flickr2" >
+  <div class="flickr2" id="flickr2" v-show="store.state.currentNeighborhood">
     <h3>More photos from {{ store.state.currentNeighborhood }}</h3>
       <span v-for="url in flickrPhotos2.slice(0, 20)">
         <a v-bind:href="url">

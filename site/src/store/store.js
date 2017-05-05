@@ -144,7 +144,10 @@ export default new Vuex.Store({
       state.currentNeighborhood = newNghd
     },
     selectCurrentCity: function (state, newCurrentCity) {
-      state.currentCity = newCurrentCity
+      if (newCurrentCity !== state.currentCity) {
+        state.currentCity = newCurrentCity
+        state.currentNeighborhood = ''
+      }
     },
     selectCompareNghd: function (state, newCompareNghd) {
       state.compareNeighborhood = newCompareNghd

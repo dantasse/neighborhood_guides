@@ -1,5 +1,5 @@
 <template>
-  <div class="streetview" id="streetview">
+  <div class="streetview" id="streetview"  v-show="store.state.currentNeighborhood">
     <h3>{{ store.state.currentNeighborhood }} from Street View</h3>
       <span v-for="url in streetViewPhotos.slice(0, 20)">
         <a v-bind:href="url">
