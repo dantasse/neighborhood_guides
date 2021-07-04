@@ -37,3 +37,7 @@ The last line is so relative imports work well - since you're running python fro
     from aesthetic import foo
     
 If you try to just run python scripts like you're used to, you might find that it's hard to, say, import something from `util` into `aesthetic`.
+
+## Making changes and republishing
+
+Build the app in `site/`. Then copy everything from the `site/dist` directory into `docs`. (This is because github pages [is set up](https://github.com/dantasse/neighborhood_guides/settings/pages) to read from `docs`.) Then, you might have to change index.html to remove some leading slashes in imports, as in [this commit](https://github.com/dantasse/neighborhood_guides/commit/7df250434225ccd9742d736424d157dc661a11be).
